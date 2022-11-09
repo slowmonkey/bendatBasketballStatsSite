@@ -4,9 +4,9 @@ title: "Weekly Stats Home"
 
 <div class="week-selection-drop-down">
     <select name="week-dropdown" id="week-dropdown">
-        <option selected value="Unselected">Unselected</option>
+        <option selected value="{{ 'week-stats-home' | url }}">Unselected</option>
     {% for availableWeek in stats.availableWeeks %}
-        <option value="/{{ availableWeek.Date | statsdate | slugify }}/">{{ availableWeek.Date | statsdate }}</option>
+        <option value="/{{ availableWeek.Date | statsdate | slugify | url }}/">{{ availableWeek.Date | statsdate }}</option>
     {% endfor %}
     </select>
 </div>
@@ -14,12 +14,7 @@ title: "Weekly Stats Home"
 <script type="text/javascript">
     var urlmenu = document.getElementById('player-names-dropdown');
     urlmenu.onchange = function() {
-        if (this.options[this.selectedIndex].value === "Unselected") {
-            window.location = `/weekly-stats-home/`;
-        }
-        else {
-            window.location = `/weekly-stats${this.options[this.selectedIndex].value}`;
-        }
+        window.location = `${this.options[this.selectedIndex].value}`;
     };
 </script>
 

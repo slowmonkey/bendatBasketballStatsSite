@@ -9,12 +9,12 @@ permalink: "weekly-stats/{{ week.date | slugify }}/"
 
 <div class="week-selection-drop-down">
     <select name="week-dropdown" id="week-dropdown">
-        <option selected value="Unselected">Unselected</option>
+        <option value="{{ 'week-stats-home' | url }}">Unselected</option>
     {% for availableWeek in stats.availableWeeks %}
         {{ availableWeek.Date }}
         <option {% if availableWeek.Date === week.date %} 
                     selected=true 
-                {% endif %} value="/{{ availableWeek.Date | statsdate | slugify }}/">{{ availableWeek.Date | statsdate }}</option>
+                {% endif %} value="/{{ availableWeek.Date | statsdate | slugify | url }}/">{{ availableWeek.Date | statsdate }}</option>
     {% endfor %}
     </select>
 </div>

@@ -9,11 +9,12 @@ permalink: "player-stats/{{ player.name | slugify }}/"
 
 <div class="player-selection-drop-down">
     <select name="player-names-dropdown" id="player-names-dropdown">
-        <option selected value="Unselected">Unselected</option>
+        {# {% set player-stats-home-literal = "player-stats-home" %} #}
+        <option value="{{ 'player-stats-home' | url }}">Unselected</option>
     {% for playerName in stats.players %}
         <option {% if playerName === player.name %}
                     selected=true
-                {% endif %} value="/{{ playerName | slugify }}/">{{ playerName }}</option>
+                {% endif %} value="/{{ playerName | slugify | url }}/">{{ playerName }}</option>
     {% endfor %}
     </select>
 </div>
@@ -22,10 +23,7 @@ permalink: "player-stats/{{ player.name | slugify }}/"
     var urlmenu = document.getElementById('player-names-dropdown');
     urlmenu.onchange = function() {
         if (this.options[this.selectedIndex].value === "Unselected") {
-            window.location = `/player-stats-home/`;
-        }
-        else {
-            window.location = `/player-stats${this.options[this.selectedIndex].value}`;
+            window.location = `${this.options[this.selectedIndex].value}`;
         }
     };
 </script>

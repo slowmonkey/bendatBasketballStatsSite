@@ -82,23 +82,23 @@
 <body>
     <div class="topnav">
         
-            <a href="/"
+            <a href="/bendatBasketballStatsSite/"
                 
             >Home</a>
         
-            <a href="/weekly-stats-home/"
+            <a href="/bendatBasketballStatsSite/weekly-stats-home/"
                 
             >Weekly Stats</a>
         
-            <a href="/player-stats-home/"
+            <a href="/bendatBasketballStatsSite/player-stats-home/"
                 
             >Player Stats</a>
         
-            <a href="/yearly-stats/"
+            <a href="/bendatBasketballStatsSite/yearly-stats/"
                 
             >Yearly Stats</a>
         
-            <a href="/all-stats/"
+            <a href="/bendatBasketballStatsSite/all-stats/"
                 
             >All Stats</a>
         
@@ -108,7 +108,8 @@
     
 <div class="player-selection-drop-down">
     <select name="player-names-dropdown" id="player-names-dropdown">
-        <option selected value="Unselected">Unselected</option>
+        
+        <option value="player-stats-home">Unselected</option>
     
         <option  value="/adam/">Adam</option>
     
@@ -283,10 +284,7 @@
     var urlmenu = document.getElementById('player-names-dropdown');
     urlmenu.onchange = function() {
         if (this.options[this.selectedIndex].value === "Unselected") {
-            window.location = `/player-stats-home/`;
-        }
-        else {
-            window.location = `/player-stats${this.options[this.selectedIndex].value}`;
+            window.location = `${this.options[this.selectedIndex].value}`;
         }
     };
 </script>
