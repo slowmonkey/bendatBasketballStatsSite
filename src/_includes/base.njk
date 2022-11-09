@@ -97,7 +97,7 @@
 <body>
     <div class="topnav">
         {% for item in nav.items %}
-            <a href="{{ item.url | htmlBaseUrl }}"
+            <a href="{{ item.url }}"
                 {% if item.url === page.url %}
                     aria-current="page" data-state="active"
                 {% endif %}
