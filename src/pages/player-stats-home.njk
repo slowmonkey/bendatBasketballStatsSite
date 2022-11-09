@@ -4,10 +4,12 @@ title: "Player Stats Home"
 
 <div class="player-selection-drop-down">
     <select name="player-names-dropdown" id="player-names-dropdown">
-        {# {% set player-stats-home-literal = "player-stats-home" %} #}
-        <option selected value="{{ 'player-stats-home' | url }}">Unselected</option>
+        <option selected value="{{ '/player-stats-home/' | url }}">Unselected</option>
     {% for playerName in stats.players %}
-        <option value="/{{ playerName | slugify | url }}/">{{ playerName }}</option>
+        {% set slugifiedPlayerName = [playerName] | slugify %}
+        {% set itemValue = ["/player-stats/", slugifiedPlayerName, "/"] | join %}
+        <p>itemValue: {{ itemValue }}</p>
+        <option value="{{ itemValue | url }}">{{ playerName }}</option>
     {% endfor %}
     </select>
 </div>

@@ -4,15 +4,16 @@ title: "Weekly Stats Home"
 
 <div class="week-selection-drop-down">
     <select name="week-dropdown" id="week-dropdown">
-        <option selected value="{{ 'week-stats-home' | url }}">Unselected</option>
+        <option selected value="{{ '/week-stats-home/' | url }}">Unselected</option>
     {% for availableWeek in stats.availableWeeks %}
-        <option value="/{{ availableWeek.Date | statsdate | slugify | url }}/">{{ availableWeek.Date | statsdate }}</option>
+        {% set dateValue = ["/weekly-stats/", availableWeek, "/"] | join %}
+        <option value="{{ dateValue | url }}">{{ availableWeek }}</option>
     {% endfor %}
     </select>
 </div>
 
 <script type="text/javascript">
-    var urlmenu = document.getElementById('player-names-dropdown');
+    var urlmenu = document.getElementById('week-dropdown');
     urlmenu.onchange = function() {
         window.location = `${this.options[this.selectedIndex].value}`;
     };

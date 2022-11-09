@@ -64,7 +64,10 @@ async function getAvailableWeeks() {
         const availableWeeksQuery = client.query("SELECT DISTINCT \"Date\" FROM bballstats.\"allStats\" ORDER BY \"Date\" DESC");
 
         const response = await availableWeeksQuery;
-        availableWeeks = response.rows;
+        response.rows.forEach((row) => {
+            let isoDateValue = DateTime.fromJSDate(row.Date).toFormat("yyyy-MM-dd")
+            availableWeeks.push(isoDateValue);
+        })
     } catch (e) {
         console.error(e);
     }

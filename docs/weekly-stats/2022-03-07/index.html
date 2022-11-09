@@ -1,0 +1,214 @@
+<head>
+    <title>
+        Bendat Basketball Stats
+    </title>
+
+    <style>
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: #4285f4;
+            overflow: hidden;
+        }
+
+        /* Style the links inside the navigation bar */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a.selected {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add an active class to highlight the current page */
+        .topnav a[data-state="active"] {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        /* Hide the link that should open and close the topnav on small screens */
+        .topnav .icon {
+            display: none;
+        }
+
+        .stats-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 7pt;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            
+        }
+
+        
+
+        
+
+        .stats-table th,
+        .stats-table td {
+            padding: 12px 15px;
+        }
+
+        .stats-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .stats-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .stats-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+    </style>
+    
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+</head>
+
+<body>
+    <div class="topnav">
+        
+            <a href="/bendatBasketballStatsSite/"
+                
+            >Home</a>
+        
+            <a href="/bendatBasketballStatsSite/weekly-stats-home/"
+                
+            >Weekly Stats</a>
+        
+            <a href="/bendatBasketballStatsSite/player-stats-home/"
+                
+            >Player Stats</a>
+        
+            <a href="/bendatBasketballStatsSite/yearly-stats/"
+                
+            >Yearly Stats</a>
+        
+            <a href="/bendatBasketballStatsSite/all-stats/"
+                
+            >All Stats</a>
+        
+    </div>
+    <main>
+        <main>
+    
+<div class="week-selection-drop-down">
+    <select name="week-dropdown" id="week-dropdown">
+        <option value="/bendatBasketballStatsSite/week-stats-home/">Unselected</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-10-25/">2022-10-25</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-10-18/">2022-10-18</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-10-11/">2022-10-11</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-09-20/">2022-09-20</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-09-06/">2022-09-06</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-08-23/">2022-08-23</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-08-16/">2022-08-16</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-07-19/">2022-07-19</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-28/">2022-06-28</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-21/">2022-06-21</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-14/">2022-06-14</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-07/">2022-06-07</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-05-31/">2022-05-31</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-05-17/">2022-05-17</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-05-10/">2022-05-10</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-04-26/">2022-04-26</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-04-05/">2022-04-05</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-29/">2022-03-29</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-22/">2022-03-22</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-15/">2022-03-15</option>
+    
+        
+        <option  
+                    selected=true 
+                 value="/bendatBasketballStatsSite/weekly-stats/2022-03-07/">2022-03-07</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-01/">2022-03-01</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-22/">2022-02-22</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-15/">2022-02-15</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-08/">2022-02-08</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-01/">2022-02-01</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-01-11/">2022-01-11</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-01-04/">2022-01-04</option>
+    
+    </select>
+</div>
+
+<script type="text/javascript">
+    var urlmenu = document.getElementById('week-dropdown');
+    urlmenu.onchange = function() {
+        window.location = `${this.options[this.selectedIndex].value}`;
+    };
+</script>
+
+
+</main>
+    </main>
+</body>
+
+</html>

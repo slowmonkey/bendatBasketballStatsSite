@@ -4,30 +4,25 @@ pagination:
     data: stats.weeklyStats
     size: 1
     alias: week
-permalink: "weekly-stats/{{ week.date | slugify }}/"
+permalink: "weekly-stats/{{ week.date | url }}/"
 ---
 
 <div class="week-selection-drop-down">
     <select name="week-dropdown" id="week-dropdown">
-        <option value="{{ 'week-stats-home' | url }}">Unselected</option>
+        <option value="{{ '/week-stats-home/' | url }}">Unselected</option>
     {% for availableWeek in stats.availableWeeks %}
-        {{ availableWeek.Date }}
-        <option {% if availableWeek.Date === week.date %} 
+        {% set dateValue = ["/weekly-stats/", availableWeek, "/"] | join %}
+        <option {% if availableWeek === week.date %} 
                     selected=true 
-                {% endif %} value="/{{ availableWeek.Date | statsdate | slugify | url }}/">{{ availableWeek.Date | statsdate }}</option>
+                {% endif %} value="{{ dateValue | url }}">{{ availableWeek }}</option>
     {% endfor %}
     </select>
 </div>
 
 <script type="text/javascript">
-    var urlmenu = document.getElementById('player-names-dropdown');
+    var urlmenu = document.getElementById('week-dropdown');
     urlmenu.onchange = function() {
-        if (this.options[this.selectedIndex].value === "Unselected") {
-            window.location = `/weekly-stats-home/`;
-        }
-        else {
-            window.location = `/weekly-stats${this.options[this.selectedIndex].value}`;
-        }
+        window.location = `${this.options[this.selectedIndex].value}`;
     };
 </script>
 
