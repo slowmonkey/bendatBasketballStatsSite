@@ -1,0 +1,24 @@
+{
+    "items": [
+        {
+            "url": "/",
+            "name": "Home"
+        },
+        {
+            "url": "/weekly-stats/",
+            "name": "Weekly Stats"
+        },
+        {
+            "url": "/player-stats-home/",
+            "name": "Player Stats"
+        },
+        {
+            "url": "/yearly-stats/",
+            "name": "Yearly Stats"
+        },
+        {
+            "url": "/all-stats/",
+            "name": "All Stats"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+---
+title: "Weekly Stats"
+---
+
+<p>Test Weekly Stats</p>
+
+<p>Drop down box for each week - available weeks sql [done]</p>
+
+<p>Navigational Tab here: Summary, Games</p>
+
+<p>Summary Tab</p>
+
+<p>Table of each team with summation of stats for each person, 4 tables here.</p>
+
+<p>Table of all the players with summation of stats. - Sortable columns allowed</p>
+
+
+<p>Games Tab</p>
+
+<p>6 tables. Each table is the game 1 to 6 and it's a list ordered by team then player name. Not a sortable column here - allStats but with where clause on date, ordered by games, teams, players - [Done]</p>
+
+eg.
+SELECT
+	*
+FROM bballstats."allStats"
+WHERE "Date" = '2022-10-25'
+ORDER BY "Game", "Team", "Player";

@@ -1,0 +1,65 @@
+---
+title: "All Stats"
+---
+<table class="stats-table">
+    <tr>
+        <th>Date</th>
+        <th>Player</th>
+        <th>Team</th>
+        <th>Opponent</th>
+        <th>Game</th>
+        <th>FTM</th>
+        <th>FTA</th>
+        <th>FT%</th>
+        <th>2PM</th>
+        <th>2PA</th>
+        <th>2P%</th>
+        <th>3PM</th>
+        <th>3PA</th>
+        <th>3P%</th>
+        <th>O Reb</th>
+        <th>D Reb</th>
+        <th>Assists</th>
+        <th>Steals</th>
+        <th>Blocks</th>
+        <th>TOV</th>
+        <th>Total Points</th>
+        <th>FGM</th>
+        <th>FGA</th>
+        <th>FG%</th>
+        <th>Total Rebounds</th>
+        <th>Fan Points</th>
+        <th>Win/Loss</th>
+    </tr>
+{% for item in stats.allStats %}
+    <tr>
+        <td>{{ item.Date | statsdate }}</td>
+        <td>{{ item.Player }}</td>
+        <td>{{ item.Team }}</td>
+        <td>{{ item.Opponent }}</td>
+        <td>{{ item.Game }}</td>
+        <td>{{ item.FTM }}</td>
+        <td>{{ item.FTA }}</td>
+        <td>{{ item["FT%"] | percentage }}</td>
+        <td>{{ item.2PM }}</td>
+        <td>{{ item.2PA }}</td>
+        <td>{{ item["2PT%"] | percentage }}</td>
+        <td>{{ item.3PM }}</td>
+        <td>{{ item.3PA }}</td>
+        <td>{{ item["3PT%"] | percentage }}</td>
+        <td>{{ item.OReb }}</td>
+        <td>{{ item.DReb }}</td>
+        <td>{{ item.Assists }}</td>
+        <td>{{ item.Steals }}</td>
+        <td>{{ item.Blocks }}</td>
+        <td>{{ item.TOV }}</td>
+        <td>{{ item.TotalPoints }}</td>
+        <td>{{ item.FGM }}</td>
+        <td>{{ item.FGA }}</td>
+        <td>{{ item["FG%"] | percentage }}</td>
+        <td>{{ item.TotalRebounds }}</td>
+        <td>{{ item | fanpoints }}</td>
+        <td>{{ item["Win/Loss"] }}</td>
+    </tr>
+{% endfor %}
+</table>

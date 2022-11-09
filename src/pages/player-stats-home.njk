@@ -1,0 +1,11 @@
+---
+title: "Player Stats Home"
+---
+
+<div class="player-selection-drop-down">
+    <select name="Player Names" id="player-name-dropdown">
+    {% for playerName in stats.players %}
+        <option value={{ playerName }}>{{ playerName }}</option>
+    {% endfor %}
+    </select>
+</div>
