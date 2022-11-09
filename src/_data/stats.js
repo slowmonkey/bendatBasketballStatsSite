@@ -1,4 +1,5 @@
 const { Client } = require("pg");
+const { DateTime } = require("luxon");
 
 async function getAllStats() {
     const client = new Client({
@@ -64,14 +65,50 @@ async function getAvailableWeeks() {
 
         const response = await availableWeeksQuery;
         availableWeeks = response.rows;
-
-        // console.log({ availableWeeks: availableWeeks });
-
     } catch (e) {
         console.error(e);
     }
 
     return availableWeeks;
+}
+
+async function getWeeklyStats() {
+    const client = new Client({
+        host: "host.docker.internal",
+        port: 5432,
+        user: "postgres",
+        password: "postgres",
+        database: "bballstats"
+    });
+
+    let weeklyStats = [];
+    try {
+        client.connect();
+        const availableWeeksQuery = client.query("SELECT DISTINCT \"Date\" FROM bballstats.\"allStats\" ORDER BY \"Date\" DESC");
+
+        const response = await availableWeeksQuery;
+        let availableWeeks = response.rows;
+
+        let weeklyPlayerTotalStatsQuery = [];
+        let weeklyAllGamesStatsQuery = [];
+
+        availableWeeks.forEach(async (week) => {
+            let dateValue = DateTime.fromJSDate(week.Date).toFormat("yyyy-MM-dd");
+            weeklyPlayerTotalStatsQuery.push(client.query(`SELECT * FROM bballstats."playerTotalsPerWeek" WHERE "Date" = '${dateValue}' ORDER BY "Player"`));
+            weeklyAllGamesStatsQuery.push(client.query(`SELECT * FROM bballstats."allStats" WHERE "Date" = '${dateValue}' ORDER BY "Game", "Team", "Player"`));
+        });
+
+        let weeklyPlayerTotalStatsQueryResult = await Promise.all(weeklyPlayerTotalStatsQuery);
+
+        weeklyPlayerTotalStatsQueryResult.forEach((result) => {
+            let dateKey = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
+            weeklyStats.push({ date: dateKey, stats: result.rows });
+        });
+    } catch (e) {
+        console.error(e);
+    }
+
+    return weeklyStats;
 }
 
 async function getPlayers() {
@@ -136,8 +173,6 @@ async function getPlayersStats() {
         console.error(e);
     }
 
-    console.log(`Players Count: ${players.length}`);
-
     return players;
 }
 
@@ -145,15 +180,15 @@ module.exports = async function () {
     let allStats = await getAllStats();
     let yearlyStats = await getYearlyStats();
     let availableWeeks = await getAvailableWeeks();
+    let weeklyStats = await getWeeklyStats();
     let players = await getPlayers();
-    let playersStats = await getPlayersStats();
-
-    console.log({ playersStats: playersStats });
+    let playersStats = await getPlayersStats();    
 
     return {
         allStats: allStats,
         yearlyStats: yearlyStats,
         availableWeeks: availableWeeks,
+        weeklyStats: weeklyStats,
         players: players,
         playersStats: playersStats
     };

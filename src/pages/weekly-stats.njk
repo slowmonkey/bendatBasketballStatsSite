@@ -1,27 +1,33 @@
 ---
-title: "Weekly Stats"
+layout: base-weekly-stats.njk
+pagination:
+    data: stats.weeklyStats
+    size: 1
+    alias: week
+permalink: "weekly-stats/{{ week.date | slugify }}/"
 ---
 
-<p>Test Weekly Stats</p>
+<div class="week-selection-drop-down">
+    <select name="week-dropdown" id="week-dropdown">
+        <option selected value="Unselected">Unselected</option>
+    {% for availableWeek in stats.availableWeeks %}
+        {{ availableWeek.Date }}
+        <option {% if availableWeek.Date === week.date %} 
+                    selected=true 
+                {% endif %} value="/{{ availableWeek.Date | statsdate | slugify }}/">{{ availableWeek.Date | statsdate }}</option>
+    {% endfor %}
+    </select>
+</div>
 
-<p>Drop down box for each week - available weeks sql [done]</p>
+<script type="text/javascript">
+    var urlmenu = document.getElementById('player-names-dropdown');
+    urlmenu.onchange = function() {
+        if (this.options[this.selectedIndex].value === "Unselected") {
+            window.location = `/weekly-stats-home/`;
+        }
+        else {
+            window.location = `/weekly-stats${this.options[this.selectedIndex].value}`;
+        }
+    };
+</script>
 
-<p>Navigational Tab here: Summary, Games</p>
-
-<p>Summary Tab</p>
-
-<p>Table of each team with summation of stats for each person, 4 tables here.</p>
-
-<p>Table of all the players with summation of stats. - Sortable columns allowed</p>
-
-
-<p>Games Tab</p>
-
-<p>6 tables. Each table is the game 1 to 6 and it's a list ordered by team then player name. Not a sortable column here - allStats but with where clause on date, ordered by games, teams, players - [Done]</p>
-
-eg.
-SELECT
-	*
-FROM bballstats."allStats"
-WHERE "Date" = '2022-10-25'
-ORDER BY "Game", "Team", "Player";

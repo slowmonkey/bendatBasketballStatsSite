@@ -86,7 +86,7 @@
                 
             >Home</a>
         
-            <a href="/weekly-stats/"
+            <a href="/weekly-stats-home/"
                 
             >Weekly Stats</a>
         
@@ -108,175 +108,25 @@
     <main>
         
 <div class="player-selection-drop-down">
-    <select name="Player Names" id="player-name-dropdown">
-    
-        <option value=Adam>Adam</option>
-    
-        <option value=Alan>Alan</option>
-    
-        <option value=Andy>Andy</option>
-    
-        <option value=Angus>Angus</option>
-    
-        <option value=Anson>Anson</option>
-    
-        <option value=Anthony>Anthony</option>
-    
-        <option value=Axyl>Axyl</option>
-    
-        <option value=Ben>Ben</option>
-    
-        <option value=Biyanka>Biyanka</option>
-    
-        <option value=Brendan Lim>Brendan Lim</option>
-    
-        <option value=Brendon>Brendon</option>
-    
-        <option value=Brian>Brian</option>
-    
-        <option value=Cameron>Cameron</option>
-    
-        <option value=Chad>Chad</option>
-    
-        <option value=Charlie>Charlie</option>
-    
-        <option value=Chee>Chee</option>
-    
-        <option value=Chee Kao>Chee Kao</option>
-    
-        <option value=Chris>Chris</option>
-    
-        <option value=Cuong>Cuong</option>
-    
-        <option value=Cyrus>Cyrus</option>
-    
-        <option value=Dai>Dai</option>
-    
-        <option value=Dave Laan>Dave Laan</option>
-    
-        <option value=Dave Le>Dave Le</option>
-    
-        <option value=Dave Seah>Dave Seah</option>
-    
-        <option value=Dave Shoebridge>Dave Shoebridge</option>
-    
-        <option value=Derek>Derek</option>
-    
-        <option value=Doug>Doug</option>
-    
-        <option value=Dung>Dung</option>
-    
-        <option value=Felix>Felix</option>
-    
-        <option value=Feng>Feng</option>
-    
-        <option value=Gav>Gav</option>
-    
-        <option value=Gav 2>Gav 2</option>
-    
-        <option value=Gideon>Gideon</option>
-    
-        <option value=Glenn>Glenn</option>
-    
-        <option value=Gordon>Gordon</option>
-    
-        <option value=Hendo>Hendo</option>
-    
-        <option value=Heng>Heng</option>
-    
-        <option value=Huy>Huy</option>
-    
-        <option value=Hyun>Hyun</option>
-    
-        <option value=Jake>Jake</option>
-    
-        <option value=Jason>Jason</option>
-    
-        <option value=Jayden>Jayden</option>
-    
-        <option value=Jayson>Jayson</option>
-    
-        <option value=Jeen>Jeen</option>
-    
-        <option value=Jerry>Jerry</option>
-    
-        <option value=Jimmy>Jimmy</option>
-    
-        <option value=Josh>Josh</option>
-    
-        <option value=Jun>Jun</option>
-    
-        <option value=Jun Hao>Jun Hao</option>
-    
-        <option value=Kelvin>Kelvin</option>
-    
-        <option value=Khang>Khang</option>
-    
-        <option value=Kris>Kris</option>
-    
-        <option value=Larry>Larry</option>
-    
-        <option value=Lennard>Lennard</option>
-    
-        <option value=Lester>Lester</option>
-    
-        <option value=Lil Chee>Lil Chee</option>
-    
-        <option value=Louis>Louis</option>
-    
-        <option value=Marvin>Marvin</option>
-    
-        <option value=Michael>Michael</option>
-    
-        <option value=Mike>Mike</option>
-    
-        <option value=Mo>Mo</option>
-    
-        <option value=Moritz>Moritz</option>
-    
-        <option value=Otto>Otto</option>
-    
-        <option value=PC>PC</option>
-    
-        <option value=Park>Park</option>
-    
-        <option value=Raph>Raph</option>
-    
-        <option value=Rhys>Rhys</option>
-    
-        <option value=Roberto>Roberto</option>
-    
-        <option value=Ronnie>Ronnie</option>
-    
-        <option value=Sam>Sam</option>
-    
-        <option value=Stasi>Stasi</option>
-    
-        <option value=Terry>Terry</option>
-    
-        <option value=Thuan>Thuan</option>
-    
-        <option value=Tom>Tom</option>
-    
-        <option value=Trevor>Trevor</option>
-    
-        <option value=Viet>Viet</option>
-    
-        <option value=Will>Will</option>
-    
-        <option value=Wins>Wins</option>
-    
-        <option value=Xavi>Xavi</option>
-    
-        <option value=Yon>Yon</option>
-    
-        <option value=Zac>Zac</option>
-    
-        <option value=Zarko>Zarko</option>
+    <select name="player-names-dropdown" id="player-names-dropdown">
+        <option selected value="Unselected">Unselected</option>
     
     </select>
 </div>
 
+<script type="text/javascript">
+    var urlmenu = document.getElementById('player-names-dropdown');
+    urlmenu.onchange = function() {
+        if (this.options[this.selectedIndex].value === "Unselected") {
+            window.location = `/player-stats-home/`;
+        }
+        else {
+            window.location = `/player-stats${this.options[this.selectedIndex].value}`;
+        }
+    };
+</script>
+
+<p>Please select a player to start</p>
     </main>
 </body>
 
