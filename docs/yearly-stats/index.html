@@ -46,7 +46,7 @@
         .stats-table {
             border-collapse: collapse;
             margin: 25px 0;
-            font-size: 7pt;
+            font-size: 10pt;
             font-family: sans-serif;
             min-width: 400px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -108,7 +108,11 @@
             padding: 6px 12px;
             border: 1px solid #ccc;
             border-top: none;
-        } 
+        }
+
+        .show {
+            display: block;
+        }
     </style>
     
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
@@ -137,7 +141,61 @@
         
     </div>
     <main>
-        <table id="yearlyStatsTable" class="stats-table sortable">
+        
+<div class="yearly-min-games-filter">
+    <select name="yearly-min-games-dropdown" id="yearly-min-games-dropdown">
+        <option value="0">All</option>
+        <option value="10">10</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+    </select>
+</div>
+
+<script type="text/javascript">
+    var selectedFilters = {
+        games: ""
+    };
+
+    var urlmenu = document.getElementById('yearly-min-games-dropdown');
+    urlmenu.onchange = function() {        
+        filterByGames(this.options[this.selectedIndex].value);
+    };
+
+    function filterByGames(games) {
+        let querySelector = `[data-min-0-games=true]`;
+        switch (games) {
+            case "10":
+                querySelector = `[data-min-10-games=true]`;
+            break;
+            case "30":
+                querySelector = `[data-min-30-games=true]`;
+            break;
+            case "50":
+                querySelector = `[data-min-50-games=true]`;
+            break;            
+        }
+
+        selectedFilters.games = querySelector;
+
+        applyFilters();
+
+    }    
+
+    function applyFilters(){
+        // Use any class here, just hide all the items.
+        document.querySelectorAll("tr[data-games]").forEach(i => {
+            i.setAttribute("hidden", true);
+        });
+
+        let combinedQuerySelectors = selectedFilters.games;
+
+        document.querySelectorAll(combinedQuerySelectors).forEach(i => {
+            i.removeAttribute("hidden");
+        });
+    }
+</script>
+
+<table id="yearlyStatsTable" class="stats-table sortable">
     <tr>
         <th>Player</th>
         <th>Games</th>
@@ -166,7 +224,12 @@
         <th>Fan Points</th>
     </tr>
 
-    <tr>
+    <tr data-games="6"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Adam</td>
         <td>6</td>
         <td>0</td>
@@ -194,7 +257,12 @@
         <td>121.90</td>
     </tr>
 
-    <tr>
+    <tr data-games="75"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Alan</td>
         <td>75</td>
         <td>0</td>
@@ -222,7 +290,12 @@
         <td>1293.30</td>
     </tr>
 
-    <tr>
+    <tr data-games="6"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Andy</td>
         <td>6</td>
         <td>0</td>
@@ -250,7 +323,12 @@
         <td>153.10</td>
     </tr>
 
-    <tr>
+    <tr data-games="2"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Angus</td>
         <td>2</td>
         <td>0</td>
@@ -278,7 +356,12 @@
         <td>85.10</td>
     </tr>
 
-    <tr>
+    <tr data-games="38"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Anson</td>
         <td>38</td>
         <td>0</td>
@@ -306,7 +389,12 @@
         <td>1427.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="12"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Anthony</td>
         <td>12</td>
         <td>0</td>
@@ -334,7 +422,12 @@
         <td>371.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="69"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Axyl</td>
         <td>69</td>
         <td>0</td>
@@ -362,7 +455,12 @@
         <td>1973.50</td>
     </tr>
 
-    <tr>
+    <tr data-games="81"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Ben</td>
         <td>81</td>
         <td>0</td>
@@ -390,7 +488,12 @@
         <td>1713.90</td>
     </tr>
 
-    <tr>
+    <tr data-games="9"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Biyanka</td>
         <td>9</td>
         <td>0</td>
@@ -418,7 +521,12 @@
         <td>199.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Brendan Lim</td>
         <td>3</td>
         <td>0</td>
@@ -446,7 +554,12 @@
         <td>31.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="22"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Brendon</td>
         <td>22</td>
         <td>0</td>
@@ -474,7 +587,12 @@
         <td>207.10</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Brian</td>
         <td>3</td>
         <td>0</td>
@@ -502,7 +620,12 @@
         <td>64.20</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Cameron</td>
         <td>3</td>
         <td>0</td>
@@ -530,7 +653,12 @@
         <td>66.70</td>
     </tr>
 
-    <tr>
+    <tr data-games="6"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Chad</td>
         <td>6</td>
         <td>0</td>
@@ -558,7 +686,12 @@
         <td>175.20</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Charlie</td>
         <td>3</td>
         <td>0</td>
@@ -586,7 +719,12 @@
         <td>63.50</td>
     </tr>
 
-    <tr>
+    <tr data-games="48"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Chee</td>
         <td>48</td>
         <td>0</td>
@@ -614,7 +752,12 @@
         <td>1474.10</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Chee Kao</td>
         <td>3</td>
         <td>0</td>
@@ -642,7 +785,12 @@
         <td>40.80</td>
     </tr>
 
-    <tr>
+    <tr data-games="36"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Chris</td>
         <td>36</td>
         <td>0</td>
@@ -670,7 +818,12 @@
         <td>649.80</td>
     </tr>
 
-    <tr>
+    <tr data-games="6"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Cuong</td>
         <td>6</td>
         <td>0</td>
@@ -698,7 +851,12 @@
         <td>112.90</td>
     </tr>
 
-    <tr>
+    <tr data-games="48"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Cyrus</td>
         <td>48</td>
         <td>0</td>
@@ -726,7 +884,12 @@
         <td>1512.40</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Dai</td>
         <td>3</td>
         <td>0</td>
@@ -754,7 +917,12 @@
         <td>55.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="20"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Dave Laan</td>
         <td>20</td>
         <td>0</td>
@@ -782,7 +950,12 @@
         <td>519.70</td>
     </tr>
 
-    <tr>
+    <tr data-games="66"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Dave Le</td>
         <td>66</td>
         <td>0</td>
@@ -810,7 +983,12 @@
         <td>1051.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="12"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Dave Seah</td>
         <td>12</td>
         <td>0</td>
@@ -838,7 +1016,12 @@
         <td>164.30</td>
     </tr>
 
-    <tr>
+    <tr data-games="14"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Dave Shoebridge</td>
         <td>14</td>
         <td>0</td>
@@ -866,7 +1049,12 @@
         <td>578.90</td>
     </tr>
 
-    <tr>
+    <tr data-games="15"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Derek</td>
         <td>15</td>
         <td>0</td>
@@ -894,7 +1082,12 @@
         <td>362.40</td>
     </tr>
 
-    <tr>
+    <tr data-games="57"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Doug</td>
         <td>57</td>
         <td>0</td>
@@ -922,7 +1115,12 @@
         <td>928.20</td>
     </tr>
 
-    <tr>
+    <tr data-games="24"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Dung</td>
         <td>24</td>
         <td>0</td>
@@ -950,7 +1148,12 @@
         <td>490.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Felix</td>
         <td>3</td>
         <td>0</td>
@@ -978,7 +1181,12 @@
         <td>49.50</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Feng</td>
         <td>3</td>
         <td>0</td>
@@ -1006,7 +1214,12 @@
         <td>-1.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="59"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Gav</td>
         <td>59</td>
         <td>0</td>
@@ -1034,7 +1247,12 @@
         <td>795.10</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Gav 2</td>
         <td>3</td>
         <td>0</td>
@@ -1062,7 +1280,12 @@
         <td>43.20</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Gideon</td>
         <td>3</td>
         <td>0</td>
@@ -1090,7 +1313,12 @@
         <td>116.80</td>
     </tr>
 
-    <tr>
+    <tr data-games="21"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Glenn</td>
         <td>21</td>
         <td>0</td>
@@ -1118,7 +1346,12 @@
         <td>454.40</td>
     </tr>
 
-    <tr>
+    <tr data-games="12"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Gordon</td>
         <td>12</td>
         <td>0</td>
@@ -1146,7 +1379,12 @@
         <td>184.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="51"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Hendo</td>
         <td>51</td>
         <td>0</td>
@@ -1174,7 +1412,12 @@
         <td>970.30</td>
     </tr>
 
-    <tr>
+    <tr data-games="6"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Heng</td>
         <td>6</td>
         <td>0</td>
@@ -1202,7 +1445,12 @@
         <td>48.70</td>
     </tr>
 
-    <tr>
+    <tr data-games="68"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Huy</td>
         <td>68</td>
         <td>1</td>
@@ -1230,7 +1478,12 @@
         <td>1961.80</td>
     </tr>
 
-    <tr>
+    <tr data-games="6"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Hyun</td>
         <td>6</td>
         <td>0</td>
@@ -1258,7 +1511,12 @@
         <td>61.40</td>
     </tr>
 
-    <tr>
+    <tr data-games="18"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Jake</td>
         <td>18</td>
         <td>0</td>
@@ -1286,7 +1544,12 @@
         <td>522.90</td>
     </tr>
 
-    <tr>
+    <tr data-games="15"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Jason</td>
         <td>15</td>
         <td>0</td>
@@ -1314,7 +1577,12 @@
         <td>346.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="18"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Jayden</td>
         <td>18</td>
         <td>0</td>
@@ -1342,7 +1610,12 @@
         <td>145.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="6"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Jayson</td>
         <td>6</td>
         <td>0</td>
@@ -1370,7 +1643,12 @@
         <td>320.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="66"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Jeen</td>
         <td>66</td>
         <td>0</td>
@@ -1398,7 +1676,12 @@
         <td>760.20</td>
     </tr>
 
-    <tr>
+    <tr data-games="57"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Jerry</td>
         <td>57</td>
         <td>0</td>
@@ -1426,7 +1709,12 @@
         <td>837.40</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Jimmy</td>
         <td>3</td>
         <td>0</td>
@@ -1454,7 +1742,12 @@
         <td>91.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="45"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Josh</td>
         <td>45</td>
         <td>0</td>
@@ -1482,7 +1775,12 @@
         <td>878.40</td>
     </tr>
 
-    <tr>
+    <tr data-games="24"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Jun</td>
         <td>24</td>
         <td>0</td>
@@ -1510,7 +1808,12 @@
         <td>404.20</td>
     </tr>
 
-    <tr>
+    <tr data-games="55"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Jun Hao</td>
         <td>55</td>
         <td>2</td>
@@ -1538,7 +1841,12 @@
         <td>1435.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="23"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Kelvin</td>
         <td>23</td>
         <td>0</td>
@@ -1566,7 +1874,12 @@
         <td>692.20</td>
     </tr>
 
-    <tr>
+    <tr data-games="33"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Khang</td>
         <td>33</td>
         <td>0</td>
@@ -1594,7 +1907,12 @@
         <td>819.70</td>
     </tr>
 
-    <tr>
+    <tr data-games="14"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Kris</td>
         <td>14</td>
         <td>0</td>
@@ -1622,7 +1940,12 @@
         <td>316.40</td>
     </tr>
 
-    <tr>
+    <tr data-games="51"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Larry</td>
         <td>51</td>
         <td>0</td>
@@ -1650,7 +1973,12 @@
         <td>1442.80</td>
     </tr>
 
-    <tr>
+    <tr data-games="51"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Lennard</td>
         <td>51</td>
         <td>0</td>
@@ -1678,7 +2006,12 @@
         <td>922.10</td>
     </tr>
 
-    <tr>
+    <tr data-games="84"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Lester</td>
         <td>84</td>
         <td>0</td>
@@ -1706,7 +2039,12 @@
         <td>1935.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="42"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Lil Chee</td>
         <td>42</td>
         <td>0</td>
@@ -1734,7 +2072,12 @@
         <td>780.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="75"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Louis</td>
         <td>75</td>
         <td>0</td>
@@ -1762,7 +2105,12 @@
         <td>1956.90</td>
     </tr>
 
-    <tr>
+    <tr data-games="15"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Marvin</td>
         <td>15</td>
         <td>0</td>
@@ -1790,7 +2138,12 @@
         <td>196.30</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Michael</td>
         <td>3</td>
         <td>0</td>
@@ -1818,7 +2171,12 @@
         <td>18.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Mike</td>
         <td>3</td>
         <td>0</td>
@@ -1846,7 +2204,12 @@
         <td>98.10</td>
     </tr>
 
-    <tr>
+    <tr data-games="36"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Mo</td>
         <td>36</td>
         <td>0</td>
@@ -1874,7 +2237,12 @@
         <td>649.50</td>
     </tr>
 
-    <tr>
+    <tr data-games="18"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Moritz</td>
         <td>18</td>
         <td>0</td>
@@ -1902,7 +2270,12 @@
         <td>707.70</td>
     </tr>
 
-    <tr>
+    <tr data-games="36"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Otto</td>
         <td>36</td>
         <td>0</td>
@@ -1930,7 +2303,12 @@
         <td>1040.50</td>
     </tr>
 
-    <tr>
+    <tr data-games="9"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>PC</td>
         <td>9</td>
         <td>0</td>
@@ -1958,7 +2336,12 @@
         <td>214.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="6"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Park</td>
         <td>6</td>
         <td>0</td>
@@ -1986,7 +2369,12 @@
         <td>167.40</td>
     </tr>
 
-    <tr>
+    <tr data-games="54"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Raph</td>
         <td>54</td>
         <td>0</td>
@@ -2014,7 +2402,12 @@
         <td>922.30</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Rhys</td>
         <td>3</td>
         <td>0</td>
@@ -2042,7 +2435,12 @@
         <td>116.50</td>
     </tr>
 
-    <tr>
+    <tr data-games="54"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        data-min-50-games=true
+        >
         <td>Roberto</td>
         <td>54</td>
         <td>0</td>
@@ -2070,7 +2468,12 @@
         <td>999.70</td>
     </tr>
 
-    <tr>
+    <tr data-games="30"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Ronnie</td>
         <td>30</td>
         <td>0</td>
@@ -2098,7 +2501,12 @@
         <td>473.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="9"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Sam</td>
         <td>9</td>
         <td>0</td>
@@ -2126,7 +2534,12 @@
         <td>206.10</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Stasi</td>
         <td>3</td>
         <td>0</td>
@@ -2154,7 +2567,12 @@
         <td>68.70</td>
     </tr>
 
-    <tr>
+    <tr data-games="38"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Terry</td>
         <td>38</td>
         <td>0</td>
@@ -2182,7 +2600,12 @@
         <td>1182.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="21"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Thuan</td>
         <td>21</td>
         <td>0</td>
@@ -2210,7 +2633,12 @@
         <td>726.50</td>
     </tr>
 
-    <tr>
+    <tr data-games="27"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Tom</td>
         <td>27</td>
         <td>0</td>
@@ -2238,7 +2666,12 @@
         <td>623.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="33"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Trevor</td>
         <td>33</td>
         <td>0</td>
@@ -2266,7 +2699,12 @@
         <td>889.00</td>
     </tr>
 
-    <tr>
+    <tr data-games="39"
+        data-min-0-games=true
+        data-min-10-games=true
+        data-min-30-games=true
+        
+        >
         <td>Viet</td>
         <td>39</td>
         <td>1</td>
@@ -2294,7 +2732,12 @@
         <td>908.10</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Will</td>
         <td>3</td>
         <td>0</td>
@@ -2322,7 +2765,12 @@
         <td>24.70</td>
     </tr>
 
-    <tr>
+    <tr data-games="3"
+        data-min-0-games=true
+        
+        
+        
+        >
         <td>Wins</td>
         <td>3</td>
         <td>0</td>
@@ -2350,7 +2798,12 @@
         <td>17.20</td>
     </tr>
 
-    <tr>
+    <tr data-games="15"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Xavi</td>
         <td>15</td>
         <td>0</td>
@@ -2378,7 +2831,12 @@
         <td>656.60</td>
     </tr>
 
-    <tr>
+    <tr data-games="12"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Yon</td>
         <td>12</td>
         <td>0</td>
@@ -2406,7 +2864,12 @@
         <td>504.70</td>
     </tr>
 
-    <tr>
+    <tr data-games="15"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Zac</td>
         <td>15</td>
         <td>0</td>
@@ -2434,7 +2897,12 @@
         <td>435.40</td>
     </tr>
 
-    <tr>
+    <tr data-games="12"
+        data-min-0-games=true
+        data-min-10-games=true
+        
+        
+        >
         <td>Zarko</td>
         <td>12</td>
         <td>0</td>

@@ -8,7 +8,6 @@ title: "Player Stats Home"
     {% for playerName in stats.players %}
         {% set slugifiedPlayerName = [playerName] | slugify %}
         {% set itemValue = ["/player-stats/", slugifiedPlayerName, "/"] | join %}
-        <p>itemValue: {{ itemValue }}</p>
         <option value="{{ itemValue | url }}">{{ playerName }}</option>
     {% endfor %}
     </select>

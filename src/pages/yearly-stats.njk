@@ -1,6 +1,60 @@
 ---
 title: "Yearly Stats"
 ---
+
+<div class="yearly-min-games-filter">
+    <select name="yearly-min-games-dropdown" id="yearly-min-games-dropdown">
+        <option value="0">All</option>
+        <option value="10">10</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+    </select>
+</div>
+
+<script type="text/javascript">
+    var selectedFilters = {
+        games: ""
+    };
+
+    var urlmenu = document.getElementById('yearly-min-games-dropdown');
+    urlmenu.onchange = function() {        
+        filterByGames(this.options[this.selectedIndex].value);
+    };
+
+    function filterByGames(games) {
+        let querySelector = `[data-min-0-games=true]`;
+        switch (games) {
+            case "10":
+                querySelector = `[data-min-10-games=true]`;
+            break;
+            case "30":
+                querySelector = `[data-min-30-games=true]`;
+            break;
+            case "50":
+                querySelector = `[data-min-50-games=true]`;
+            break;            
+        }
+
+        selectedFilters.games = querySelector;
+
+        applyFilters();
+
+    }    
+
+    function applyFilters(){
+        // Use any class here, just hide all the items.
+        document.querySelectorAll("tr[data-games]").forEach(i => {
+            i.setAttribute("hidden", true);
+        });
+
+        let combinedQuerySelectors = selectedFilters.games;
+
+        document.querySelectorAll(combinedQuerySelectors).forEach(i => {
+            i.removeAttribute("hidden");
+        });
+    }
+</script>
+
 <table id="yearlyStatsTable" class="stats-table sortable">
     <tr>
         <th>Player</th>
@@ -30,7 +84,12 @@ title: "Yearly Stats"
         <th>Fan Points</th>
     </tr>
 {% for item in stats.yearlyStats %}
-    <tr>
+    <tr data-games="{{ item.Games }}"
+        data-min-0-games=true
+        {% if item.Games >= 10 %}data-min-10-games=true{% endif %}
+        {% if item.Games >= 30 %}data-min-30-games=true{% endif %}
+        {% if item.Games >= 50 %}data-min-50-games=true{% endif %}
+        >
         <td>{{ item.Player }}</td>
         <td>{{ item.Games }}</td>
         <td>{{ item.FTM }}</td>

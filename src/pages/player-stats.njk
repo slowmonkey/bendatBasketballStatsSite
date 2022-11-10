@@ -13,7 +13,6 @@ permalink: "player-stats/{{ player.name | slugify }}/"
     {% for playerStat in stats.playersStats %}
         {% set slugifiedPlayerName = [playerStat.name] | slugify %}
         {% set itemValue = ["/player-stats/", slugifiedPlayerName, "/"] | join %}
-        <p>itemValue: {{ itemValue }}</p>
         <option {% if playerStat.name === player.name %}
                     selected=true
                 {% endif %} value="{{ itemValue | url }}">{{ playerStat.name }}</option>
