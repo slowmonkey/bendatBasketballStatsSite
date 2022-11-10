@@ -6,7 +6,7 @@ pagination:
     alias: week
 permalink: "weekly-stats/{{ week.date | url }}/"
 ---
-
+{{ week.date }}
 <div class="week-selection-drop-down">
     <select name="week-dropdown" id="week-dropdown">
         <option value="{{ '/week-stats-home/' | url }}">Unselected</option>
@@ -26,3 +26,106 @@ permalink: "weekly-stats/{{ week.date | url }}/"
     };
 </script>
 
+<div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'TeamSummary')">Team Summary</button>
+    <button class="tablinks" onclick="openTab(event, 'Summary')">Summary</button>
+    <button class="tablinks" onclick="openTab(event, 'Games')">Games</button>
+</div>
+
+<div id="TeamSummary" class="tabcontent">
+    <h3>Team Summary</h3>
+</div>
+
+<div id="Summary" class="tabcontent">
+    <h3>Summary</h3>
+</div>
+
+<div id="Games" class="tabcontent">
+    <h3>Games test</h3>
+    <p>Test</p>
+    <table class="stats-table">
+        <tr>
+            <th>Date</th>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Opponent</th>
+            <th>Game</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Win/Loss</th>
+        </tr>
+    {% for item in week.games %}
+        <tr>
+            <td>{{ item.Date | statsdate }}</td>
+            <td>{{ item.Player }}</td>
+            <td>{{ item.Team }}</td>
+            <td>{{ item.Opponent }}</td>
+            <td>{{ item.Game }}</td>
+            <td>{{ item.FTM }}</td>
+            <td>{{ item.FTA }}</td>
+            <td>{{ item["FT%"] | percentage }}</td>
+            <td>{{ item.2PM }}</td>
+            <td>{{ item.2PA }}</td>
+            <td>{{ item["2PT%"] | percentage }}</td>
+            <td>{{ item.3PM }}</td>
+            <td>{{ item.3PA }}</td>
+            <td>{{ item["3PT%"] | percentage }}</td>
+            <td>{{ item.OReb }}</td>
+            <td>{{ item.DReb }}</td>
+            <td>{{ item.Assists }}</td>
+            <td>{{ item.Steals }}</td>
+            <td>{{ item.Blocks }}</td>
+            <td>{{ item.TOV }}</td>
+            <td>{{ item.TotalPoints }}</td>
+            <td>{{ item.FGM }}</td>
+            <td>{{ item.FGA }}</td>
+            <td>{{ item["FG%"] | percentage }}</td>
+            <td>{{ item.TotalRebounds }}</td>
+            <td>{{ item | fanpoints }}</td>
+            <td>{{ item["Win/Loss"] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    } 
+</script>

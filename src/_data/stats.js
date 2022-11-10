@@ -84,6 +84,7 @@ async function getWeeklyStats() {
         database: "bballstats"
     });
 
+    let weeklyStatsMap = new Map();
     let weeklyStats = [];
     try {
         client.connect();
@@ -105,8 +106,37 @@ async function getWeeklyStats() {
 
         weeklyPlayerTotalStatsQueryResult.forEach((result) => {
             let dateKey = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
-            weeklyStats.push({ date: dateKey, stats: result.rows });
+
+            let weeklyStatData = weeklyStatsMap.get(dateKey);
+
+            if (weeklyStatData) {
+                weeklyStatData.playerTotals = result.rows;
+            } else {
+                weeklyStatData = { date: dateKey, playerTotals: result.rows };
+            }
+            weeklyStatsMap.set(dateKey, weeklyStatData);
         });
+
+        let weeklyAllGamesStatsQueryResult = await Promise.all(weeklyAllGamesStatsQuery);
+        weeklyAllGamesStatsQueryResult.forEach((result) => {
+            let dateKey = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
+
+            let weeklyStatData = weeklyStatsMap.get(dateKey);
+
+            if (weeklyStatData) {
+                weeklyStatData.games = result.rows;
+            } else {
+                weeklyStatData = { date: dateKey, games: result.rows };
+            }
+            weeklyStatsMap.set(dateKey, weeklyStatData);
+        });
+
+
+
+        weeklyStatsMap.forEach((value, key) => {            
+            weeklyStats.push(value);
+        });
+
     } catch (e) {
         console.error(e);
     }
@@ -185,7 +215,7 @@ module.exports = async function () {
     let availableWeeks = await getAvailableWeeks();
     let weeklyStats = await getWeeklyStats();
     let players = await getPlayers();
-    let playersStats = await getPlayersStats();    
+    let playersStats = await getPlayersStats();
 
     return {
         allStats: allStats,

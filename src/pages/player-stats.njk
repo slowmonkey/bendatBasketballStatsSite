@@ -10,7 +10,7 @@ permalink: "player-stats/{{ player.name | slugify }}/"
 <div class="player-selection-drop-down">
     <select name="player-names-dropdown" id="player-names-dropdown">
         <option value="{{ '/player-stats-home/' | url }}">Unselected</option>
-    {% for playerName in stats.players %}
+    {% for playerName in stats.playersStats %}
         {% set slugifiedPlayerName = [playerName] | slugify %}
         {% set itemValue = ["/player-stats/", slugifiedPlayerName, "/"] | join %}
         <p>itemValue: {{ itemValue }}</p>
