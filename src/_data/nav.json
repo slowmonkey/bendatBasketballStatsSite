@@ -15,10 +15,6 @@
         {
             "url": "/yearly-stats/",
             "name": "Yearly Stats"
-        },
-        {
-            "url": "/all-stats/",
-            "name": "All Stats"
         }
     ]
 }

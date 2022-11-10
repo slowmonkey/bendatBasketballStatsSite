@@ -6,7 +6,6 @@ pagination:
     alias: week
 permalink: "weekly-stats/{{ week.date | url }}/"
 ---
-{{ week.date }}
 <div class="week-selection-drop-down">
     <select name="week-dropdown" id="week-dropdown">
         <option value="{{ '/week-stats-home/' | url }}">Unselected</option>
@@ -27,22 +26,329 @@ permalink: "weekly-stats/{{ week.date | url }}/"
 </script>
 
 <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'TeamSummary')">Team Summary</button>
+    <button class="tablinks active" onclick="openTab(event, 'TeamSummary')">Team Summary</button>
     <button class="tablinks" onclick="openTab(event, 'Summary')">Summary</button>
     <button class="tablinks" onclick="openTab(event, 'Games')">Games</button>
 </div>
 
-<div id="TeamSummary" class="tabcontent">
+<div id="TeamSummary" class="tabcontent" style="display: block;">
     <h3>Team Summary</h3>
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    {% for item in week.playerTotals %}
+        {% if item.Team == 1 %}
+        <tr>
+            <td>{{ item.Player }}</td>
+            <td>{{ item.Team }}</td>
+            <td>{{ item.Games }}</td>
+            <td>{{ item.FTM }}</td>
+            <td>{{ item.FTA }}</td>
+            <td>{{ item["FT%"] | percentage }}</td>
+            <td>{{ item.2PM }}</td>
+            <td>{{ item.2PA }}</td>
+            <td>{{ item["2PT%"] | percentage }}</td>
+            <td>{{ item.3PM }}</td>
+            <td>{{ item.3PA }}</td>
+            <td>{{ item["3PT%"] | percentage }}</td>
+            <td>{{ item.OReb }}</td>
+            <td>{{ item.DReb }}</td>
+            <td>{{ item.Assists }}</td>
+            <td>{{ item.Steals }}</td>
+            <td>{{ item.Blocks }}</td>
+            <td>{{ item.TOV }}</td>
+            <td>{{ item.TotalPoints }}</td>
+            <td>{{ item.FGM }}</td>
+            <td>{{ item.FGA }}</td>
+            <td>{{ item["FG%"] | percentage }}</td>
+            <td>{{ item.TotalRebounds }}</td>
+            <td class=" sorttable_sorted">{{ item | fanpoints }}</td>
+            <td>{{ item.Wins }}</td>
+            <td>{{ item.Losses }}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    {% for item in week.playerTotals %}
+        {% if item.Team == 2 %}
+        <tr>
+            <td>{{ item.Player }}</td>
+            <td>{{ item.Team }}</td>
+            <td>{{ item.Games }}</td>
+            <td>{{ item.FTM }}</td>
+            <td>{{ item.FTA }}</td>
+            <td>{{ item["FT%"] | percentage }}</td>
+            <td>{{ item.2PM }}</td>
+            <td>{{ item.2PA }}</td>
+            <td>{{ item["2PT%"] | percentage }}</td>
+            <td>{{ item.3PM }}</td>
+            <td>{{ item.3PA }}</td>
+            <td>{{ item["3PT%"] | percentage }}</td>
+            <td>{{ item.OReb }}</td>
+            <td>{{ item.DReb }}</td>
+            <td>{{ item.Assists }}</td>
+            <td>{{ item.Steals }}</td>
+            <td>{{ item.Blocks }}</td>
+            <td>{{ item.TOV }}</td>
+            <td>{{ item.TotalPoints }}</td>
+            <td>{{ item.FGM }}</td>
+            <td>{{ item.FGA }}</td>
+            <td>{{ item["FG%"] | percentage }}</td>
+            <td>{{ item.TotalRebounds }}</td>
+            <td class=" sorttable_sorted">{{ item | fanpoints }}</td>
+            <td>{{ item.Wins }}</td>
+            <td>{{ item.Losses }}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    {% for item in week.playerTotals %}
+        {% if item.Team == 3 %}
+        <tr>
+            <td>{{ item.Player }}</td>
+            <td>{{ item.Team }}</td>
+            <td>{{ item.Games }}</td>
+            <td>{{ item.FTM }}</td>
+            <td>{{ item.FTA }}</td>
+            <td>{{ item["FT%"] | percentage }}</td>
+            <td>{{ item.2PM }}</td>
+            <td>{{ item.2PA }}</td>
+            <td>{{ item["2PT%"] | percentage }}</td>
+            <td>{{ item.3PM }}</td>
+            <td>{{ item.3PA }}</td>
+            <td>{{ item["3PT%"] | percentage }}</td>
+            <td>{{ item.OReb }}</td>
+            <td>{{ item.DReb }}</td>
+            <td>{{ item.Assists }}</td>
+            <td>{{ item.Steals }}</td>
+            <td>{{ item.Blocks }}</td>
+            <td>{{ item.TOV }}</td>
+            <td>{{ item.TotalPoints }}</td>
+            <td>{{ item.FGM }}</td>
+            <td>{{ item.FGA }}</td>
+            <td>{{ item["FG%"] | percentage }}</td>
+            <td>{{ item.TotalRebounds }}</td>
+            <td class=" sorttable_sorted">{{ item | fanpoints }}</td>
+            <td>{{ item.Wins }}</td>
+            <td>{{ item.Losses }}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    {% for item in week.playerTotals %}
+        {% if item.Team == 4 %}
+        <tr>
+            <td>{{ item.Player }}</td>
+            <td>{{ item.Team }}</td>
+            <td>{{ item.Games }}</td>
+            <td>{{ item.FTM }}</td>
+            <td>{{ item.FTA }}</td>
+            <td>{{ item["FT%"] | percentage }}</td>
+            <td>{{ item.2PM }}</td>
+            <td>{{ item.2PA }}</td>
+            <td>{{ item["2PT%"] | percentage }}</td>
+            <td>{{ item.3PM }}</td>
+            <td>{{ item.3PA }}</td>
+            <td>{{ item["3PT%"] | percentage }}</td>
+            <td>{{ item.OReb }}</td>
+            <td>{{ item.DReb }}</td>
+            <td>{{ item.Assists }}</td>
+            <td>{{ item.Steals }}</td>
+            <td>{{ item.Blocks }}</td>
+            <td>{{ item.TOV }}</td>
+            <td>{{ item.TotalPoints }}</td>
+            <td>{{ item.FGM }}</td>
+            <td>{{ item.FGA }}</td>
+            <td>{{ item["FG%"] | percentage }}</td>
+            <td>{{ item.TotalRebounds }}</td>
+            <td class=" sorttable_sorted">{{ item | fanpoints }}</td>
+            <td>{{ item.Wins }}</td>
+            <td>{{ item.Losses }}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>    
 </div>
 
 <div id="Summary" class="tabcontent">
     <h3>Summary</h3>
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    {% for item in week.playerTotals %}
+        <tr>
+            <td>{{ item.Player }}</td>
+            <td>{{ item.Team }}</td>
+            <td>{{ item.Games }}</td>
+            <td>{{ item.FTM }}</td>
+            <td>{{ item.FTA }}</td>
+            <td>{{ item["FT%"] | percentage }}</td>
+            <td>{{ item.2PM }}</td>
+            <td>{{ item.2PA }}</td>
+            <td>{{ item["2PT%"] | percentage }}</td>
+            <td>{{ item.3PM }}</td>
+            <td>{{ item.3PA }}</td>
+            <td>{{ item["3PT%"] | percentage }}</td>
+            <td>{{ item.OReb }}</td>
+            <td>{{ item.DReb }}</td>
+            <td>{{ item.Assists }}</td>
+            <td>{{ item.Steals }}</td>
+            <td>{{ item.Blocks }}</td>
+            <td>{{ item.TOV }}</td>
+            <td>{{ item.TotalPoints }}</td>
+            <td>{{ item.FGM }}</td>
+            <td>{{ item.FGA }}</td>
+            <td>{{ item["FG%"] | percentage }}</td>
+            <td>{{ item.TotalRebounds }}</td>
+            <td class=" sorttable_sorted">{{ item | fanpoints }}</td>
+            <td>{{ item.Wins }}</td>
+            <td>{{ item.Losses }}</td>
+        </tr>
+    {% endfor %}
+    </table>
 </div>
 
 <div id="Games" class="tabcontent">
     <h3>Games test</h3>
-    <p>Test</p>
     <table class="stats-table">
         <tr>
             <th>Date</th>
@@ -100,7 +406,7 @@ permalink: "weekly-stats/{{ week.date | url }}/"
             <td>{{ item.FGA }}</td>
             <td>{{ item["FG%"] | percentage }}</td>
             <td>{{ item.TotalRebounds }}</td>
-            <td>{{ item | fanpoints }}</td>
+            <td class=" sorttable_sorted">{{ item | fanpoints }}</td>
             <td>{{ item["Win/Loss"] }}</td>
         </tr>
     {% endfor %}

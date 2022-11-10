@@ -131,8 +131,6 @@ async function getWeeklyStats() {
             weeklyStatsMap.set(dateKey, weeklyStatData);
         });
 
-
-
         weeklyStatsMap.forEach((value, key) => {            
             weeklyStats.push(value);
         });
