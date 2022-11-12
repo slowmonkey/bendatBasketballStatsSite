@@ -2,7 +2,9 @@ DROP VIEW bballstats."allStats";
 CREATE OR REPLACE VIEW bballstats."allStats" AS
     SELECT 
         "Date", 
-        "Player", 
+        CASE WHEN an."Alias" IS NOT NULL THEN an."Alias"
+        ELSE ptpg."Player" 
+        END AS "Player",
         "Team", 
         "Opponent", 
         "Game", 
@@ -51,4 +53,5 @@ CREATE OR REPLACE VIEW bballstats."allStats" AS
         END AS "FG%",
         ("2PM"*2)+("3PM"*3)+"FTM" AS "TotalPoints",
         "OReb"+"DReb" AS "TotalRebounds"
-	FROM bballstats."playerTotalsPerGame";
+	FROM bballstats."playerTotalsPerGame" ptpg
+    LEFT JOIN bballstats."aliasNames" an ON an."Player" = ptpg."Player";

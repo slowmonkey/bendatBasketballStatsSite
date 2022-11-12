@@ -32,7 +32,6 @@ permalink: "weekly-stats/{{ week.date | url }}/"
 </div>
 
 <div id="TeamSummary" class="tabcontent" style="display: block;">
-    <h3>Team Summary</h3>
     <table class="stats-table sortable">
         <tr>
             <th>Player</th>
@@ -88,7 +87,7 @@ permalink: "weekly-stats/{{ week.date | url }}/"
             <td>{{ item.FGA }}</td>
             <td>{{ item["FG%"] | percentage }}</td>
             <td>{{ item.TotalRebounds }}</td>
-            <td class=" sorttable_sorted">{{ item | fanpoints }}</td>
+            <td>{{ item | fanpoints }}</td>
             <td>{{ item.Wins }}</td>
             <td>{{ item.Losses }}</td>
         </tr>
@@ -284,7 +283,6 @@ permalink: "weekly-stats/{{ week.date | url }}/"
 </div>
 
 <div id="Summary" class="tabcontent">
-    <h3>Summary</h3>
     <table class="stats-table sortable">
         <tr>
             <th>Player</th>
@@ -348,7 +346,6 @@ permalink: "weekly-stats/{{ week.date | url }}/"
 </div>
 
 <div id="Games" class="tabcontent">
-    <h3>Games</h3>
     <table class="stats-table">
         <tr>
             <th>Date</th>
