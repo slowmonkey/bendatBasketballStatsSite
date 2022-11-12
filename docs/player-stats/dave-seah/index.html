@@ -1,0 +1,882 @@
+<head>
+    <title>
+        Bendat Basketball Stats
+    </title>
+
+    <style>
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: #4285f4;
+            overflow: hidden;
+        }
+
+        /* Style the links inside the navigation bar */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a.selected {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add an active class to highlight the current page */
+        .topnav a[data-state="active"] {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        /* Hide the link that should open and close the topnav on small screens */
+        .topnav .icon {
+            display: none;
+        }
+
+        .stats-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 10pt;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            
+        }
+
+        
+
+        
+
+        .stats-table th,
+        .stats-table td {
+            padding: 12px 15px;
+        }
+
+        .stats-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .stats-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .stats-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+</head>
+
+<body>
+    <div class="topnav">
+        
+            <a href="/bendatBasketballStatsSite/"
+                
+            >Home</a>
+        
+            <a href="/bendatBasketballStatsSite/weekly-stats-home/"
+                
+            >Weekly Stats</a>
+        
+            <a href="/bendatBasketballStatsSite/player-stats-home/"
+                
+            >Player Stats</a>
+        
+            <a href="/bendatBasketballStatsSite/yearly-stats/"
+                
+            >Yearly Stats</a>
+        
+    </div>
+    <main>
+        
+
+<div class="player-selection-drop-down">
+    <select name="player-names-dropdown" id="player-names-dropdown">
+        <option value="/bendatBasketballStatsSite/player-stats-home/">Unselected</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/adam/">Adam</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/alan/">Alan</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/andy/">Andy</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/angus/">Angus</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/anson/">Anson</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/anthony/">Anthony</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/axyl/">Axyl</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/b-tay/">B. Tay</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/ben/">Ben</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/biyanka/">Biyanka</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/brendon/">Brendon</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/brian/">Brian</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/cameron/">Cameron</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/chad/">Chad</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/charlie/">Charlie</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/chee/">Chee</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/chris/">Chris</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/cuong/">Cuong</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/cyrus/">Cyrus</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/d-laan/">D. Laan</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/d-le/">D. Le</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/d-shoeba/">D. Shoeba</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/dai/">Dai</option>
+    
+        
+        
+        <option 
+                    selected=true
+                 value="/bendatBasketballStatsSite/player-stats/dave-seah/">Dave Seah</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/derek/">Derek</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/doug/">Doug</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/dung/">Dung</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/felix/">Felix</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/feng/">Feng</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/gav/">Gav</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/gav-2/">Gav 2</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/gideon/">Gideon</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/glenn/">Glenn</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/gordon/">Gordon</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/hendo/">Hendo</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/heng/">Heng</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/huy/">Huy</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/hyun/">Hyun</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/jake/">Jake</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/jason/">Jason</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/jayden/">Jayden</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/jayson/">Jayson</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/jeen/">Jeen</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/jerry/">Jerry</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/jimmy/">Jimmy</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/josh/">Josh</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/jun/">Jun</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/jun-hao/">Jun Hao</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/kelvin/">Kelvin</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/khang/">Khang</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/kris/">Kris</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/larry/">Larry</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/lennard/">Lennard</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/lester/">Lester</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/lil-chee/">Lil Chee</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/louis/">Louis</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/marvin/">Marvin</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/michael/">Michael</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/mike/">Mike</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/mo/">Mo</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/moritz/">Moritz</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/otto/">Otto</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/pc/">PC</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/park/">Park</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/raph/">Raph</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/rhys/">Rhys</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/roberto/">Roberto</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/ronnie/">Ronnie</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/sam/">Sam</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/stasi/">Stasi</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/terry/">Terry</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/thuan/">Thuan</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/tom/">Tom</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/trevor/">Trevor</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/viet/">Viet</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/will/">Will</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/wins/">Wins</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/xavi/">Xavi</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/yon/">Yon</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/zac/">Zac</option>
+    
+        
+        
+        <option  value="/bendatBasketballStatsSite/player-stats/zarko/">Zarko</option>
+    
+    </select>
+</div>
+
+<script type="text/javascript">
+    var urlmenu = document.getElementById('player-names-dropdown');
+    urlmenu.onchange = function() {
+        window.location = `${this.options[this.selectedIndex].value}`;
+    };
+</script>
+
+<table class="stats-table sortable">
+    <tr>
+        <th>Date</th>
+        <th>Team</th>
+        <th>Opponent</th>
+        <th>Game</th>
+        <th>FTM</th>
+        <th>FTA</th>
+        <th>FT%</th>
+        <th>2PM</th>
+        <th>2PA</th>
+        <th>2P%</th>
+        <th>3PM</th>
+        <th>3PA</th>
+        <th>3P%</th>
+        <th>O Reb</th>
+        <th>D Reb</th>
+        <th>Assists</th>
+        <th>Steals</th>
+        <th>Blocks</th>
+        <th>TOV</th>
+        <th>Total Points</th>
+        <th>FGM</th>
+        <th>FGA</th>
+        <th>FG%</th>
+        <th>Total Rebounds</th>
+        <th>Fan Points</th>
+        <th>Win/Loss</th>
+    </tr>
+
+    <tr>
+        <td>2022-03-15</td>
+        <td>3</td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>2</td>
+        <td>7</td>
+        <td>28.57%</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0.00%</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>1</td>
+        <td>1</td>
+        <td>2</td>
+        <td>4</td>
+        <td>2</td>
+        <td>8</td>
+        <td>25.00%</td>
+        <td>3</td>
+        <td>18.40</td>
+        <td>L</td>
+    </tr>
+
+    <tr>
+        <td>2022-03-15</td>
+        <td>3</td>
+        <td>1</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>3</td>
+        <td>5</td>
+        <td>60.00%</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0.00%</td>
+        <td>2</td>
+        <td>4</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>6</td>
+        <td>3</td>
+        <td>8</td>
+        <td>37.50%</td>
+        <td>6</td>
+        <td>23.90</td>
+        <td>L</td>
+    </tr>
+
+    <tr>
+        <td>2022-03-15</td>
+        <td>3</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>1</td>
+        <td>4</td>
+        <td>25.00%</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0.00%</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>2</td>
+        <td>1</td>
+        <td>7</td>
+        <td>14.29%</td>
+        <td>0</td>
+        <td>-0.40</td>
+        <td>L</td>
+    </tr>
+
+    <tr>
+        <td>2022-03-07</td>
+        <td>3</td>
+        <td>1</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>1</td>
+        <td>2</td>
+        <td>50.00%</td>
+        <td>1</td>
+        <td>3</td>
+        <td>33.33%</td>
+        <td>1</td>
+        <td>3</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>5</td>
+        <td>2</td>
+        <td>5</td>
+        <td>40.00%</td>
+        <td>4</td>
+        <td>18.00</td>
+        <td>W</td>
+    </tr>
+
+    <tr>
+        <td>2022-03-07</td>
+        <td>3</td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0.00%</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0.00%</td>
+        <td>2</td>
+        <td>2</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0.00%</td>
+        <td>4</td>
+        <td>5.70</td>
+        <td>W</td>
+    </tr>
+
+    <tr>
+        <td>2022-03-07</td>
+        <td>3</td>
+        <td>2</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>2</td>
+        <td>4</td>
+        <td>50.00%</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0.00%</td>
+        <td>1</td>
+        <td>3</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>4</td>
+        <td>2</td>
+        <td>5</td>
+        <td>40.00%</td>
+        <td>4</td>
+        <td>17.00</td>
+        <td>W</td>
+    </tr>
+
+    <tr>
+        <td>2022-01-11</td>
+        <td>1</td>
+        <td>4</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>2</td>
+        <td>8</td>
+        <td>25.00%</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0.00%</td>
+        <td>2</td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>4</td>
+        <td>2</td>
+        <td>9</td>
+        <td>22.22%</td>
+        <td>6</td>
+        <td>16.20</td>
+        <td>L</td>
+    </tr>
+
+    <tr>
+        <td>2022-01-11</td>
+        <td>1</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>3</td>
+        <td>5</td>
+        <td>60.00%</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0.00%</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>6</td>
+        <td>3</td>
+        <td>6</td>
+        <td>50.00%</td>
+        <td>1</td>
+        <td>22.80</td>
+        <td>L</td>
+    </tr>
+
+    <tr>
+        <td>2022-01-11</td>
+        <td>1</td>
+        <td>2</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>1</td>
+        <td>4</td>
+        <td>25.00%</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>0</td>
+        <td>5</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>2</td>
+        <td>1</td>
+        <td>4</td>
+        <td>25.00%</td>
+        <td>5</td>
+        <td>13.70</td>
+        <td>L</td>
+    </tr>
+
+    <tr>
+        <td>2022-01-04</td>
+        <td>1</td>
+        <td>4</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>1</td>
+        <td>6</td>
+        <td>16.67%</td>
+        <td>1</td>
+        <td>2</td>
+        <td>50.00%</td>
+        <td>1</td>
+        <td>2</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>5</td>
+        <td>2</td>
+        <td>8</td>
+        <td>25.00%</td>
+        <td>3</td>
+        <td>12.90</td>
+        <td>L</td>
+    </tr>
+
+    <tr>
+        <td>2022-01-04</td>
+        <td>1</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>2</td>
+        <td>4</td>
+        <td>50.00%</td>
+        <td>0</td>
+        <td>2</td>
+        <td>0.00%</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>4</td>
+        <td>2</td>
+        <td>6</td>
+        <td>33.33%</td>
+        <td>1</td>
+        <td>11.30</td>
+        <td>W</td>
+    </tr>
+
+    <tr>
+        <td>2022-01-04</td>
+        <td>1</td>
+        <td>2</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>1</td>
+        <td>6</td>
+        <td>16.67%</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0.00%</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>2</td>
+        <td>1</td>
+        <td>6</td>
+        <td>16.67%</td>
+        <td>2</td>
+        <td>4.80</td>
+        <td>W</td>
+    </tr>
+
+</table>
+
+    </main>
+</body>
+
+</html>

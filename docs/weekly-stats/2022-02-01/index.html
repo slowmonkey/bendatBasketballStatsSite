@@ -1,0 +1,3864 @@
+<head>
+    <title>
+        Bendat Basketball Stats
+    </title>
+
+    <style>
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: #4285f4;
+            overflow: hidden;
+        }
+
+        /* Style the links inside the navigation bar */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a.selected {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add an active class to highlight the current page */
+        .topnav a[data-state="active"] {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        /* Hide the link that should open and close the topnav on small screens */
+        .topnav .icon {
+            display: none;
+        }
+
+        .stats-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 10pt;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            
+        }
+
+        
+
+        
+
+        .stats-table th,
+        .stats-table td {
+            padding: 12px 15px;
+        }
+
+        .stats-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .stats-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .stats-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+</head>
+
+<body>
+    <div class="topnav">
+        
+            <a href="/bendatBasketballStatsSite/"
+                
+            >Home</a>
+        
+            <a href="/bendatBasketballStatsSite/weekly-stats-home/"
+                
+            >Weekly Stats</a>
+        
+            <a href="/bendatBasketballStatsSite/player-stats-home/"
+                
+            >Player Stats</a>
+        
+            <a href="/bendatBasketballStatsSite/yearly-stats/"
+                
+            >Yearly Stats</a>
+        
+    </div>
+    <main>
+        
+<div class="week-selection-drop-down">
+    <select name="week-dropdown" id="week-dropdown">
+        <option value="/bendatBasketballStatsSite/week-stats-home/">Unselected</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-10-25/">2022-10-25</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-10-18/">2022-10-18</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-10-11/">2022-10-11</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-09-20/">2022-09-20</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-09-06/">2022-09-06</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-08-23/">2022-08-23</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-08-16/">2022-08-16</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-07-19/">2022-07-19</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-28/">2022-06-28</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-21/">2022-06-21</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-14/">2022-06-14</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-07/">2022-06-07</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-05-31/">2022-05-31</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-05-17/">2022-05-17</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-05-10/">2022-05-10</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-04-26/">2022-04-26</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-04-05/">2022-04-05</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-29/">2022-03-29</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-22/">2022-03-22</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-15/">2022-03-15</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-07/">2022-03-07</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-01/">2022-03-01</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-22/">2022-02-22</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-15/">2022-02-15</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-08/">2022-02-08</option>
+    
+        
+        <option  
+                    selected=true 
+                 value="/bendatBasketballStatsSite/weekly-stats/2022-02-01/">2022-02-01</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-01-11/">2022-01-11</option>
+    
+        
+        <option  value="/bendatBasketballStatsSite/weekly-stats/2022-01-04/">2022-01-04</option>
+    
+    </select>
+</div>
+
+<script type="text/javascript">
+    var urlmenu = document.getElementById('week-dropdown');
+    urlmenu.onchange = function() {
+        window.location = `${this.options[this.selectedIndex].value}`;
+    };
+</script>
+
+<div class="tab">
+    <button class="tablinks active" onclick="openTab(event, 'TeamSummary')">Team Summary</button>
+    <button class="tablinks" onclick="openTab(event, 'Summary')">Summary</button>
+    <button class="tablinks" onclick="openTab(event, 'Games')">Games</button>
+</div>
+
+<div id="TeamSummary" class="tabcontent" style="display: block;">
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Gav</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>15</td>
+            <td>33.33%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>7</td>
+            <td>14</td>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td>10</td>
+            <td>5</td>
+            <td>15</td>
+            <td>33.33%</td>
+            <td>12</td>
+            <td>70.50</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Jayson</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>15</td>
+            <td>44</td>
+            <td>34.09%</td>
+            <td>2</td>
+            <td>7</td>
+            <td>28.57%</td>
+            <td>6</td>
+            <td>13</td>
+            <td>19</td>
+            <td>3</td>
+            <td>2</td>
+            <td>5</td>
+            <td>36</td>
+            <td>17</td>
+            <td>51</td>
+            <td>33.33%</td>
+            <td>19</td>
+            <td>140.30</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        
+    
+        
+    
+        
+        <tr>
+            <td>Kris</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>17</td>
+            <td>52.94%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>9</td>
+            <td>5</td>
+            <td>2</td>
+            <td>0</td>
+            <td>1</td>
+            <td>18</td>
+            <td>9</td>
+            <td>18</td>
+            <td>50.00%</td>
+            <td>11</td>
+            <td>71.40</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Roberto</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>24</td>
+            <td>37.50%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>4</td>
+            <td>2</td>
+            <td>6</td>
+            <td>0</td>
+            <td>3</td>
+            <td>18</td>
+            <td>9</td>
+            <td>27</td>
+            <td>33.33%</td>
+            <td>9</td>
+            <td>63.10</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Terry</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>8</td>
+            <td>14</td>
+            <td>57.14%</td>
+            <td>1</td>
+            <td>4</td>
+            <td>25.00%</td>
+            <td>2</td>
+            <td>6</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>19</td>
+            <td>9</td>
+            <td>18</td>
+            <td>50.00%</td>
+            <td>8</td>
+            <td>60.40</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        
+    
+        
+    
+        
+        <tr>
+            <td>Xavi</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>12</td>
+            <td>24</td>
+            <td>50.00%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>16</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>24</td>
+            <td>12</td>
+            <td>27</td>
+            <td>44.44%</td>
+            <td>19</td>
+            <td>88.10</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        
+    
+    </table>
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Anson</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>22</td>
+            <td>37</td>
+            <td>59.46%</td>
+            <td>0</td>
+            <td>5</td>
+            <td>0.00%</td>
+            <td>8</td>
+            <td>4</td>
+            <td>12</td>
+            <td>6</td>
+            <td>0</td>
+            <td>5</td>
+            <td>44</td>
+            <td>22</td>
+            <td>42</td>
+            <td>52.38%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">150.10</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+        
+    
+        
+        <tr>
+            <td>Axyl</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>7</td>
+            <td>13</td>
+            <td>53.85%</td>
+            <td>2</td>
+            <td>13</td>
+            <td>15.38%</td>
+            <td>2</td>
+            <td>13</td>
+            <td>16</td>
+            <td>7</td>
+            <td>2</td>
+            <td>4</td>
+            <td>20</td>
+            <td>9</td>
+            <td>26</td>
+            <td>34.62%</td>
+            <td>15</td>
+            <td class=" sorttable_sorted">108.80</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Jason</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>7</td>
+            <td>21</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>3</td>
+            <td>10</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>28</td>
+            <td class=" sorttable_sorted">71.40</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Louis</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>13</td>
+            <td>22</td>
+            <td>59.09%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>12</td>
+            <td>12</td>
+            <td>1</td>
+            <td>0</td>
+            <td>10</td>
+            <td>26</td>
+            <td>13</td>
+            <td>25</td>
+            <td>52.00%</td>
+            <td>14</td>
+            <td class=" sorttable_sorted">87.00</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+        
+    
+        
+        <tr>
+            <td>Moritz</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>22</td>
+            <td>40.91%</td>
+            <td>8</td>
+            <td>17</td>
+            <td>47.06%</td>
+            <td>2</td>
+            <td>17</td>
+            <td>14</td>
+            <td>1</td>
+            <td>0</td>
+            <td>4</td>
+            <td>42</td>
+            <td>17</td>
+            <td>39</td>
+            <td>43.59%</td>
+            <td>19</td>
+            <td class=" sorttable_sorted">141.70</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </table>
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    
+        
+        <tr>
+            <td>Alan</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>50.00%</td>
+            <td>7</td>
+            <td>27</td>
+            <td>25.93%</td>
+            <td>3</td>
+            <td>15</td>
+            <td>9</td>
+            <td>6</td>
+            <td>0</td>
+            <td>3</td>
+            <td>25</td>
+            <td>9</td>
+            <td>31</td>
+            <td>29.03%</td>
+            <td>18</td>
+            <td class=" sorttable_sorted">96.80</td>
+            <td>0</td>
+            <td>3</td>
+        </tr>
+        
+    
+        
+        <tr>
+            <td>Angus</td>
+            <td>3</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>7</td>
+            <td>15</td>
+            <td>46.67%</td>
+            <td>2</td>
+            <td>7</td>
+            <td>28.57%</td>
+            <td>7</td>
+            <td>11</td>
+            <td>4</td>
+            <td>1</td>
+            <td>6</td>
+            <td>6</td>
+            <td>20</td>
+            <td>9</td>
+            <td>22</td>
+            <td>40.91%</td>
+            <td>18</td>
+            <td class=" sorttable_sorted">85.10</td>
+            <td>0</td>
+            <td>2</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Jayden</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>7</td>
+            <td>22</td>
+            <td>31.82%</td>
+            <td>0</td>
+            <td>17</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>6</td>
+            <td>2</td>
+            <td>0</td>
+            <td>6</td>
+            <td>14</td>
+            <td>7</td>
+            <td>39</td>
+            <td>17.95%</td>
+            <td>6</td>
+            <td class=" sorttable_sorted">21.20</td>
+            <td>0</td>
+            <td>3</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Raph</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>9</td>
+            <td>33.33%</td>
+            <td>4</td>
+            <td>13</td>
+            <td>30.77%</td>
+            <td>3</td>
+            <td>12</td>
+            <td>8</td>
+            <td>6</td>
+            <td>0</td>
+            <td>3</td>
+            <td>18</td>
+            <td>7</td>
+            <td>22</td>
+            <td>31.82%</td>
+            <td>15</td>
+            <td class=" sorttable_sorted">82.60</td>
+            <td>0</td>
+            <td>3</td>
+        </tr>
+        
+    
+        
+    
+        
+        <tr>
+            <td>Ronnie</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>8</td>
+            <td>25</td>
+            <td>32.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>9</td>
+            <td>7</td>
+            <td>5</td>
+            <td>1</td>
+            <td>5</td>
+            <td>16</td>
+            <td>8</td>
+            <td>25</td>
+            <td>32.00%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">70.50</td>
+            <td>0</td>
+            <td>3</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Xavi</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>19</td>
+            <td>47.37%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>50.00%</td>
+            <td>5</td>
+            <td>4</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>2</td>
+            <td>24</td>
+            <td>11</td>
+            <td>23</td>
+            <td>47.83%</td>
+            <td>9</td>
+            <td class=" sorttable_sorted">69.40</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        
+    
+        
+    
+    </table>
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Ben</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>5</td>
+            <td>60.00%</td>
+            <td>7</td>
+            <td>16</td>
+            <td>43.75%</td>
+            <td>5</td>
+            <td>3</td>
+            <td>6</td>
+            <td>3</td>
+            <td>0</td>
+            <td>4</td>
+            <td>27</td>
+            <td>10</td>
+            <td>21</td>
+            <td>47.62%</td>
+            <td>8</td>
+            <td class=" sorttable_sorted">83.30</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+        
+    
+        
+        <tr>
+            <td>D. Shoeba</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>16</td>
+            <td>56.25%</td>
+            <td>10</td>
+            <td>20</td>
+            <td>50.00%</td>
+            <td>13</td>
+            <td>23</td>
+            <td>8</td>
+            <td>4</td>
+            <td>0</td>
+            <td>4</td>
+            <td>48</td>
+            <td>19</td>
+            <td>36</td>
+            <td>52.78%</td>
+            <td>36</td>
+            <td class=" sorttable_sorted">182.80</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+        
+    
+        
+    
+        
+        <tr>
+            <td>Huy</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>12</td>
+            <td>22</td>
+            <td>54.55%</td>
+            <td>4</td>
+            <td>17</td>
+            <td>23.53%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>12</td>
+            <td>4</td>
+            <td>1</td>
+            <td>4</td>
+            <td>36</td>
+            <td>16</td>
+            <td>39</td>
+            <td>41.03%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">106.20</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Jeen</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>10</td>
+            <td>60.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>1</td>
+            <td>6</td>
+            <td>13</td>
+            <td>0</td>
+            <td>0</td>
+            <td>3</td>
+            <td>15</td>
+            <td>7</td>
+            <td>15</td>
+            <td>46.67%</td>
+            <td>7</td>
+            <td class=" sorttable_sorted">62.50</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+        
+    
+        
+    
+        
+        <tr>
+            <td>Lester</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>11</td>
+            <td>54.55%</td>
+            <td>3</td>
+            <td>8</td>
+            <td>37.50%</td>
+            <td>2</td>
+            <td>5</td>
+            <td>10</td>
+            <td>2</td>
+            <td>0</td>
+            <td>8</td>
+            <td>21</td>
+            <td>9</td>
+            <td>19</td>
+            <td>47.37%</td>
+            <td>7</td>
+            <td class=" sorttable_sorted">66.20</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <tr>
+            <td>Terry</td>
+            <td>4</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>16</td>
+            <td>56.25%</td>
+            <td>1</td>
+            <td>2</td>
+            <td>50.00%</td>
+            <td>2</td>
+            <td>10</td>
+            <td>7</td>
+            <td>1</td>
+            <td>0</td>
+            <td>3</td>
+            <td>21</td>
+            <td>10</td>
+            <td>18</td>
+            <td>55.56%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">78.40</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        
+    
+        
+    
+        
+    
+        
+    
+    </table>    
+</div>
+
+<div id="Summary" class="tabcontent">
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+        </tr>
+    
+        <tr>
+            <td>Alan</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>50.00%</td>
+            <td>7</td>
+            <td>27</td>
+            <td>25.93%</td>
+            <td>3</td>
+            <td>15</td>
+            <td>9</td>
+            <td>6</td>
+            <td>0</td>
+            <td>3</td>
+            <td>25</td>
+            <td>9</td>
+            <td>31</td>
+            <td>29.03%</td>
+            <td>18</td>
+            <td class=" sorttable_sorted">96.80</td>
+            <td>0</td>
+            <td>3</td>
+        </tr>
+    
+        <tr>
+            <td>Angus</td>
+            <td>3</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>7</td>
+            <td>15</td>
+            <td>46.67%</td>
+            <td>2</td>
+            <td>7</td>
+            <td>28.57%</td>
+            <td>7</td>
+            <td>11</td>
+            <td>4</td>
+            <td>1</td>
+            <td>6</td>
+            <td>6</td>
+            <td>20</td>
+            <td>9</td>
+            <td>22</td>
+            <td>40.91%</td>
+            <td>18</td>
+            <td class=" sorttable_sorted">85.10</td>
+            <td>0</td>
+            <td>2</td>
+        </tr>
+    
+        <tr>
+            <td>Anson</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>22</td>
+            <td>37</td>
+            <td>59.46%</td>
+            <td>0</td>
+            <td>5</td>
+            <td>0.00%</td>
+            <td>8</td>
+            <td>4</td>
+            <td>12</td>
+            <td>6</td>
+            <td>0</td>
+            <td>5</td>
+            <td>44</td>
+            <td>22</td>
+            <td>42</td>
+            <td>52.38%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">150.10</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+    
+        <tr>
+            <td>Axyl</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>7</td>
+            <td>13</td>
+            <td>53.85%</td>
+            <td>2</td>
+            <td>13</td>
+            <td>15.38%</td>
+            <td>2</td>
+            <td>13</td>
+            <td>16</td>
+            <td>7</td>
+            <td>2</td>
+            <td>4</td>
+            <td>20</td>
+            <td>9</td>
+            <td>26</td>
+            <td>34.62%</td>
+            <td>15</td>
+            <td class=" sorttable_sorted">108.80</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+    
+        <tr>
+            <td>Ben</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>5</td>
+            <td>60.00%</td>
+            <td>7</td>
+            <td>16</td>
+            <td>43.75%</td>
+            <td>5</td>
+            <td>3</td>
+            <td>6</td>
+            <td>3</td>
+            <td>0</td>
+            <td>4</td>
+            <td>27</td>
+            <td>10</td>
+            <td>21</td>
+            <td>47.62%</td>
+            <td>8</td>
+            <td class=" sorttable_sorted">83.30</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+    
+        <tr>
+            <td>D. Shoeba</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>16</td>
+            <td>56.25%</td>
+            <td>10</td>
+            <td>20</td>
+            <td>50.00%</td>
+            <td>13</td>
+            <td>23</td>
+            <td>8</td>
+            <td>4</td>
+            <td>0</td>
+            <td>4</td>
+            <td>48</td>
+            <td>19</td>
+            <td>36</td>
+            <td>52.78%</td>
+            <td>36</td>
+            <td class=" sorttable_sorted">182.80</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+    
+        <tr>
+            <td>Gav</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>15</td>
+            <td>33.33%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>7</td>
+            <td>14</td>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td>10</td>
+            <td>5</td>
+            <td>15</td>
+            <td>33.33%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">70.50</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+    
+        <tr>
+            <td>Huy</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>12</td>
+            <td>22</td>
+            <td>54.55%</td>
+            <td>4</td>
+            <td>17</td>
+            <td>23.53%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>12</td>
+            <td>4</td>
+            <td>1</td>
+            <td>4</td>
+            <td>36</td>
+            <td>16</td>
+            <td>39</td>
+            <td>41.03%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">106.20</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+    
+        <tr>
+            <td>Jason</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>7</td>
+            <td>21</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>3</td>
+            <td>10</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>28</td>
+            <td class=" sorttable_sorted">71.40</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+    
+        <tr>
+            <td>Jayden</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>7</td>
+            <td>22</td>
+            <td>31.82%</td>
+            <td>0</td>
+            <td>17</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>6</td>
+            <td>2</td>
+            <td>0</td>
+            <td>6</td>
+            <td>14</td>
+            <td>7</td>
+            <td>39</td>
+            <td>17.95%</td>
+            <td>6</td>
+            <td class=" sorttable_sorted">21.20</td>
+            <td>0</td>
+            <td>3</td>
+        </tr>
+    
+        <tr>
+            <td>Jayson</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>15</td>
+            <td>44</td>
+            <td>34.09%</td>
+            <td>2</td>
+            <td>7</td>
+            <td>28.57%</td>
+            <td>6</td>
+            <td>13</td>
+            <td>19</td>
+            <td>3</td>
+            <td>2</td>
+            <td>5</td>
+            <td>36</td>
+            <td>17</td>
+            <td>51</td>
+            <td>33.33%</td>
+            <td>19</td>
+            <td class=" sorttable_sorted">140.30</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+    
+        <tr>
+            <td>Jeen</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>10</td>
+            <td>60.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>1</td>
+            <td>6</td>
+            <td>13</td>
+            <td>0</td>
+            <td>0</td>
+            <td>3</td>
+            <td>15</td>
+            <td>7</td>
+            <td>15</td>
+            <td>46.67%</td>
+            <td>7</td>
+            <td class=" sorttable_sorted">62.50</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+    
+        <tr>
+            <td>Kris</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>17</td>
+            <td>52.94%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>9</td>
+            <td>5</td>
+            <td>2</td>
+            <td>0</td>
+            <td>1</td>
+            <td>18</td>
+            <td>9</td>
+            <td>18</td>
+            <td>50.00%</td>
+            <td>11</td>
+            <td class=" sorttable_sorted">71.40</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+    
+        <tr>
+            <td>Lester</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>11</td>
+            <td>54.55%</td>
+            <td>3</td>
+            <td>8</td>
+            <td>37.50%</td>
+            <td>2</td>
+            <td>5</td>
+            <td>10</td>
+            <td>2</td>
+            <td>0</td>
+            <td>8</td>
+            <td>21</td>
+            <td>9</td>
+            <td>19</td>
+            <td>47.37%</td>
+            <td>7</td>
+            <td class=" sorttable_sorted">66.20</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+    
+        <tr>
+            <td>Louis</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>13</td>
+            <td>22</td>
+            <td>59.09%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>12</td>
+            <td>12</td>
+            <td>1</td>
+            <td>0</td>
+            <td>10</td>
+            <td>26</td>
+            <td>13</td>
+            <td>25</td>
+            <td>52.00%</td>
+            <td>14</td>
+            <td class=" sorttable_sorted">87.00</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+    
+        <tr>
+            <td>Moritz</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>22</td>
+            <td>40.91%</td>
+            <td>8</td>
+            <td>17</td>
+            <td>47.06%</td>
+            <td>2</td>
+            <td>17</td>
+            <td>14</td>
+            <td>1</td>
+            <td>0</td>
+            <td>4</td>
+            <td>42</td>
+            <td>17</td>
+            <td>39</td>
+            <td>43.59%</td>
+            <td>19</td>
+            <td class=" sorttable_sorted">141.70</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+    
+        <tr>
+            <td>Raph</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>9</td>
+            <td>33.33%</td>
+            <td>4</td>
+            <td>13</td>
+            <td>30.77%</td>
+            <td>3</td>
+            <td>12</td>
+            <td>8</td>
+            <td>6</td>
+            <td>0</td>
+            <td>3</td>
+            <td>18</td>
+            <td>7</td>
+            <td>22</td>
+            <td>31.82%</td>
+            <td>15</td>
+            <td class=" sorttable_sorted">82.60</td>
+            <td>0</td>
+            <td>3</td>
+        </tr>
+    
+        <tr>
+            <td>Roberto</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>24</td>
+            <td>37.50%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>4</td>
+            <td>2</td>
+            <td>6</td>
+            <td>0</td>
+            <td>3</td>
+            <td>18</td>
+            <td>9</td>
+            <td>27</td>
+            <td>33.33%</td>
+            <td>9</td>
+            <td class=" sorttable_sorted">63.10</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+    
+        <tr>
+            <td>Ronnie</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>8</td>
+            <td>25</td>
+            <td>32.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>9</td>
+            <td>7</td>
+            <td>5</td>
+            <td>1</td>
+            <td>5</td>
+            <td>16</td>
+            <td>8</td>
+            <td>25</td>
+            <td>32.00%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">70.50</td>
+            <td>0</td>
+            <td>3</td>
+        </tr>
+    
+        <tr>
+            <td>Terry</td>
+            <td>4</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>16</td>
+            <td>56.25%</td>
+            <td>1</td>
+            <td>2</td>
+            <td>50.00%</td>
+            <td>2</td>
+            <td>10</td>
+            <td>7</td>
+            <td>1</td>
+            <td>0</td>
+            <td>3</td>
+            <td>21</td>
+            <td>10</td>
+            <td>18</td>
+            <td>55.56%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">78.40</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+    
+        <tr>
+            <td>Terry</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>8</td>
+            <td>14</td>
+            <td>57.14%</td>
+            <td>1</td>
+            <td>4</td>
+            <td>25.00%</td>
+            <td>2</td>
+            <td>6</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>19</td>
+            <td>9</td>
+            <td>18</td>
+            <td>50.00%</td>
+            <td>8</td>
+            <td class=" sorttable_sorted">60.40</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+    
+        <tr>
+            <td>Xavi</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>19</td>
+            <td>47.37%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>50.00%</td>
+            <td>5</td>
+            <td>4</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>2</td>
+            <td>24</td>
+            <td>11</td>
+            <td>23</td>
+            <td>47.83%</td>
+            <td>9</td>
+            <td class=" sorttable_sorted">69.40</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+    
+        <tr>
+            <td>Xavi</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>12</td>
+            <td>24</td>
+            <td>50.00%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>16</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>24</td>
+            <td>12</td>
+            <td>27</td>
+            <td>44.44%</td>
+            <td>19</td>
+            <td class=" sorttable_sorted">88.10</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+    
+    </table>
+</div>
+
+<div id="Games" class="tabcontent">
+    <table class="stats-table">
+        <tr>
+            <th>Date</th>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Opponent</th>
+            <th>Game</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>O Reb</th>
+            <th>D Reb</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>TOV</th>
+            <th>Total Points</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>Total Rebounds</th>
+            <th>Fan Points</th>
+            <th>Win/Loss</th>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Gav</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>3</td>
+            <td>66.67%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>3</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>4</td>
+            <td>2</td>
+            <td>3</td>
+            <td>66.67%</td>
+            <td>5</td>
+            <td class=" sorttable_sorted">26.40</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jayson</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>4</td>
+            <td>13</td>
+            <td>30.77%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>2</td>
+            <td>6</td>
+            <td>1</td>
+            <td>1</td>
+            <td>3</td>
+            <td>8</td>
+            <td>4</td>
+            <td>13</td>
+            <td>30.77%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">32.90</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Kris</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>1</td>
+            <td>6</td>
+            <td>16.67%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">9.30</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Roberto</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>1</td>
+            <td>7</td>
+            <td>14.29%</td>
+            <td>1</td>
+            <td class=" sorttable_sorted">7.60</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Xavi</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>4</td>
+            <td>11</td>
+            <td>36.36%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>8</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>8</td>
+            <td>4</td>
+            <td>12</td>
+            <td>33.33%</td>
+            <td>9</td>
+            <td class=" sorttable_sorted">31.60</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Anson</td>
+            <td>2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>7</td>
+            <td>28.57%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>4</td>
+            <td>2</td>
+            <td>8</td>
+            <td>25.00%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">10.90</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Axyl</td>
+            <td>2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>33.33%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>0</td>
+            <td>4</td>
+            <td>6</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>5</td>
+            <td>2</td>
+            <td>8</td>
+            <td>25.00%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">25.90</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jason</td>
+            <td>2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>2</td>
+            <td>100.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>100.00%</td>
+            <td>3</td>
+            <td class=" sorttable_sorted">16.10</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Louis</td>
+            <td>2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>4</td>
+            <td>6</td>
+            <td>66.67%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>6</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>3</td>
+            <td>8</td>
+            <td>4</td>
+            <td>7</td>
+            <td>57.14%</td>
+            <td>7</td>
+            <td class=" sorttable_sorted">34.10</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Moritz</td>
+            <td>2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>2</td>
+            <td>5</td>
+            <td>40.00%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>8</td>
+            <td>3</td>
+            <td>10</td>
+            <td>30.00%</td>
+            <td>6</td>
+            <td class=" sorttable_sorted">25.50</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Alan</td>
+            <td>3</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>1</td>
+            <td>100.00%</td>
+            <td>2</td>
+            <td>7</td>
+            <td>28.57%</td>
+            <td>2</td>
+            <td>6</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>8</td>
+            <td>3</td>
+            <td>8</td>
+            <td>37.50%</td>
+            <td>8</td>
+            <td class=" sorttable_sorted">37.90</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Angus</td>
+            <td>3</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>4</td>
+            <td>11</td>
+            <td>36.36%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>50.00%</td>
+            <td>4</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>2</td>
+            <td>2</td>
+            <td>14</td>
+            <td>6</td>
+            <td>15</td>
+            <td>40.00%</td>
+            <td>8</td>
+            <td class=" sorttable_sorted">49.50</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jayden</td>
+            <td>3</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>7</td>
+            <td>28.57%</td>
+            <td>0</td>
+            <td>5</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>4</td>
+            <td>2</td>
+            <td>0</td>
+            <td>2</td>
+            <td>4</td>
+            <td>2</td>
+            <td>12</td>
+            <td>16.67%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">14.10</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Raph</td>
+            <td>3</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>4</td>
+            <td>25.00%</td>
+            <td>3</td>
+            <td>5</td>
+            <td>60.00%</td>
+            <td>0</td>
+            <td>4</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>1</td>
+            <td>11</td>
+            <td>4</td>
+            <td>9</td>
+            <td>44.44%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">36.20</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Ronnie</td>
+            <td>3</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>7</td>
+            <td>28.57%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>1</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>2</td>
+            <td>4</td>
+            <td>2</td>
+            <td>7</td>
+            <td>28.57%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">21.10</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Ben</td>
+            <td>4</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>33.33%</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>2</td>
+            <td>3</td>
+            <td>1</td>
+            <td>3</td>
+            <td>33.33%</td>
+            <td>1</td>
+            <td class=" sorttable_sorted">10.90</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>D. Shoeba</td>
+            <td>4</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>9</td>
+            <td>33.33%</td>
+            <td>3</td>
+            <td>6</td>
+            <td>50.00%</td>
+            <td>4</td>
+            <td>8</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>15</td>
+            <td>6</td>
+            <td>15</td>
+            <td>40.00%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">47.50</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Huy</td>
+            <td>4</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>6</td>
+            <td>33.33%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>50.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>2</td>
+            <td>10</td>
+            <td>4</td>
+            <td>10</td>
+            <td>40.00%</td>
+            <td>0</td>
+            <td class=" sorttable_sorted">25.00</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jeen</td>
+            <td>4</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>8</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">16.30</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Lester</td>
+            <td>4</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>5</td>
+            <td>60.00%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>3</td>
+            <td>9</td>
+            <td>3</td>
+            <td>6</td>
+            <td>50.00%</td>
+            <td>1</td>
+            <td class=" sorttable_sorted">20.80</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Terry</td>
+            <td>4</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>8</td>
+            <td>75.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>1</td>
+            <td>0</td>
+            <td>2</td>
+            <td>12</td>
+            <td>6</td>
+            <td>8</td>
+            <td>75.00%</td>
+            <td>5</td>
+            <td class=" sorttable_sorted">44.90</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Gav</td>
+            <td>1</td>
+            <td>3</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>5</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>0</td>
+            <td>3</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>5</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td class=" sorttable_sorted">10.00</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jayson</td>
+            <td>1</td>
+            <td>3</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>19</td>
+            <td>26.32%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>33.33%</td>
+            <td>1</td>
+            <td>8</td>
+            <td>6</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>13</td>
+            <td>6</td>
+            <td>22</td>
+            <td>27.27%</td>
+            <td>9</td>
+            <td class=" sorttable_sorted">51.60</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Kris</td>
+            <td>1</td>
+            <td>3</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>6</td>
+            <td>50.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>6</td>
+            <td>3</td>
+            <td>6</td>
+            <td>50.00%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">22.80</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Roberto</td>
+            <td>1</td>
+            <td>3</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>8</td>
+            <td>37.50%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>1</td>
+            <td>6</td>
+            <td>3</td>
+            <td>8</td>
+            <td>37.50%</td>
+            <td>6</td>
+            <td class=" sorttable_sorted">27.40</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Xavi</td>
+            <td>1</td>
+            <td>3</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>8</td>
+            <td>13</td>
+            <td>61.54%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>8</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>16</td>
+            <td>8</td>
+            <td>15</td>
+            <td>53.33%</td>
+            <td>10</td>
+            <td class=" sorttable_sorted">56.50</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Anson</td>
+            <td>2</td>
+            <td>4</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>8</td>
+            <td>15</td>
+            <td>53.33%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0.00%</td>
+            <td>4</td>
+            <td>2</td>
+            <td>5</td>
+            <td>3</td>
+            <td>0</td>
+            <td>1</td>
+            <td>16</td>
+            <td>8</td>
+            <td>17</td>
+            <td>47.06%</td>
+            <td>6</td>
+            <td class=" sorttable_sorted">61.10</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Axyl</td>
+            <td>2</td>
+            <td>4</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>10</td>
+            <td>60.00%</td>
+            <td>1</td>
+            <td>4</td>
+            <td>25.00%</td>
+            <td>2</td>
+            <td>2</td>
+            <td>6</td>
+            <td>4</td>
+            <td>0</td>
+            <td>1</td>
+            <td>15</td>
+            <td>7</td>
+            <td>14</td>
+            <td>50.00%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">61.20</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jason</td>
+            <td>2</td>
+            <td>4</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>2</td>
+            <td>50.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>5</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td>50.00%</td>
+            <td>11</td>
+            <td class=" sorttable_sorted">25.10</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Louis</td>
+            <td>2</td>
+            <td>4</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>4</td>
+            <td>8</td>
+            <td>50.00%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>8</td>
+            <td>4</td>
+            <td>9</td>
+            <td>44.44%</td>
+            <td>1</td>
+            <td class=" sorttable_sorted">22.70</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Moritz</td>
+            <td>2</td>
+            <td>4</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>9</td>
+            <td>33.33%</td>
+            <td>1</td>
+            <td>4</td>
+            <td>25.00%</td>
+            <td>0</td>
+            <td>9</td>
+            <td>5</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>9</td>
+            <td>4</td>
+            <td>13</td>
+            <td>30.77%</td>
+            <td>9</td>
+            <td class=" sorttable_sorted">35.40</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Alan</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>16</td>
+            <td>31.25%</td>
+            <td>0</td>
+            <td>5</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>15</td>
+            <td>5</td>
+            <td>16</td>
+            <td>31.25%</td>
+            <td>5</td>
+            <td class=" sorttable_sorted">33.30</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Angus</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>4</td>
+            <td>75.00%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>7</td>
+            <td>1</td>
+            <td>1</td>
+            <td>4</td>
+            <td>4</td>
+            <td>6</td>
+            <td>3</td>
+            <td>7</td>
+            <td>42.86%</td>
+            <td>10</td>
+            <td class=" sorttable_sorted">35.60</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jayden</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>4</td>
+            <td>10</td>
+            <td>40.00%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>8</td>
+            <td>4</td>
+            <td>11</td>
+            <td>36.36%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">14.80</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Raph</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>3</td>
+            <td>66.67%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>8</td>
+            <td>6</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>4</td>
+            <td>2</td>
+            <td>6</td>
+            <td>33.33%</td>
+            <td>9</td>
+            <td class=" sorttable_sorted">32.80</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Ronnie</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>7</td>
+            <td>14.29%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>4</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>2</td>
+            <td>1</td>
+            <td>7</td>
+            <td>14.29%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">11.10</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Ben</td>
+            <td>4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>3</td>
+            <td>66.67%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>2</td>
+            <td>2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>2</td>
+            <td>7</td>
+            <td>3</td>
+            <td>8</td>
+            <td>37.50%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">19.90</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>D. Shoeba</td>
+            <td>4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>7</td>
+            <td>85.71%</td>
+            <td>3</td>
+            <td>6</td>
+            <td>50.00%</td>
+            <td>7</td>
+            <td>5</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>21</td>
+            <td>9</td>
+            <td>13</td>
+            <td>69.23%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">73.90</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Huy</td>
+            <td>4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>33.33%</td>
+            <td>0</td>
+            <td>5</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>4</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>2</td>
+            <td>1</td>
+            <td>8</td>
+            <td>12.50%</td>
+            <td>1</td>
+            <td class=" sorttable_sorted">13.40</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jeen</td>
+            <td>4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>33.33%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>3</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>1</td>
+            <td class=" sorttable_sorted">7.50</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Lester</td>
+            <td>4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>2</td>
+            <td>50.00%</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td>4</td>
+            <td>2</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">3.00</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Terry</td>
+            <td>4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>8</td>
+            <td>37.50%</td>
+            <td>1</td>
+            <td>2</td>
+            <td>50.00%</td>
+            <td>0</td>
+            <td>7</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>9</td>
+            <td>4</td>
+            <td>10</td>
+            <td>40.00%</td>
+            <td>7</td>
+            <td class=" sorttable_sorted">33.50</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Gav</td>
+            <td>1</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>7</td>
+            <td>42.86%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>8</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>6</td>
+            <td>3</td>
+            <td>7</td>
+            <td>42.86%</td>
+            <td>6</td>
+            <td class=" sorttable_sorted">34.10</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jayson</td>
+            <td>1</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>12</td>
+            <td>50.00%</td>
+            <td>1</td>
+            <td>4</td>
+            <td>25.00%</td>
+            <td>3</td>
+            <td>3</td>
+            <td>7</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>15</td>
+            <td>7</td>
+            <td>16</td>
+            <td>43.75%</td>
+            <td>6</td>
+            <td class=" sorttable_sorted">55.80</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Kris</td>
+            <td>1</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>6</td>
+            <td>83.33%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>10</td>
+            <td>5</td>
+            <td>6</td>
+            <td>83.33%</td>
+            <td>3</td>
+            <td class=" sorttable_sorted">39.30</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Roberto</td>
+            <td>1</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>11</td>
+            <td>45.45%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>2</td>
+            <td>10</td>
+            <td>5</td>
+            <td>12</td>
+            <td>41.67%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">28.10</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Terry</td>
+            <td>1</td>
+            <td>4</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>8</td>
+            <td>14</td>
+            <td>57.14%</td>
+            <td>1</td>
+            <td>4</td>
+            <td>25.00%</td>
+            <td>2</td>
+            <td>6</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>19</td>
+            <td>9</td>
+            <td>18</td>
+            <td>50.00%</td>
+            <td>8</td>
+            <td class=" sorttable_sorted">60.40</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Anson</td>
+            <td>2</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>12</td>
+            <td>15</td>
+            <td>80.00%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0.00%</td>
+            <td>3</td>
+            <td>1</td>
+            <td>5</td>
+            <td>3</td>
+            <td>0</td>
+            <td>3</td>
+            <td>24</td>
+            <td>12</td>
+            <td>17</td>
+            <td>70.59%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">78.10</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Axyl</td>
+            <td>2</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>4</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>7</td>
+            <td>4</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>4</td>
+            <td>0.00%</td>
+            <td>7</td>
+            <td class=" sorttable_sorted">21.70</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jason</td>
+            <td>2</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>50.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>13</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>4</td>
+            <td>2</td>
+            <td>4</td>
+            <td>50.00%</td>
+            <td>14</td>
+            <td class=" sorttable_sorted">30.20</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Louis</td>
+            <td>2</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>6</td>
+            <td>5</td>
+            <td>0</td>
+            <td>0</td>
+            <td>6</td>
+            <td>10</td>
+            <td>5</td>
+            <td>9</td>
+            <td>55.56%</td>
+            <td>6</td>
+            <td class=" sorttable_sorted">30.20</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Moritz</td>
+            <td>2</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>0</td>
+            <td>4</td>
+            <td>8</td>
+            <td>1</td>
+            <td>0</td>
+            <td>2</td>
+            <td>25</td>
+            <td>10</td>
+            <td>16</td>
+            <td>62.50%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">80.80</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Alan</td>
+            <td>3</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>33.33%</td>
+            <td>0</td>
+            <td>4</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>4</td>
+            <td>6</td>
+            <td>3</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>7</td>
+            <td>14.29%</td>
+            <td>5</td>
+            <td class=" sorttable_sorted">25.60</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jayden</td>
+            <td>3</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>0</td>
+            <td>11</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>2</td>
+            <td>1</td>
+            <td>16</td>
+            <td>6.25%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">-7.70</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Raph</td>
+            <td>3</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>20.00%</td>
+            <td>2</td>
+            <td>0</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>1</td>
+            <td>3</td>
+            <td>1</td>
+            <td>7</td>
+            <td>14.29%</td>
+            <td>2</td>
+            <td class=" sorttable_sorted">13.60</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Ronnie</td>
+            <td>3</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>11</td>
+            <td>45.45%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>5</td>
+            <td>0</td>
+            <td>2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>10</td>
+            <td>5</td>
+            <td>11</td>
+            <td>45.45%</td>
+            <td>6</td>
+            <td class=" sorttable_sorted">38.30</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Xavi</td>
+            <td>3</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>19</td>
+            <td>47.37%</td>
+            <td>2</td>
+            <td>4</td>
+            <td>50.00%</td>
+            <td>5</td>
+            <td>4</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>2</td>
+            <td>24</td>
+            <td>11</td>
+            <td>23</td>
+            <td>47.83%</td>
+            <td>9</td>
+            <td class=" sorttable_sorted">69.40</td>
+            <td>L</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Ben</td>
+            <td>4</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>2</td>
+            <td>50.00%</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>2</td>
+            <td>1</td>
+            <td>4</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>17</td>
+            <td>6</td>
+            <td>10</td>
+            <td>60.00%</td>
+            <td>3</td>
+            <td class=" sorttable_sorted">52.50</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>D. Shoeba</td>
+            <td>4</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>4</td>
+            <td>8</td>
+            <td>50.00%</td>
+            <td>2</td>
+            <td>10</td>
+            <td>6</td>
+            <td>3</td>
+            <td>0</td>
+            <td>2</td>
+            <td>12</td>
+            <td>4</td>
+            <td>8</td>
+            <td>50.00%</td>
+            <td>12</td>
+            <td class=" sorttable_sorted">61.40</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Huy</td>
+            <td>4</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>9</td>
+            <td>13</td>
+            <td>69.23%</td>
+            <td>2</td>
+            <td>8</td>
+            <td>25.00%</td>
+            <td>0</td>
+            <td>1</td>
+            <td>7</td>
+            <td>1</td>
+            <td>0</td>
+            <td>2</td>
+            <td>24</td>
+            <td>11</td>
+            <td>21</td>
+            <td>52.38%</td>
+            <td>1</td>
+            <td class=" sorttable_sorted">67.80</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Jeen</td>
+            <td>4</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>6</td>
+            <td>7</td>
+            <td>85.71%</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>12</td>
+            <td>6</td>
+            <td>9</td>
+            <td>66.67%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">38.70</td>
+            <td>W</td>
+        </tr>
+    
+        <tr>
+            <td>2022-02-01</td>
+            <td>Lester</td>
+            <td>4</td>
+            <td>1</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>1</td>
+            <td>3</td>
+            <td>7</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>10</td>
+            <td>5</td>
+            <td>8</td>
+            <td>62.50%</td>
+            <td>4</td>
+            <td class=" sorttable_sorted">42.40</td>
+            <td>W</td>
+        </tr>
+    
+    </table>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    } 
+</script>
+
+    </main>
+</body>
+
+</html>
