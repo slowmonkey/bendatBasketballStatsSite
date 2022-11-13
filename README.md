@@ -1,6 +1,12 @@
 # How to run locally
 
-`docker-compose -f docker-compose.11ty.yml up`
+`docker-compose up`
+
+Navigate to `http://localhost:8080`
+
+# How to run in debug mode
+
+`docker-compose -f docker.compose.11tydebug.yml up`
 
 Navigate to `http://localhost:8080`
 

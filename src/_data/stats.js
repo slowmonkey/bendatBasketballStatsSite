@@ -207,6 +207,41 @@ async function getPlayersStats() {
     return players;
 }
 
+function calculateYearlyStatsAverage(yearlyStats) {
+    let yearlyStatsAverage = [];
+
+    yearlyStats.forEach((item) => {
+        const games = item.Games;
+        yearlyStatsAverage.push({
+            Player: item.Player,
+            Games: item.Games,
+            FTM: item.FTM / games,
+            FTA: item.FTA / games,
+            'FT%': item['FT%'] / games,
+            '2PM': item['2PM'] / games,
+            '2PA': item['2PA'] / games,
+            '2PT%': item['2PT%'] / games,
+            '3PM': item['3PM'] / games,
+            '3PA': item['3PA'] / games,
+            '3PT%': item['3PT%'] / games,
+            OReb: item.OReb / games,
+            DReb: item.DReb / games,
+            Assists: item.Assists / games,
+            Steals: item.Steals / games,
+            Blocks: item.Blocks / games,
+            TOV: item.TOV / games,
+            TotalPoints: item.TotalPoints / games,
+            FGM: item.FGM / games,
+            FGA: item.FGA / games,
+            'FG%': item['FG%'] / games,
+            TotalRebounds: item.TotalRebounds / games,
+            FanPoints: item.FanPoints / games
+        })
+    });
+
+    return yearlyStatsAverage;
+}
+
 module.exports = async function () {
     let allStats = await getAllStats();
     let yearlyStats = await getYearlyStats();
@@ -215,9 +250,12 @@ module.exports = async function () {
     let players = await getPlayers();
     let playersStats = await getPlayersStats();
 
+    let yearlyStatsAverage = calculateYearlyStatsAverage(yearlyStats);
+
     return {
         allStats: allStats,
         yearlyStats: yearlyStats,
+        yearlyStatsAverage: yearlyStatsAverage,
         availableWeeks: availableWeeks,
         weeklyStats: weeklyStats,
         players: players,
