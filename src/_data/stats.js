@@ -220,10 +220,10 @@ function calculateYearlyStatsAverage(yearlyStats) {
             'FT%': item['FT%'] / games,
             '2PM': item['2PM'] / games,
             '2PA': item['2PA'] / games,
-            '2PT%': item['2PT%'] / games,
+            '2PT%': item['2PT%'],
             '3PM': item['3PM'] / games,
             '3PA': item['3PA'] / games,
-            '3PT%': item['3PT%'] / games,
+            '3PT%': item['3PT%'],
             OReb: item.OReb / games,
             DReb: item.DReb / games,
             Assists: item.Assists / games,
@@ -233,7 +233,7 @@ function calculateYearlyStatsAverage(yearlyStats) {
             TotalPoints: item.TotalPoints / games,
             FGM: item.FGM / games,
             FGA: item.FGA / games,
-            'FG%': item['FG%'] / games,
+            'FG%': item['FG%'],
             TotalRebounds: item.TotalRebounds / games,
             FanPoints: item.FanPoints / games
         })
