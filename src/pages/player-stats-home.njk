@@ -3,7 +3,7 @@ title: "Player Stats Home"
 ---
 
 <div class="player-selection-drop-down">
-    <select name="player-names-dropdown" id="player-names-dropdown">
+    <select name="player-names-dropdown" id="player-names-dropdown" class="dropdown">
         <option selected value="{{ '/player-stats-home/' | url }}">Unselected</option>
     {% for playerName in stats.players %}
         {% set slugifiedPlayerName = [playerName] | slugify %}

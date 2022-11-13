@@ -7,7 +7,7 @@ pagination:
 permalink: "weekly-stats/{{ week.date | url }}/"
 ---
 <div class="week-selection-drop-down">
-    <select name="week-dropdown" id="week-dropdown">
+    <select name="week-dropdown" id="week-dropdown" class="dropdown">
         <option value="{{ '/week-stats-home/' | url }}">Unselected</option>
     {% for availableWeek in stats.availableWeeks %}
         {% set dateValue = ["/weekly-stats/", availableWeek, "/"] | join %}

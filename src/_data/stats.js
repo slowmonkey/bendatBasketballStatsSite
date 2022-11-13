@@ -242,6 +242,34 @@ function calculateYearlyStatsAverage(yearlyStats) {
     return yearlyStatsAverage;
 }
 
+function calculateLeaderBoardStats(allStats) {
+
+    let bestPts = { points: 0, players: new Map() };
+
+    // Calculate best totals
+
+    allStats.forEach((item) => {
+        if (item.TotalPoints > bestPts.points) {
+            bestPts.points = item.TotalPoints;
+            bestPts.players = new Map();
+
+            bestPts.players.set(item.Player, 1);
+        } else if (item.TotalPoints === bestPts.points) {
+            if (!bestPts.players.has(item.Player)) {
+                bestPts.players.set(item.Player, 1);
+            } else {
+                bestPts.players.set(item.Player, bestPts.players.get(item.Player)++);
+            }
+        }
+    });
+
+    // Calculate best averages - all, 10, 30, 50 game minimums
+
+    // Calculate best week totals
+
+    // Calculate best games totals
+}
+
 module.exports = async function () {
     let allStats = await getAllStats();
     let yearlyStats = await getYearlyStats();
@@ -251,6 +279,7 @@ module.exports = async function () {
     let playersStats = await getPlayersStats();
 
     let yearlyStatsAverage = calculateYearlyStatsAverage(yearlyStats);
+    let leaderBoardStats = calculateLeaderBoardStats(allStats);
 
     return {
         allStats: allStats,

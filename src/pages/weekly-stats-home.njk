@@ -3,7 +3,7 @@ title: "Weekly Stats Home"
 ---
 
 <div class="week-selection-drop-down">
-    <select name="week-dropdown" id="week-dropdown">
+    <select name="week-dropdown" id="week-dropdown" class="dropdown">
         <option selected value="{{ '/week-stats-home/' | url }}">Unselected</option>
     {% for availableWeek in stats.availableWeeks %}
         {% set dateValue = ["/weekly-stats/", availableWeek, "/"] | join %}

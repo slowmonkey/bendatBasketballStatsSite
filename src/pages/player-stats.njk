@@ -8,7 +8,7 @@ permalink: "player-stats/{{ player.name | slugify }}/"
 ---
 
 <div class="player-selection-drop-down">
-    <select name="player-names-dropdown" id="player-names-dropdown">
+    <select name="player-names-dropdown" id="player-names-dropdown" class="dropdown">
         <option value="{{ '/player-stats-home/' | url }}">Unselected</option>
     {% for playerStat in stats.playersStats %}
         {% set slugifiedPlayerName = [playerStat.name] | slugify %}
