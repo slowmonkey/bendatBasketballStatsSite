@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f docker-compose.11ty.yml run --rm eleventy bash
+docker-compose -f docker-compose.yml run --rm eleventy bash

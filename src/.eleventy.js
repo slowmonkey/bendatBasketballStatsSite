@@ -1,5 +1,4 @@
 const { DateTime } = require("luxon");
-const { Client } = require("pg");
 
 module.exports = (function (eleventyConfig) {
     eleventyConfig.addFilter("statsdate", (dateObj) => {
