@@ -28,6 +28,22 @@ git commit -m ""
 git push origin master
 ```
 
+# Known bugs / TODO
+
+## BUG: When filtering tables by minimum number of games the row styling is not updated.
+
+When the dropdown to filter minimum number of games is set to a value other than All the table row styling doesn't update to show an alternating row background for an easier read.
+
+## TODO: Leaderboard totals
+
+## TODO: Year compliant so that other years data can be imported
+
+## TODO: Labels for the drop down boxes.
+
+## TODO: Default sort indicator
+
+## TODO: Instructions for each page?
+
 # References
 
 https://sia.codes/posts/architecting-data-in-eleventy/

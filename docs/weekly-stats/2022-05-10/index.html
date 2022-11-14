@@ -74,6 +74,11 @@
             border-bottom: 2px solid #009879;
         }
 
+        .stats-table .with-border {
+            border-top: 2px solid #009879;
+            border-bottom: 2px solid #009879;
+        }
+
         /* Style the tab */
         .tab {
             overflow: hidden;
@@ -266,11 +271,12 @@
 
 <div class="tab">
     <button class="tablinks active" onclick="openTab(event, 'TeamSummary')">Team Summary</button>
-    <button class="tablinks" onclick="openTab(event, 'Summary')">Summary</button>
+    <button class="tablinks" onclick="openTab(event, 'Player Summary')">Summary</button>
     <button class="tablinks" onclick="openTab(event, 'Games')">Games</button>
 </div>
 
 <div id="TeamSummary" class="tabcontent" style="display: block;">
+    
     <table class="stats-table sortable">
         <tr>
             <th>Player</th>
@@ -300,8 +306,8 @@
             <th>Wins</th>
             <th>Losses</th>
         </tr>
-    
         
+            
         <tr>
             <td>Axyl</td>
             <td>1</td>
@@ -330,23 +336,23 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Huy</td>
             <td>1</td>
@@ -375,17 +381,17 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Louis</td>
             <td>1</td>
@@ -414,17 +420,17 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Trevor</td>
             <td>1</td>
@@ -453,9 +459,9 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
-        
+            
         <tr>
             <td>Viet</td>
             <td>1</td>
@@ -484,13 +490,70 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+        <tr class="with-border">
+            <td><b>Avg Per Game</b></td>
+            <td></td>
+            <td></td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00%</td>
+            <td>16.33</td>
+            <td>34.33</td>
+            <td>47.57%</td>
+            <td>2.33</td>
+            <td>9.67</td>
+            <td>24.14%</td>
+            <td>18.67</td>
+            <td>44.00</td>
+            <td>42.42%</td>
+            <td>39.67</td>
+            <td>5.33</td>
+            <td>18.33</td>
+            <td>23.67</td>
+            <td>16.67</td>
+            <td>4.00</td>
+            <td>1.67</td>
+            <td>3.33</td>
+            <td>162.53</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>Total</b></td>
+            <td></td>
+            <td></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>49</td>
+            <td>103</td>
+            <td>47.57%</td>
+            <td>7</td>
+            <td>29</td>
+            <td>24.14%</td>
+            <td>56</td>
+            <td>132</td>
+            <td>42.42%</td>
+            <td>119</td>
+            <td>16</td>
+            <td>55</td>
+            <td>71</td>
+            <td>50</td>
+            <td>12</td>
+            <td>5</td>
+            <td>10</td>
+            <td>487.6</td>
+            <td></td>
+            <td></td>
+        </tr>
     </table>
+    
     <table class="stats-table sortable">
         <tr>
             <th>Player</th>
@@ -520,10 +583,10 @@
             <th>Wins</th>
             <th>Losses</th>
         </tr>
-    
         
-    
+            
         
+            
         <tr>
             <td>Ben</td>
             <td>2</td>
@@ -552,13 +615,13 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Chris</td>
             <td>2</td>
@@ -587,11 +650,11 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>D. Le</td>
             <td>2</td>
@@ -620,15 +683,15 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Larry</td>
             <td>2</td>
@@ -657,11 +720,11 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Lil Chee</td>
             <td>2</td>
@@ -690,15 +753,15 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Roberto</td>
             <td>2</td>
@@ -727,19 +790,76 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+        <tr class="with-border">
+            <td><b>Avg Per Game</b></td>
+            <td></td>
+            <td></td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00%</td>
+            <td>5.00</td>
+            <td>17.67</td>
+            <td>28.30%</td>
+            <td>5.00</td>
+            <td>20.33</td>
+            <td>24.59%</td>
+            <td>10.00</td>
+            <td>38.00</td>
+            <td>26.32%</td>
+            <td>25.00</td>
+            <td>6.67</td>
+            <td>18.00</td>
+            <td>24.67</td>
+            <td>8.67</td>
+            <td>3.33</td>
+            <td>0.33</td>
+            <td>7.00</td>
+            <td>89.57</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>Total</b></td>
+            <td></td>
+            <td></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>15</td>
+            <td>53</td>
+            <td>28.30%</td>
+            <td>15</td>
+            <td>61</td>
+            <td>24.59%</td>
+            <td>30</td>
+            <td>114</td>
+            <td>26.32%</td>
+            <td>75</td>
+            <td>20</td>
+            <td>54</td>
+            <td>74</td>
+            <td>26</td>
+            <td>10</td>
+            <td>1</td>
+            <td>21</td>
+            <td>268.7</td>
+            <td></td>
+            <td></td>
+        </tr>
     </table>
+    
     <table class="stats-table sortable">
         <tr>
             <th>Player</th>
@@ -769,12 +889,12 @@
             <th>Wins</th>
             <th>Losses</th>
         </tr>
-    
         
-    
+            
         
-    
+            
         
+            
         <tr>
             <td>Brendon</td>
             <td>3</td>
@@ -803,9 +923,9 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
-        
+            
         <tr>
             <td>Chee</td>
             <td>3</td>
@@ -834,19 +954,19 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Jason</td>
             <td>3</td>
@@ -875,17 +995,17 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Otto</td>
             <td>3</td>
@@ -914,21 +1034,21 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Yon</td>
             <td>3</td>
@@ -957,9 +1077,66 @@
             <td>2</td>
             <td>1</td>
         </tr>
+            
         
-    
+        <tr class="with-border">
+            <td><b>Avg Per Game</b></td>
+            <td></td>
+            <td></td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00%</td>
+            <td>13.00</td>
+            <td>30.00</td>
+            <td>43.33%</td>
+            <td>4.00</td>
+            <td>16.00</td>
+            <td>25.00%</td>
+            <td>17.00</td>
+            <td>46.00</td>
+            <td>36.96%</td>
+            <td>38.00</td>
+            <td>10.00</td>
+            <td>16.00</td>
+            <td>26.00</td>
+            <td>12.67</td>
+            <td>5.00</td>
+            <td>2.00</td>
+            <td>3.33</td>
+            <td>152.47</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>Total</b></td>
+            <td></td>
+            <td></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>39</td>
+            <td>90</td>
+            <td>43.33%</td>
+            <td>12</td>
+            <td>48</td>
+            <td>25.00%</td>
+            <td>51</td>
+            <td>138</td>
+            <td>36.96%</td>
+            <td>114</td>
+            <td>30</td>
+            <td>48</td>
+            <td>78</td>
+            <td>38</td>
+            <td>15</td>
+            <td>6</td>
+            <td>10</td>
+            <td>457.4</td>
+            <td></td>
+            <td></td>
+        </tr>
     </table>
+    
     <table class="stats-table sortable">
         <tr>
             <th>Player</th>
@@ -989,18 +1166,18 @@
             <th>Wins</th>
             <th>Losses</th>
         </tr>
-    
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
+            
         <tr>
             <td>Cyrus</td>
             <td>4</td>
@@ -1029,11 +1206,11 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Hendo</td>
             <td>4</td>
@@ -1062,15 +1239,15 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Lester</td>
             <td>4</td>
@@ -1099,15 +1276,15 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Raph</td>
             <td>4</td>
@@ -1136,11 +1313,11 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Tom</td>
             <td>4</td>
@@ -1169,13 +1346,13 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
-    
+            
         
-    
-        
+            
         <tr>
             <td>Wins</td>
             <td>4</td>
@@ -1204,14 +1381,71 @@
             <td>1</td>
             <td>2</td>
         </tr>
+            
         
-    
+            
         
+        <tr class="with-border">
+            <td><b>Avg Per Game</b></td>
+            <td></td>
+            <td></td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00%</td>
+            <td>13.00</td>
+            <td>31.33</td>
+            <td>41.49%</td>
+            <td>1.33</td>
+            <td>9.67</td>
+            <td>13.79%</td>
+            <td>14.33</td>
+            <td>41.00</td>
+            <td>34.96%</td>
+            <td>30.00</td>
+            <td>7.67</td>
+            <td>17.00</td>
+            <td>24.67</td>
+            <td>7.33</td>
+            <td>2.33</td>
+            <td>1.33</td>
+            <td>6.67</td>
+            <td>105.80</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>Total</b></td>
+            <td></td>
+            <td></td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>39</td>
+            <td>94</td>
+            <td>41.49%</td>
+            <td>4</td>
+            <td>29</td>
+            <td>13.79%</td>
+            <td>43</td>
+            <td>123</td>
+            <td>34.96%</td>
+            <td>90</td>
+            <td>23</td>
+            <td>51</td>
+            <td>74</td>
+            <td>22</td>
+            <td>7</td>
+            <td>4</td>
+            <td>20</td>
+            <td>317.4</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
     
-    </table>    
 </div>
 
-<div id="Summary" class="tabcontent">
+<div id="Player Summary" class="tabcontent">
     <table class="stats-table sortable">
         <tr>
             <th>Player</th>

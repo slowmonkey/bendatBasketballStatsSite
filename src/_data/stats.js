@@ -88,6 +88,9 @@ async function getWeeklyStats() {
     let weeklyStats = [];
     try {
         client.connect();
+
+        // Get all the weeks available.
+
         const availableWeeksQuery = client.query("SELECT DISTINCT \"Date\" FROM bballstats.\"allStats\" ORDER BY \"Date\" DESC");
 
         const response = await availableWeeksQuery;
@@ -95,11 +98,16 @@ async function getWeeklyStats() {
 
         let weeklyPlayerTotalStatsQuery = [];
         let weeklyAllGamesStatsQuery = [];
+        let weeklyTeamTotalStatsQuery = [];
+
+        // For each week get the totals for each player per week
+        // Get all the games for each week
 
         availableWeeks.forEach(async (week) => {
             let dateValue = DateTime.fromJSDate(week.Date).toFormat("yyyy-MM-dd");
             weeklyPlayerTotalStatsQuery.push(client.query(`SELECT * FROM bballstats."playerTotalsPerWeek" WHERE "Date" = '${dateValue}' ORDER BY "Player"`));
             weeklyAllGamesStatsQuery.push(client.query(`SELECT * FROM bballstats."allStats" WHERE "Date" = '${dateValue}' ORDER BY "Game", "Team", "Player"`));
+            weeklyTeamTotalStatsQuery.push(client.query(`SELECT * FROM bballstats."teamTotalsPerWeek" WHERE "Date" = '${dateValue}' ORDER BY "Team"`));
         });
 
         let weeklyPlayerTotalStatsQueryResult = await Promise.all(weeklyPlayerTotalStatsQuery);
@@ -109,11 +117,46 @@ async function getWeeklyStats() {
 
             let weeklyStatData = weeklyStatsMap.get(dateKey);
 
-            if (weeklyStatData) {
-                weeklyStatData.playerTotals = result.rows;
-            } else {
-                weeklyStatData = { date: dateKey, playerTotals: result.rows };
+            if (!weeklyStatData) {
+                weeklyStatData = { date: dateKey };
             }
+            weeklyStatData.playerTotals = result.rows;
+
+            weeklyStatData.playerAverages = [];
+
+            result.rows.forEach((playerTotal) => {
+                let games = playerTotal.Games;
+                let playerAverage = {
+                    Date: playerTotal.Date,
+                    Player: playerTotal.Player,
+                    Team: playerTotal.Team,
+                    Games: playerTotal.Games,
+                    FTM: playerTotal.FTM / games,
+                    FTA: playerTotal.FTA / games,
+                    'FT%': playerTotal['FT%'],
+                    '2PM': playerTotal['2PM'] / games,
+                    '2PA': playerTotal['2PA'] / games,
+                    '2PT%': playerTotal['2PT%'],
+                    '3PM': playerTotal['3PM'] / games,
+                    '3PA': playerTotal['3PA'] / games,
+                    '3PT%': playerTotal['3PT%'],
+                    OReb: playerTotal.OReb / games,
+                    DReb: playerTotal.DReb / games,
+                    Assists: playerTotal.Assists / games,
+                    Steals: playerTotal.Steals / games,
+                    Blocks: playerTotal.Blocks / games,
+                    TOV: playerTotal.TOV / games,
+                    TotalPoints: playerTotal.TotalPoints / games,
+                    FGM: playerTotal.FGM / games,
+                    FGA: playerTotal.FGA / games,
+                    'FG%': playerTotal['FG%'],
+                    TotalRebounds: playerTotal.TotalRebounds / games,
+                    FanPoints: playerTotal.FanPoints / games
+                }
+
+                weeklyStatData.playerAverages.push(playerAverage);
+            })
+
             weeklyStatsMap.set(dateKey, weeklyStatData);
         });
 
@@ -123,15 +166,30 @@ async function getWeeklyStats() {
 
             let weeklyStatData = weeklyStatsMap.get(dateKey);
 
-            if (weeklyStatData) {
-                weeklyStatData.games = result.rows;
-            } else {
-                weeklyStatData = { date: dateKey, games: result.rows };
+            if (!weeklyStatData) {
+                weeklyStatData = { date: dateKey };
             }
+            weeklyStatData.games = result.rows;
+
             weeklyStatsMap.set(dateKey, weeklyStatData);
         });
 
-        weeklyStatsMap.forEach((value, key) => {            
+        let weeklyTeamTotalStatsQueryResult = await Promise.all(weeklyTeamTotalStatsQuery);
+        weeklyTeamTotalStatsQueryResult.forEach((result) => {
+            let dateKey = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
+
+            let weeklyStatData = weeklyStatsMap.get(dateKey);
+
+            if (!weeklyStatData) {
+                weeklyStatData = { date: dateKey };
+            }
+
+            weeklyStatData.teamSummary = calculateTeamSummary(result.rows);
+
+            weeklyStatsMap.set(dateKey, weeklyStatData);
+        })
+
+        weeklyStatsMap.forEach((value, key) => {
             weeklyStats.push(value);
         });
 
@@ -140,6 +198,65 @@ async function getWeeklyStats() {
     }
 
     return weeklyStats;
+}
+
+function calculateTeamSummary(teamTotals) {
+    let returnResult = {
+        team1: {
+            totals: {},
+            averages: {}
+        },
+        team2: {
+            totals: {},
+            averages: {}
+        },
+        team3: {
+            totals: {},
+            averages: {}
+        },
+        team4: {
+            totals: {},
+            averages: {}
+        }
+    };
+
+    teamTotals.forEach((teamTotal) => {
+        returnResult[`team${teamTotal.Team}`].totals = teamTotal;
+
+        let games = 3;
+
+        let averages = {
+            Date: teamTotal.Date,
+            Team: teamTotal.Team,
+            Game: teamTotal.Games,
+            FTM: teamTotal.FTM / games,
+            FTA: teamTotal.FTA / games,
+            '2PM': teamTotal['2PM'] / games,
+            '2PA': teamTotal['2PA'] / games,
+            '3PM': teamTotal['3PM'] / games,
+            '3PA': teamTotal['3PA'] / games,
+            OReb: teamTotal.OReb / games,
+            DReb: teamTotal.DReb / games,
+            Assists: teamTotal.Assists / games,
+            Steals: teamTotal.Steals / games,
+            Blocks: teamTotal.Blocks / games,
+            TOV: teamTotal.TOV / games,
+            TotalPoints: teamTotal.TotalPoints / games,
+            FGM: teamTotal.FGM / games,
+            FGA: teamTotal.FGA / games,
+            TotalRebounds: teamTotal.TotalRebounds / games,
+            FanPoints: teamTotal.FanPoints / games
+        };
+
+        averages['FT%'] = averages['FTA'] === 0 ? 0: averages['FTM'] / averages['FTA'],
+        averages['2PT%'] = averages['2PA'] === 0 ? 0: averages['2PM'] / averages['2PA'],
+        averages['3PT%'] = averages['3PA'] === 0 ? 0: averages['3PM'] / averages['3PA'],
+        averages['FG%'] = averages['FGA'] === 0 ? 0: averages['FGM'] / averages['FGA'],
+
+        returnResult[`team${teamTotal.Team}`].averages = averages;
+    });
+
+    return returnResult;
 }
 
 async function getPlayers() {

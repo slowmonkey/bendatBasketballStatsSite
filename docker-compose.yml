@@ -6,8 +6,8 @@ services:
       - ${PWD}/src:/app
       - ${PWD}/docs:/app/_site
     working_dir: /app
-    environment:
-      - DEBUG=Eleventy*
+    # environment:
+    #   - DEBUG=Eleventy*
     command: ["npx", "-p", "@11ty/eleventy", "eleventy", "--watch", "--serve"]
     ports:
       - 8080:8080
