@@ -43,6 +43,31 @@
             display: none;
         }
 
+        
+
+        .withrank thead {
+            background-color:#eee;
+            color:#666666;
+            font-weight: bold;
+            cursor: default;
+        }
+
+        .withrank tbody {
+            counter-reset: sortabletablescope;
+        }
+
+        .withrank thead tr::before {
+            content: "";
+            display: table-cell;
+        }
+
+        .withrank tbody tr::before {
+            content: counter(sortabletablescope);
+            counter-increment: sortabletablescope;
+            display: table-cell;
+            padding: 12px 15px;
+        }
+
         .stats-table {
             border-collapse: collapse;
             margin: 25px 0;
@@ -52,10 +77,6 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
             
         }
-
-        
-
-        
 
         .stats-table th,
         .stats-table td {
@@ -1669,7 +1690,7 @@
 </div>
 
 <div id="Player Summary" class="tabcontent">
-    <table class="stats-table sortable">
+    <table class="stats-table sortable withrank">
         <tr>
             <th>Player</th>
             <th>Team</th>
@@ -2515,7 +2536,7 @@
 </div>
 
 <div id="Player Averages" class="tabcontent">
-    <table class="stats-table sortable">
+    <table class="stats-table sortable withrank">
         <tr>
             <th>Player</th>
             <th>Team</th>
