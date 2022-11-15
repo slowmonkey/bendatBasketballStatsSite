@@ -25,6 +25,30 @@ async function getAllStats() {
     return allStats;
 }
 
+async function getAllTimeStats() {
+    const client = new Client({
+        host: "host.docker.internal",
+        port: 5432,
+        user: "postgres",
+        password: "postgres",
+        database: "bballstats"
+    });
+
+    let allTimeStats = [];
+    try {
+        client.connect();
+        const allTimeStatsQuery = client.query("SELECT * FROM bballstats.\"playerAllTimeTotals\" ORDER BY \"Player\"");
+
+        const response = await allTimeStatsQuery;
+        allTimeStats = response.rows;
+
+    } catch (e) {
+        console.error(e);
+    }
+
+    return allTimeStats;
+}
+
 async function getYearlyStats() {
     const client = new Client({
         host: "host.docker.internal",
@@ -388,7 +412,7 @@ function calculateLeaderBoardStats(allStats) {
 }
 
 module.exports = async function () {
-    let allStats = await getAllStats();
+    // let allTimeStats = await getAllTimeStats();
     let yearlyStats = await getYearlyStats();
     let availableWeeks = await getAvailableWeeks();
     let weeklyStats = await getWeeklyStats();
@@ -396,10 +420,10 @@ module.exports = async function () {
     let playersStats = await getPlayersStats();
 
     let yearlyStatsAverage = calculateYearlyStatsAverage(yearlyStats);
-    let leaderBoardStats = calculateLeaderBoardStats(allStats);
+    // let leaderBoardStats = calculateLeaderBoardStats(allStats);
 
     return {
-        allStats: allStats,
+        // allTimeStats: allTimeStats,
         yearlyStats: yearlyStats,
         yearlyStatsAverage: yearlyStatsAverage,
         availableWeeks: availableWeeks,

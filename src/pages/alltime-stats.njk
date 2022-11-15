@@ -1,22 +1,14 @@
 ---
-title: "Yearly Stats"
+title: "Alltime Stats"
 ---
 
-
-<div class="yearly-min-games-filter">
-    <label for"yearly-min-games-dropdown" class="dropdown-label">Minimum Games:</label>
-    <select name="yearly-min-games-dropdown" id="yearly-min-games-dropdown" class="dropdown">
-        <option value="0" selected>All</option>
+<div class="dropdown-label">Minimum Games Filter:</div>
+<div class="min-games-filter">
+    <select name="min-games-dropdown" id="min-games-dropdown" class="dropdown">
+        <option value="0">All</option>
         <option value="10">10</option>
         <option value="30">30</option>
         <option value="50">50</option>
-    </select>
-</div>
-
-<div class="year-filter">
-    <label for"year-dropdown" class="dropdown-label">Year:</label>
-    <select name="year-dropdown" id="year-dropdown" class="dropdown">
-        <option value="2022" selected>2022</option>
     </select>
 </div>
 
@@ -25,14 +17,9 @@ title: "Yearly Stats"
         games: ""
     };
 
-    var minGamesMenu = document.getElementById('yearly-min-games-dropdown');
-    minGamesMenu.onchange = function() {
+    var urlmenu = document.getElementById('min-games-dropdown');
+    urlmenu.onchange = function() {
         filterByGames(this.options[this.selectedIndex].value);
-    };
-
-    var yearMenu = document.getElementById('year-dropdown');
-    yearMenu.onchange = function() {
-        filterByYear(this.options[this.selectedIndex].value);
     };
 
     function filterByGames(games) {
@@ -52,14 +39,8 @@ title: "Yearly Stats"
         selectedFilters.games = querySelector;
 
         applyFilters();
-    }
 
-    function filterByYear(year) {
-        let querySelector = `[data-year="${year}"]`;
-        selectedFilters.year = querySelector;
-
-        applyFilters();
-    }
+    }    
 
     function applyFilters(){
         // Use any class here, just hide all the items.
@@ -130,14 +111,12 @@ title: "Yearly Stats"
             <th>Losses</th>
             <th>Fan Pts</th>
         </tr>
-    {% for item in stats.yearlyStats %}
+    {% for item in stats.allTimeStats %}
         <tr data-games="{{ item.Games }}"
             data-min-0-games=true
             {% if item.Games >= 10 %}data-min-10-games=true{% endif %}
             {% if item.Games >= 30 %}data-min-30-games=true{% endif %}
             {% if item.Games >= 50 %}data-min-50-games=true{% endif %}
-
-            data-year="{{ item.Year }}"
             >
             <td>{{ item.Player }}</td>
             <td>{{ item.Games }}</td>
@@ -196,7 +175,7 @@ title: "Yearly Stats"
             <th>TOV</th>
             <th>Fan Pts</th>
         </tr>
-    {% for item in stats.yearlyStatsAverage %}
+    {% for item in stats.allTimeStatsAverage %}
         <tr data-games="{{ item.Games }}"
             data-min-0-games=true
             {% if item.Games >= 10 %}data-min-10-games=true{% endif %}

@@ -171,12 +171,21 @@
     </div>
     <main>
         
+
 <div class="yearly-min-games-filter">
+    <label for"yearly-min-games-dropdown" class="dropdown-label">Minimum Games:</label>
     <select name="yearly-min-games-dropdown" id="yearly-min-games-dropdown" class="dropdown">
-        <option value="0">All</option>
+        <option value="0" selected>All</option>
         <option value="10">10</option>
         <option value="30">30</option>
         <option value="50">50</option>
+    </select>
+</div>
+
+<div class="year-filter">
+    <label for"year-dropdown" class="dropdown-label">Year:</label>
+    <select name="year-dropdown" id="year-dropdown" class="dropdown">
+        <option value="2022" selected>2022</option>
     </select>
 </div>
 
@@ -185,9 +194,14 @@
         games: ""
     };
 
-    var urlmenu = document.getElementById('yearly-min-games-dropdown');
-    urlmenu.onchange = function() {        
+    var minGamesMenu = document.getElementById('yearly-min-games-dropdown');
+    minGamesMenu.onchange = function() {
         filterByGames(this.options[this.selectedIndex].value);
+    };
+
+    var yearMenu = document.getElementById('year-dropdown');
+    yearMenu.onchange = function() {
+        filterByYear(this.options[this.selectedIndex].value);
     };
 
     function filterByGames(games) {
@@ -207,8 +221,14 @@
         selectedFilters.games = querySelector;
 
         applyFilters();
+    }
 
-    }    
+    function filterByYear(year) {
+        let querySelector = `[data-year="${year}"]`;
+        selectedFilters.year = querySelector;
+
+        applyFilters();
+    }
 
     function applyFilters(){
         // Use any class here, just hide all the items.
@@ -285,6 +305,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Adam</td>
             <td>6</td>
@@ -318,6 +340,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Alan</td>
             <td>75</td>
@@ -351,6 +375,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Andy</td>
             <td>6</td>
@@ -384,6 +410,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Angus</td>
             <td>2</td>
@@ -417,6 +445,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Anson</td>
             <td>38</td>
@@ -450,6 +480,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Anthony</td>
             <td>12</td>
@@ -483,6 +515,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Axyl</td>
             <td>69</td>
@@ -516,6 +550,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>B. Tay</td>
             <td>3</td>
@@ -549,6 +585,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Ben</td>
             <td>81</td>
@@ -582,6 +620,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Biyanka</td>
             <td>9</td>
@@ -615,6 +655,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Brendon</td>
             <td>22</td>
@@ -648,6 +690,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Brian</td>
             <td>3</td>
@@ -681,6 +725,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Cameron</td>
             <td>3</td>
@@ -714,6 +760,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Chad</td>
             <td>6</td>
@@ -747,6 +795,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Charlie</td>
             <td>3</td>
@@ -780,6 +830,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Chee</td>
             <td>51</td>
@@ -813,6 +865,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Chris</td>
             <td>36</td>
@@ -846,6 +900,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Cuong</td>
             <td>6</td>
@@ -879,6 +935,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Cyrus</td>
             <td>48</td>
@@ -912,6 +970,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>D. Laan</td>
             <td>20</td>
@@ -945,6 +1005,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>D. Le</td>
             <td>66</td>
@@ -978,6 +1040,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>D. Seah</td>
             <td>12</td>
@@ -1011,6 +1075,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>D. Shoeba</td>
             <td>14</td>
@@ -1044,6 +1110,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Dai</td>
             <td>3</td>
@@ -1077,6 +1145,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Derek</td>
             <td>15</td>
@@ -1110,6 +1180,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Doug</td>
             <td>57</td>
@@ -1143,6 +1215,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Dung</td>
             <td>24</td>
@@ -1176,6 +1250,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Felix</td>
             <td>3</td>
@@ -1209,6 +1285,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Feng</td>
             <td>3</td>
@@ -1242,6 +1320,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Gav</td>
             <td>59</td>
@@ -1275,6 +1355,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Gav 2</td>
             <td>3</td>
@@ -1308,6 +1390,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Gideon</td>
             <td>3</td>
@@ -1341,6 +1425,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Glenn</td>
             <td>21</td>
@@ -1374,6 +1460,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Gordon</td>
             <td>12</td>
@@ -1407,6 +1495,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Hendo</td>
             <td>51</td>
@@ -1440,6 +1530,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Heng</td>
             <td>6</td>
@@ -1473,6 +1565,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Huy</td>
             <td>68</td>
@@ -1506,6 +1600,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Hyun</td>
             <td>6</td>
@@ -1539,6 +1635,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Jake</td>
             <td>18</td>
@@ -1572,6 +1670,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Jason</td>
             <td>15</td>
@@ -1605,6 +1705,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Jayden</td>
             <td>18</td>
@@ -1638,6 +1740,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Jayson</td>
             <td>6</td>
@@ -1671,6 +1775,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Jeen</td>
             <td>66</td>
@@ -1704,6 +1810,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Jerry</td>
             <td>57</td>
@@ -1737,6 +1845,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Jimmy</td>
             <td>3</td>
@@ -1770,6 +1880,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Josh</td>
             <td>45</td>
@@ -1803,6 +1915,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Jun</td>
             <td>24</td>
@@ -1836,6 +1950,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Jun Hao</td>
             <td>55</td>
@@ -1869,6 +1985,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Kelvin</td>
             <td>23</td>
@@ -1902,6 +2020,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Khang</td>
             <td>33</td>
@@ -1935,6 +2055,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Kris</td>
             <td>14</td>
@@ -1968,6 +2090,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Larry</td>
             <td>51</td>
@@ -2001,6 +2125,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Lennard</td>
             <td>51</td>
@@ -2034,6 +2160,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Lester</td>
             <td>84</td>
@@ -2067,6 +2195,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Lil Chee</td>
             <td>42</td>
@@ -2100,6 +2230,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Louis</td>
             <td>75</td>
@@ -2133,6 +2265,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Marvin</td>
             <td>15</td>
@@ -2166,6 +2300,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Michael</td>
             <td>3</td>
@@ -2199,6 +2335,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Mike</td>
             <td>3</td>
@@ -2232,6 +2370,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Mo</td>
             <td>36</td>
@@ -2265,6 +2405,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Moritz</td>
             <td>18</td>
@@ -2298,6 +2440,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Otto</td>
             <td>36</td>
@@ -2331,6 +2475,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>PC</td>
             <td>9</td>
@@ -2364,6 +2510,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Park</td>
             <td>6</td>
@@ -2397,6 +2545,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Raph</td>
             <td>54</td>
@@ -2430,6 +2580,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Rhys</td>
             <td>3</td>
@@ -2463,6 +2615,8 @@
             data-min-10-games=true
             data-min-30-games=true
             data-min-50-games=true
+
+            data-year="2022"
             >
             <td>Roberto</td>
             <td>54</td>
@@ -2496,6 +2650,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Ronnie</td>
             <td>30</td>
@@ -2529,6 +2685,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Sam</td>
             <td>9</td>
@@ -2562,6 +2720,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Stasi</td>
             <td>3</td>
@@ -2595,6 +2755,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Terry</td>
             <td>38</td>
@@ -2628,6 +2790,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Thuan</td>
             <td>21</td>
@@ -2661,6 +2825,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Tom</td>
             <td>27</td>
@@ -2694,6 +2860,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Trevor</td>
             <td>33</td>
@@ -2727,6 +2895,8 @@
             data-min-10-games=true
             data-min-30-games=true
             
+
+            data-year="2022"
             >
             <td>Viet</td>
             <td>39</td>
@@ -2760,6 +2930,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Will</td>
             <td>3</td>
@@ -2793,6 +2965,8 @@
             
             
             
+
+            data-year="2022"
             >
             <td>Wins</td>
             <td>3</td>
@@ -2826,6 +3000,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Xavi</td>
             <td>15</td>
@@ -2859,6 +3035,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Yon</td>
             <td>12</td>
@@ -2892,6 +3070,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Zac</td>
             <td>15</td>
@@ -2925,6 +3105,8 @@
             data-min-10-games=true
             
             
+
+            data-year="2022"
             >
             <td>Zarko</td>
             <td>12</td>

@@ -1,6 +1,6 @@
 <head>
     <title>
-        Bendat Basketball Stats - All Stats
+        Bendat Basketball Stats - Alltime Stats
     </title>
 
     <style>
@@ -169,6 +169,149 @@
     </div>
     <main>
         
+<div class="dropdown-label">Minimum Games Filter:</div>
+<div class="min-games-filter">
+    <select name="min-games-dropdown" id="min-games-dropdown" class="dropdown">
+        <option value="0">All</option>
+        <option value="10">10</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+    </select>
+</div>
+
+<script type="text/javascript">
+    var selectedFilters = {
+        games: ""
+    };
+
+    var urlmenu = document.getElementById('min-games-dropdown');
+    urlmenu.onchange = function() {
+        filterByGames(this.options[this.selectedIndex].value);
+    };
+
+    function filterByGames(games) {
+        let querySelector = `[data-min-0-games=true]`;
+        switch (games) {
+            case "10":
+                querySelector = `[data-min-10-games=true]`;
+            break;
+            case "30":
+                querySelector = `[data-min-30-games=true]`;
+            break;
+            case "50":
+                querySelector = `[data-min-50-games=true]`;
+            break;
+        }
+
+        selectedFilters.games = querySelector;
+
+        applyFilters();
+
+    }    
+
+    function applyFilters(){
+        // Use any class here, just hide all the items.
+        document.querySelectorAll("tr[data-games]").forEach(i => {
+            i.setAttribute("hidden", true);
+        });
+
+        let combinedQuerySelectors = selectedFilters.games;
+
+        document.querySelectorAll(combinedQuerySelectors).forEach(i => {
+            i.removeAttribute("hidden");
+        });
+    }
+
+    function openTab(evt, tabName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    } 
+</script>
+
+<div class="tab">
+    <button class="tablinks active" onclick="openTab(event, 'Totals')">Totals</button>
+    <button class="tablinks" onclick="openTab(event, 'Averages')">Averages Per Game</button>
+</div>
+
+<div id="Totals" class="tabcontent" style="display: block;">
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>PTS</th>
+            <th>OREB</th>
+            <th>DREB</th>
+            <th>REB</th>
+            <th>AST</th>
+            <th>STL</th>
+            <th>BLK</th>
+            <th>TOV</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Fan Pts</th>
+        </tr>
+    
+    </table>
+</div>
+
+<div id="Averages" class="tabcontent">
+    <table class="stats-table sortable">
+        <tr>
+            <th>Player</th>
+            <th>Games</th>
+            <th>FTM</th>
+            <th>FTA</th>
+            <th>FT%</th>
+            <th>2PM</th>
+            <th>2PA</th>
+            <th>2P%</th>
+            <th>3PM</th>
+            <th>3PA</th>
+            <th>3P%</th>
+            <th>FGM</th>
+            <th>FGA</th>
+            <th>FG%</th>
+            <th>PTS</th>
+            <th>OREB</th>
+            <th>DREB</th>
+            <th>REB</th>
+            <th>AST</th>
+            <th>STL</th>
+            <th>BLK</th>
+            <th>TOV</th>
+            <th>Fan Pts</th>
+        </tr>
+    
+    </table>
+</div>
     </main>
 </body>
 
