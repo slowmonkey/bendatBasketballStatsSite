@@ -272,12 +272,12 @@ function calculateTeamSummary(teamTotals) {
             FanPoints: teamTotal.FanPoints / games
         };
 
-        averages['FT%'] = averages['FTA'] === 0 ? 0: averages['FTM'] / averages['FTA'],
-        averages['2PT%'] = averages['2PA'] === 0 ? 0: averages['2PM'] / averages['2PA'],
-        averages['3PT%'] = averages['3PA'] === 0 ? 0: averages['3PM'] / averages['3PA'],
-        averages['FG%'] = averages['FGA'] === 0 ? 0: averages['FGM'] / averages['FGA'],
+        averages['FT%'] = averages['FTA'] === 0 ? 0 : averages['FTM'] / averages['FTA'],
+            averages['2PT%'] = averages['2PA'] === 0 ? 0 : averages['2PM'] / averages['2PA'],
+            averages['3PT%'] = averages['3PA'] === 0 ? 0 : averages['3PM'] / averages['3PA'],
+            averages['FG%'] = averages['FGA'] === 0 ? 0 : averages['FGM'] / averages['FGA'],
 
-        returnResult[`team${teamTotal.Team}`].averages = averages;
+            returnResult[`team${teamTotal.Team}`].averages = averages;
     });
 
     return returnResult;
@@ -339,7 +339,11 @@ async function getPlayersStats() {
         playerStatsQueryResult = await Promise.all(playerStatsQuery);
 
         playerStatsQueryResult.forEach((result) => {
-            players.push({ name: result.rows[0].Player, stats: result.rows });
+            let str = "";
+            result.rows.forEach((item) => {
+                str = `${str}\n${DateTime.fromJSDate(item.Date).toFormat("yyyy-MM-dd")},${item.TotalPoints}`;
+            });
+            players.push({ name: result.rows[0].Player, stats: result.rows, totalpointsChartData: str });
         });
     } catch (e) {
         console.error(e);
@@ -383,48 +387,97 @@ function calculateYearlyStatsAverage(yearlyStats) {
     return yearlyStatsAverage;
 }
 
-function calculateLeaderBoardStats(allStats) {
+function getTopStat(statType, allStats, topNumberOfStats) {
+    let collatedStat = new Map();
 
-    let bestPts = { points: 0, players: new Map() };
+    // Go through every yearly stat. So stats are in totals already
 
-    // Calculate best totals
+    allStats.forEach((statItem) => {
+        // If the collatedStat already has that stat value.
+        if (collatedStat.has(statItem[statType])) {
+            // Get the stat value
+            let playerMap = collatedStat.get(statItem[statType]);
 
-    allStats.forEach((item) => {
-        if (item.TotalPoints > bestPts.points) {
-            bestPts.points = item.TotalPoints;
-            bestPts.players = new Map();
+            // Check if the stat value already has that player
+            if (playerMap.has(statItem.Player)) {
+                // If so get the player and increment that player's count
+                let playerCount = playerMap.get(statItem.Player);
+                playerCount++;
 
-            bestPts.players.set(item.Player, 1);
-        } else if (item.TotalPoints === bestPts.points) {
-            if (!bestPts.players.has(item.Player)) {
-                bestPts.players.set(item.Player, 1);
+                playerMap.set(statItem.Player, playerCount);
             } else {
-                bestPts.players.set(item.Player, bestPts.players.get(item.Player)++);
+                // Else add that player with an initial count of 1
+                playerMap.set(statItem.Player, 1);
             }
+        } else {
+            // If the stat is not in the collated value create a new stat value
+            let playerMap = new Map();
+            playerMap.set(statItem.Player, 1);
+            collatedStat.set(parseInt(statItem[statType]), playerMap);
         }
     });
+
+    let keys = [...collatedStat.keys()];
+    keys.sort(function (a, b) { return b - a });
+
+    let topStats = []
+
+    for (let index = 0; index < topNumberOfStats && index < keys.length; index++) {
+        let players = collatedStat.get(keys[index]);
+        let playerDetails = [];
+
+        players.forEach(function(value, key) {
+            playerDetails.push({name: key, count: value});
+        })
+
+        topStats.push({ statValue: keys[index], players: playerDetails });
+    }
+
+    return topStats;
+}
+
+function calculateLeaderBoardStats(allStats) {
+    let leaderBoardStats = {
+        totals: {
+            TotalPoints: getTopStat("TotalPoints", allStats, 10),
+            TotalRebounds: getTopStat("TotalRebounds", allStats, 10),
+            OReb: getTopStat("OReb", allStats, 10),
+            DReb: getTopStat("DReb", allStats, 10),
+            Assists: getTopStat("Assists", allStats, 10),
+            Blocks: getTopStat("Blocks", allStats, 10),
+            Steals: getTopStat("Steals", allStats, 10),
+            FanPoints: getTopStat("FanPoints", allStats, 10),
+        }
+    }
 
     // Calculate best averages - all, 10, 30, 50 game minimums
 
     // Calculate best week totals
 
     // Calculate best games totals
+    return leaderBoardStats;
 }
 
 module.exports = async function () {
     // let allTimeStats = await getAllTimeStats();
+
+    // let allStats = await getAllStats();
+
     let yearlyStats = await getYearlyStats();
+
+    let leaderBoardStats = calculateLeaderBoardStats(yearlyStats);
+
     let availableWeeks = await getAvailableWeeks();
     let weeklyStats = await getWeeklyStats();
     let players = await getPlayers();
     let playersStats = await getPlayersStats();
 
     let yearlyStatsAverage = calculateYearlyStatsAverage(yearlyStats);
-    // let leaderBoardStats = calculateLeaderBoardStats(allStats);
 
     return {
         // allTimeStats: allTimeStats,
         yearlyStats: yearlyStats,
+        leaderBoardStats: leaderBoardStats,
         yearlyStatsAverage: yearlyStatsAverage,
         availableWeeks: availableWeeks,
         weeklyStats: weeklyStats,

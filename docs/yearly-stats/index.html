@@ -45,7 +45,7 @@
 
         
 
-        .withrank thead {
+        .stats-table thead {
             background-color:#eee;
             color:#666666;
             font-weight: bold;
@@ -101,14 +101,14 @@
         }
 
         /* Style the tab */
-        .tab {
+        .slowmonkeytab {
             overflow: hidden;
             border: 1px solid #ccc;
             background-color: #f1f1f1;
         }
 
         /* Style the buttons that are used to open the tab content */
-        .tab button {
+        .slowmonkeytab button {
             background-color: inherit;
             float: left;
             border: none;
@@ -119,17 +119,17 @@
         }
 
         /* Change background color of buttons on hover */
-        .tab button:hover {
+        .slowmonkeytab button:hover {
             background-color: #ddd;
         }
 
         /* Create an active/current tablink class */
-        .tab button.active {
+        .slowmonkeytab button.active {
             background-color: #ccc;
         }
 
         /* Style the tab content */
-        .tabcontent {
+        .slowmonkeytabcontent {
             display: none;
             padding: 6px 12px;
             border: 1px solid #ccc;
@@ -162,6 +162,10 @@
             -moz-transition: box-shadow 200ms, border-color 200ms;
             transition: box-shadow 200ms, border-color 200ms;
             white-space: nowrap; 
+        }
+
+        .chart-container {
+            width: 100%; height: 100%; margin: 0; padding: 0; 
         }
     </style>
 
@@ -286,7 +290,7 @@
     } 
 </script>
 
-<div class="tab">
+<div class="slowmonkeytab">
     <button class="tablinks active" onclick="openTab(event, 'Totals')">Totals</button>
     <button class="tablinks" onclick="openTab(event, 'Averages')">Averages Per Game</button>
 </div>
@@ -295,7 +299,7 @@
     <table class="stats-table sortable withrank">
         <thead>
             <tr>
-                <th>Player</th>
+                <th>Player<span id="sorttable_sortrevind">&nbsp;▴</span></th>
                 <th>Games</th>
                 <th>FTM</th>
                 <th>FTA</th>
@@ -3165,2543 +3169,2547 @@
 
 <div id="Averages" class="tabcontent">
     <table class="stats-table sortable">
-        <tr>
-            <th>Player</th>
-            <th>Games</th>
-            <th>FTM</th>
-            <th>FTA</th>
-            <th>FT%</th>
-            <th>2PM</th>
-            <th>2PA</th>
-            <th>2P%</th>
-            <th>3PM</th>
-            <th>3PA</th>
-            <th>3P%</th>
-            <th>FGM</th>
-            <th>FGA</th>
-            <th>FG%</th>
-            <th>PTS</th>
-            <th>OREB</th>
-            <th>DREB</th>
-            <th>REB</th>
-            <th>AST</th>
-            <th>STL</th>
-            <th>BLK</th>
-            <th>TOV</th>
-            <th>Fan Pts</th>
-        </tr>
-    
-        <tr data-games="6"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Adam</td>
-            <td>6</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.33</td>
-            <td>5.67</td>
-            <td>41.18%</td>
-            <td>0.33</td>
-            <td>1.50</td>
-            <td>22.22%</td>
-            <td>2.67</td>
-            <td>7.17</td>
-            <td>37.21%</td>
-            <td>5.67</td>
-            <td>0.83</td>
-            <td>3.67</td>
-            <td>4.50</td>
-            <td>2.67</td>
-            <td>0.50</td>
-            <td>0.50</td>
-            <td>3.00</td>
-            <td>20.32</td>
-        </tr>
-    
-        <tr data-games="75"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Alan</td>
-            <td>75</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.64</td>
-            <td>1.56</td>
-            <td>41.03%</td>
-            <td>1.09</td>
-            <td>4.32</td>
-            <td>25.31%</td>
-            <td>1.73</td>
-            <td>5.88</td>
-            <td>29.48%</td>
-            <td>4.56</td>
-            <td>0.57</td>
-            <td>2.65</td>
-            <td>3.23</td>
-            <td>1.92</td>
-            <td>0.92</td>
-            <td>0.13</td>
-            <td>1.00</td>
-            <td>17.24</td>
-        </tr>
-    
-        <tr data-games="6"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Andy</td>
-            <td>6</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.17</td>
-            <td>3.00</td>
-            <td>72.22%</td>
-            <td>1.33</td>
-            <td>4.83</td>
-            <td>27.59%</td>
-            <td>3.50</td>
-            <td>7.83</td>
-            <td>44.68%</td>
-            <td>8.33</td>
-            <td>0.67</td>
-            <td>2.83</td>
-            <td>3.50</td>
-            <td>1.83</td>
-            <td>0.50</td>
-            <td>0.00</td>
-            <td>1.00</td>
-            <td>25.52</td>
-        </tr>
-    
-        <tr data-games="2"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Angus</td>
-            <td>2</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>3.50</td>
-            <td>7.50</td>
-            <td>46.67%</td>
-            <td>1.00</td>
-            <td>3.50</td>
-            <td>28.57%</td>
-            <td>4.50</td>
-            <td>11.00</td>
-            <td>40.91%</td>
-            <td>10.00</td>
-            <td>3.50</td>
-            <td>5.50</td>
-            <td>9.00</td>
-            <td>2.00</td>
-            <td>0.50</td>
-            <td>3.00</td>
-            <td>3.00</td>
-            <td>42.55</td>
-        </tr>
-    
-        <tr data-games="38"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Anson</td>
-            <td>38</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>4.29</td>
-            <td>7.37</td>
-            <td>58.21%</td>
-            <td>1.21</td>
-            <td>3.47</td>
-            <td>34.85%</td>
-            <td>5.50</td>
-            <td>10.84</td>
-            <td>50.73%</td>
-            <td>12.21</td>
-            <td>1.92</td>
-            <td>1.45</td>
-            <td>3.37</td>
-            <td>2.76</td>
-            <td>1.32</td>
-            <td>0.05</td>
-            <td>2.21</td>
-            <td>37.57</td>
-        </tr>
-    
-        <tr data-games="12"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Anthony</td>
-            <td>12</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>3.00</td>
-            <td>8.92</td>
-            <td>33.64%</td>
-            <td>0.00</td>
-            <td>0.25</td>
-            <td>0.00%</td>
-            <td>3.00</td>
-            <td>9.17</td>
-            <td>32.73%</td>
-            <td>6.00</td>
-            <td>1.50</td>
-            <td>4.58</td>
-            <td>6.08</td>
-            <td>3.50</td>
-            <td>1.42</td>
-            <td>0.25</td>
-            <td>0.83</td>
-            <td>30.92</td>
-        </tr>
-    
-        <tr data-games="69"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Axyl</td>
-            <td>69</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.13</td>
-            <td>5.78</td>
-            <td>36.84%</td>
-            <td>0.43</td>
-            <td>2.55</td>
-            <td>17.05%</td>
-            <td>2.57</td>
-            <td>8.33</td>
-            <td>30.78%</td>
-            <td>5.57</td>
-            <td>1.45</td>
-            <td>5.13</td>
-            <td>6.58</td>
-            <td>2.45</td>
-            <td>1.28</td>
-            <td>0.94</td>
-            <td>1.20</td>
-            <td>28.60</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>B. Tay</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.33</td>
-            <td>1.67</td>
-            <td>20.00%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.33</td>
-            <td>1.67</td>
-            <td>20.00%</td>
-            <td>0.67</td>
-            <td>1.33</td>
-            <td>1.67</td>
-            <td>3.00</td>
-            <td>0.33</td>
-            <td>1.67</td>
-            <td>0.00</td>
-            <td>0.33</td>
-            <td>10.33</td>
-        </tr>
-    
-        <tr data-games="81"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Ben</td>
-            <td>81</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.88</td>
-            <td>1.84</td>
-            <td>47.65%</td>
-            <td>1.49</td>
-            <td>5.05</td>
-            <td>29.58%</td>
-            <td>2.37</td>
-            <td>6.89</td>
-            <td>34.41%</td>
-            <td>6.23</td>
-            <td>0.62</td>
-            <td>1.93</td>
-            <td>2.54</td>
-            <td>2.79</td>
-            <td>0.74</td>
-            <td>0.04</td>
-            <td>0.96</td>
-            <td>21.16</td>
-        </tr>
-    
-        <tr data-games="9"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Biyanka</td>
-            <td>9</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>3.33</td>
-            <td>9.56</td>
-            <td>34.88%</td>
-            <td>0.00</td>
-            <td>0.67</td>
-            <td>0.00%</td>
-            <td>3.33</td>
-            <td>10.22</td>
-            <td>32.61%</td>
-            <td>6.67</td>
-            <td>1.00</td>
-            <td>2.33</td>
-            <td>3.33</td>
-            <td>2.67</td>
-            <td>0.44</td>
-            <td>0.00</td>
-            <td>1.00</td>
-            <td>22.18</td>
-        </tr>
-    
-        <tr data-games="22"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Brendon</td>
-            <td>22</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.23</td>
-            <td>3.91</td>
-            <td>31.40%</td>
-            <td>0.09</td>
-            <td>1.41</td>
-            <td>6.45%</td>
-            <td>1.32</td>
-            <td>5.32</td>
-            <td>24.79%</td>
-            <td>2.73</td>
-            <td>0.91</td>
-            <td>0.95</td>
-            <td>1.86</td>
-            <td>1.32</td>
-            <td>0.77</td>
-            <td>0.00</td>
-            <td>1.05</td>
-            <td>9.41</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Brian</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.00</td>
-            <td>3.00</td>
-            <td>33.33%</td>
-            <td>1.33</td>
-            <td>3.33</td>
-            <td>40.00%</td>
-            <td>2.33</td>
-            <td>6.33</td>
-            <td>36.84%</td>
-            <td>6.00</td>
-            <td>0.67</td>
-            <td>4.33</td>
-            <td>5.00</td>
-            <td>2.00</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>1.00</td>
-            <td>21.40</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Cameron</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.67</td>
-            <td>6.00</td>
-            <td>44.44%</td>
-            <td>0.00</td>
-            <td>0.33</td>
-            <td>0.00%</td>
-            <td>2.67</td>
-            <td>6.33</td>
-            <td>42.11%</td>
-            <td>5.33</td>
-            <td>1.33</td>
-            <td>5.67</td>
-            <td>7.00</td>
-            <td>1.33</td>
-            <td>0.00</td>
-            <td>0.33</td>
-            <td>1.67</td>
-            <td>22.23</td>
-        </tr>
-    
-        <tr data-games="6"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Chad</td>
-            <td>6</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.83</td>
-            <td>6.17</td>
-            <td>45.95%</td>
-            <td>0.00</td>
-            <td>0.33</td>
-            <td>0.00%</td>
-            <td>2.83</td>
-            <td>6.50</td>
-            <td>43.59%</td>
-            <td>5.67</td>
-            <td>3.83</td>
-            <td>5.00</td>
-            <td>8.83</td>
-            <td>1.33</td>
-            <td>0.50</td>
-            <td>0.17</td>
-            <td>0.50</td>
-            <td>29.20</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Charlie</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.00</td>
-            <td>4.67</td>
-            <td>42.86%</td>
-            <td>0.00</td>
-            <td>0.33</td>
-            <td>0.00%</td>
-            <td>2.00</td>
-            <td>5.00</td>
-            <td>40.00%</td>
-            <td>4.00</td>
-            <td>2.67</td>
-            <td>3.00</td>
-            <td>5.67</td>
-            <td>1.33</td>
-            <td>1.67</td>
-            <td>0.00</td>
-            <td>1.67</td>
-            <td>21.17</td>
-        </tr>
-    
-        <tr data-games="51"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Chee</td>
-            <td>51</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.90</td>
-            <td>1.76</td>
-            <td>51.11%</td>
-            <td>2.33</td>
-            <td>8.10</td>
-            <td>28.81%</td>
-            <td>3.24</td>
-            <td>9.86</td>
-            <td>32.80%</td>
-            <td>8.80</td>
-            <td>1.37</td>
-            <td>3.98</td>
-            <td>5.35</td>
-            <td>1.84</td>
-            <td>0.98</td>
-            <td>0.37</td>
-            <td>0.76</td>
-            <td>29.70</td>
-        </tr>
-    
-        <tr data-games="36"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Chris</td>
-            <td>36</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.89</td>
-            <td>5.58</td>
-            <td>33.83%</td>
-            <td>0.06</td>
-            <td>0.69</td>
-            <td>8.00%</td>
-            <td>1.94</td>
-            <td>6.28</td>
-            <td>30.97%</td>
-            <td>3.94</td>
-            <td>1.42</td>
-            <td>3.94</td>
-            <td>5.36</td>
-            <td>1.06</td>
-            <td>0.81</td>
-            <td>0.17</td>
-            <td>1.06</td>
-            <td>18.05</td>
-        </tr>
-    
-        <tr data-games="6"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Cuong</td>
-            <td>6</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.67</td>
-            <td>4.33</td>
-            <td>38.46%</td>
-            <td>1.50</td>
-            <td>7.00</td>
-            <td>21.43%</td>
-            <td>3.17</td>
-            <td>11.33</td>
-            <td>27.94%</td>
-            <td>7.83</td>
-            <td>0.83</td>
-            <td>0.67</td>
-            <td>1.50</td>
-            <td>1.50</td>
-            <td>0.83</td>
-            <td>0.00</td>
-            <td>0.50</td>
-            <td>18.82</td>
-        </tr>
-    
-        <tr data-games="48"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Cyrus</td>
-            <td>48</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>3.77</td>
-            <td>7.38</td>
-            <td>51.13%</td>
-            <td>0.10</td>
-            <td>0.29</td>
-            <td>35.71%</td>
-            <td>3.88</td>
-            <td>7.67</td>
-            <td>50.54%</td>
-            <td>7.85</td>
-            <td>2.56</td>
-            <td>4.23</td>
-            <td>6.79</td>
-            <td>1.48</td>
-            <td>1.02</td>
-            <td>0.21</td>
-            <td>1.69</td>
-            <td>31.51</td>
-        </tr>
-    
-        <tr data-games="20"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>D. Laan</td>
-            <td>20</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.60</td>
-            <td>6.10</td>
-            <td>42.62%</td>
-            <td>0.25</td>
-            <td>1.85</td>
-            <td>13.51%</td>
-            <td>2.85</td>
-            <td>7.95</td>
-            <td>35.85%</td>
-            <td>5.95</td>
-            <td>1.00</td>
-            <td>2.45</td>
-            <td>3.45</td>
-            <td>2.85</td>
-            <td>2.40</td>
-            <td>0.05</td>
-            <td>1.80</td>
-            <td>25.99</td>
-        </tr>
-    
-        <tr data-games="66"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>D. Le</td>
-            <td>66</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.50</td>
-            <td>1.62</td>
-            <td>30.84%</td>
-            <td>1.71</td>
-            <td>6.26</td>
-            <td>27.36%</td>
-            <td>2.21</td>
-            <td>7.88</td>
-            <td>28.08%</td>
-            <td>6.14</td>
-            <td>0.58</td>
-            <td>2.26</td>
-            <td>2.83</td>
-            <td>0.92</td>
-            <td>0.41</td>
-            <td>0.05</td>
-            <td>0.65</td>
-            <td>15.92</td>
-        </tr>
-    
-        <tr data-games="12"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>D. Seah</td>
-            <td>12</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.58</td>
-            <td>4.83</td>
-            <td>32.76%</td>
-            <td>0.17</td>
-            <td>1.50</td>
-            <td>11.11%</td>
-            <td>1.75</td>
-            <td>6.33</td>
-            <td>27.63%</td>
-            <td>3.67</td>
-            <td>1.17</td>
-            <td>2.08</td>
-            <td>3.25</td>
-            <td>0.75</td>
-            <td>0.58</td>
-            <td>0.25</td>
-            <td>0.50</td>
-            <td>13.69</td>
-        </tr>
-    
-        <tr data-games="14"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>D. Shoeba</td>
-            <td>14</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.43</td>
-            <td>5.43</td>
-            <td>44.74%</td>
-            <td>1.64</td>
-            <td>4.07</td>
-            <td>40.35%</td>
-            <td>4.07</td>
-            <td>9.50</td>
-            <td>42.86%</td>
-            <td>9.79</td>
-            <td>3.71</td>
-            <td>6.21</td>
-            <td>9.93</td>
-            <td>2.29</td>
-            <td>1.00</td>
-            <td>0.21</td>
-            <td>1.21</td>
-            <td>41.35</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Dai</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.00</td>
-            <td>5.67</td>
-            <td>35.29%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.00</td>
-            <td>5.67</td>
-            <td>35.29%</td>
-            <td>4.00</td>
-            <td>0.33</td>
-            <td>4.00</td>
-            <td>4.33</td>
-            <td>4.33</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>2.33</td>
-            <td>18.53</td>
-        </tr>
-    
-        <tr data-games="15"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Derek</td>
-            <td>15</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.73</td>
-            <td>5.80</td>
-            <td>47.13%</td>
-            <td>0.07</td>
-            <td>0.73</td>
-            <td>9.09%</td>
-            <td>2.80</td>
-            <td>6.53</td>
-            <td>42.86%</td>
-            <td>5.67</td>
-            <td>0.80</td>
-            <td>4.20</td>
-            <td>5.00</td>
-            <td>2.47</td>
-            <td>0.93</td>
-            <td>0.07</td>
-            <td>1.67</td>
-            <td>24.16</td>
-        </tr>
-    
-        <tr data-games="57"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Doug</td>
-            <td>57</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.30</td>
-            <td>5.65</td>
-            <td>40.68%</td>
-            <td>0.37</td>
-            <td>1.96</td>
-            <td>18.75%</td>
-            <td>2.67</td>
-            <td>7.61</td>
-            <td>35.02%</td>
-            <td>5.70</td>
-            <td>0.93</td>
-            <td>1.63</td>
-            <td>2.56</td>
-            <td>1.07</td>
-            <td>0.68</td>
-            <td>0.02</td>
-            <td>1.30</td>
-            <td>16.28</td>
-        </tr>
-    
-        <tr data-games="24"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Dung</td>
-            <td>24</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.33</td>
-            <td>6.00</td>
-            <td>38.89%</td>
-            <td>0.21</td>
-            <td>1.17</td>
-            <td>17.86%</td>
-            <td>2.54</td>
-            <td>7.17</td>
-            <td>35.47%</td>
-            <td>5.29</td>
-            <td>1.33</td>
-            <td>3.08</td>
-            <td>4.42</td>
-            <td>1.79</td>
-            <td>0.50</td>
-            <td>0.13</td>
-            <td>0.96</td>
-            <td>20.44</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Felix</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.33</td>
-            <td>6.67</td>
-            <td>35.00%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.33</td>
-            <td>6.67</td>
-            <td>35.00%</td>
-            <td>4.67</td>
-            <td>1.00</td>
-            <td>2.67</td>
-            <td>3.67</td>
-            <td>2.67</td>
-            <td>0.33</td>
-            <td>0.00</td>
-            <td>2.33</td>
-            <td>16.50</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Feng</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.00</td>
-            <td>3.00</td>
-            <td>0.00%</td>
-            <td>0.00</td>
-            <td>0.33</td>
-            <td>0.00%</td>
-            <td>0.00</td>
-            <td>3.33</td>
-            <td>0.00%</td>
-            <td>0.00</td>
-            <td>0.33</td>
-            <td>2.00</td>
-            <td>2.33</td>
-            <td>0.33</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>1.00</td>
-            <td>-0.33</td>
-        </tr>
-    
-        <tr data-games="59"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Gav</td>
-            <td>59</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.22</td>
-            <td>4.03</td>
-            <td>30.25%</td>
-            <td>0.00</td>
-            <td>0.15</td>
-            <td>0.00%</td>
-            <td>1.22</td>
-            <td>4.19</td>
-            <td>29.15%</td>
-            <td>2.44</td>
-            <td>1.29</td>
-            <td>1.41</td>
-            <td>2.69</td>
-            <td>1.95</td>
-            <td>1.07</td>
-            <td>0.08</td>
-            <td>1.12</td>
-            <td>13.48</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Gav 2</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.00</td>
-            <td>6.33</td>
-            <td>31.58%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.00</td>
-            <td>6.33</td>
-            <td>31.58%</td>
-            <td>4.00</td>
-            <td>0.33</td>
-            <td>4.00</td>
-            <td>4.33</td>
-            <td>0.67</td>
-            <td>1.67</td>
-            <td>0.00</td>
-            <td>3.00</td>
-            <td>14.40</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Gideon</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>5.67</td>
-            <td>12.00</td>
-            <td>47.22%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>5.67</td>
-            <td>12.00</td>
-            <td>47.22%</td>
-            <td>11.33</td>
-            <td>3.00</td>
-            <td>1.67</td>
-            <td>4.67</td>
-            <td>2.33</td>
-            <td>1.00</td>
-            <td>0.00</td>
-            <td>0.67</td>
-            <td>38.93</td>
-        </tr>
-    
-        <tr data-games="21"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Glenn</td>
-            <td>21</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.10</td>
-            <td>5.71</td>
-            <td>36.67%</td>
-            <td>0.71</td>
-            <td>2.05</td>
-            <td>34.88%</td>
-            <td>2.81</td>
-            <td>7.76</td>
-            <td>36.20%</td>
-            <td>6.33</td>
-            <td>1.24</td>
-            <td>1.33</td>
-            <td>2.57</td>
-            <td>1.81</td>
-            <td>1.33</td>
-            <td>0.00</td>
-            <td>1.19</td>
-            <td>21.64</td>
-        </tr>
-    
-        <tr data-games="12"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Gordon</td>
-            <td>12</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.08</td>
-            <td>0.08</td>
-            <td>100.00%</td>
-            <td>1.67</td>
-            <td>4.50</td>
-            <td>37.04%</td>
-            <td>1.75</td>
-            <td>4.58</td>
-            <td>38.18%</td>
-            <td>5.17</td>
-            <td>0.25</td>
-            <td>1.17</td>
-            <td>1.42</td>
-            <td>1.92</td>
-            <td>0.50</td>
-            <td>0.00</td>
-            <td>1.08</td>
-            <td>15.33</td>
-        </tr>
-    
-        <tr data-games="51"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Hendo</td>
-            <td>51</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.47</td>
-            <td>5.12</td>
-            <td>48.28%</td>
-            <td>0.08</td>
-            <td>0.39</td>
-            <td>20.00%</td>
-            <td>2.55</td>
-            <td>5.51</td>
-            <td>46.26%</td>
-            <td>5.18</td>
-            <td>1.39</td>
-            <td>2.92</td>
-            <td>4.31</td>
-            <td>1.00</td>
-            <td>0.37</td>
-            <td>0.20</td>
-            <td>1.31</td>
-            <td>19.03</td>
-        </tr>
-    
-        <tr data-games="6"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Heng</td>
-            <td>6</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.33</td>
-            <td>2.33</td>
-            <td>14.29%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.33</td>
-            <td>2.33</td>
-            <td>14.29%</td>
-            <td>0.67</td>
-            <td>1.50</td>
-            <td>2.67</td>
-            <td>4.17</td>
-            <td>0.50</td>
-            <td>0.50</td>
-            <td>0.00</td>
-            <td>0.50</td>
-            <td>8.12</td>
-        </tr>
-    
-        <tr data-games="68"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Huy</td>
-            <td>68</td>
-            <td>0.01</td>
-            <td>0.03</td>
-            <td>0.74%</td>
-            <td>2.99</td>
-            <td>5.66</td>
-            <td>52.73%</td>
-            <td>1.09</td>
-            <td>3.54</td>
-            <td>30.71%</td>
-            <td>4.07</td>
-            <td>9.21</td>
-            <td>44.25%</td>
-            <td>9.25</td>
-            <td>0.46</td>
-            <td>0.91</td>
-            <td>1.37</td>
-            <td>1.85</td>
-            <td>1.69</td>
-            <td>0.10</td>
-            <td>0.91</td>
-            <td>28.85</td>
-        </tr>
-    
-        <tr data-games="6"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Hyun</td>
-            <td>6</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.17</td>
-            <td>2.17</td>
-            <td>53.85%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.17</td>
-            <td>2.17</td>
-            <td>53.85%</td>
-            <td>2.33</td>
-            <td>0.17</td>
-            <td>0.33</td>
-            <td>0.50</td>
-            <td>1.83</td>
-            <td>1.00</td>
-            <td>0.00</td>
-            <td>1.33</td>
-            <td>10.23</td>
-        </tr>
-    
-        <tr data-games="18"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Jake</td>
-            <td>18</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.17</td>
-            <td>4.44</td>
-            <td>48.75%</td>
-            <td>0.72</td>
-            <td>2.67</td>
-            <td>27.08%</td>
-            <td>2.89</td>
-            <td>7.11</td>
-            <td>40.63%</td>
-            <td>6.50</td>
-            <td>1.50</td>
-            <td>3.22</td>
-            <td>4.72</td>
-            <td>4.00</td>
-            <td>1.11</td>
-            <td>0.00</td>
-            <td>1.28</td>
-            <td>29.05</td>
-        </tr>
-    
-        <tr data-games="15"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Jason</td>
-            <td>15</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.33</td>
-            <td>3.33</td>
-            <td>40.00%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.33</td>
-            <td>3.33</td>
-            <td>40.00%</td>
-            <td>2.67</td>
-            <td>2.53</td>
-            <td>5.33</td>
-            <td>7.87</td>
-            <td>1.53</td>
-            <td>0.80</td>
-            <td>0.67</td>
-            <td>0.93</td>
-            <td>23.07</td>
-        </tr>
-    
-        <tr data-games="18"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Jayden</td>
-            <td>18</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.39</td>
-            <td>4.89</td>
-            <td>28.41%</td>
-            <td>0.17</td>
-            <td>2.06</td>
-            <td>8.11%</td>
-            <td>1.56</td>
-            <td>6.94</td>
-            <td>22.40%</td>
-            <td>3.28</td>
-            <td>0.67</td>
-            <td>0.67</td>
-            <td>1.33</td>
-            <td>1.22</td>
-            <td>0.56</td>
-            <td>0.00</td>
-            <td>1.00</td>
-            <td>8.06</td>
-        </tr>
-    
-        <tr data-games="6"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Jayson</td>
-            <td>6</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>6.50</td>
-            <td>14.83</td>
-            <td>43.82%</td>
-            <td>0.83</td>
-            <td>3.00</td>
-            <td>27.78%</td>
-            <td>7.33</td>
-            <td>17.83</td>
-            <td>41.12%</td>
-            <td>15.50</td>
-            <td>1.50</td>
-            <td>5.00</td>
-            <td>6.50</td>
-            <td>4.67</td>
-            <td>1.33</td>
-            <td>0.50</td>
-            <td>1.83</td>
-            <td>53.43</td>
-        </tr>
-    
-        <tr data-games="66"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Jeen</td>
-            <td>66</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.97</td>
-            <td>2.41</td>
-            <td>40.25%</td>
-            <td>0.06</td>
-            <td>0.68</td>
-            <td>8.89%</td>
-            <td>1.03</td>
-            <td>3.09</td>
-            <td>33.33%</td>
-            <td>2.12</td>
-            <td>1.03</td>
-            <td>1.23</td>
-            <td>2.26</td>
-            <td>1.71</td>
-            <td>0.94</td>
-            <td>0.12</td>
-            <td>1.17</td>
-            <td>11.52</td>
-        </tr>
-    
-        <tr data-games="57"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Jerry</td>
-            <td>57</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.51</td>
-            <td>4.49</td>
-            <td>33.59%</td>
-            <td>0.04</td>
-            <td>0.12</td>
-            <td>28.57%</td>
-            <td>1.54</td>
-            <td>4.61</td>
-            <td>33.46%</td>
-            <td>3.12</td>
-            <td>0.63</td>
-            <td>3.05</td>
-            <td>3.68</td>
-            <td>1.68</td>
-            <td>0.88</td>
-            <td>0.07</td>
-            <td>1.56</td>
-            <td>14.69</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Jimmy</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>3.00</td>
-            <td>8.67</td>
-            <td>34.62%</td>
-            <td>1.33</td>
-            <td>2.00</td>
-            <td>66.67%</td>
-            <td>4.33</td>
-            <td>10.67</td>
-            <td>40.63%</td>
-            <td>10.00</td>
-            <td>0.33</td>
-            <td>4.33</td>
-            <td>4.67</td>
-            <td>1.33</td>
-            <td>1.33</td>
-            <td>0.00</td>
-            <td>2.33</td>
-            <td>30.53</td>
-        </tr>
-    
-        <tr data-games="45"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Josh</td>
-            <td>45</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.09</td>
-            <td>5.62</td>
-            <td>37.15%</td>
-            <td>0.16</td>
-            <td>1.11</td>
-            <td>14.00%</td>
-            <td>2.24</td>
-            <td>6.73</td>
-            <td>33.33%</td>
-            <td>4.64</td>
-            <td>1.40</td>
-            <td>2.53</td>
-            <td>3.93</td>
-            <td>1.47</td>
-            <td>1.13</td>
-            <td>0.13</td>
-            <td>0.89</td>
-            <td>19.52</td>
-        </tr>
-    
-        <tr data-games="24"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Jun</td>
-            <td>24</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.83</td>
-            <td>2.63</td>
-            <td>31.75%</td>
-            <td>0.00</td>
-            <td>0.04</td>
-            <td>0.00%</td>
-            <td>0.83</td>
-            <td>2.67</td>
-            <td>31.25%</td>
-            <td>1.67</td>
-            <td>1.46</td>
-            <td>2.42</td>
-            <td>3.88</td>
-            <td>3.33</td>
-            <td>1.29</td>
-            <td>0.04</td>
-            <td>1.38</td>
-            <td>16.84</td>
-        </tr>
-    
-        <tr data-games="55"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Jun Hao</td>
-            <td>55</td>
-            <td>0.04</td>
-            <td>0.04</td>
-            <td>1.82%</td>
-            <td>3.64</td>
-            <td>7.16</td>
-            <td>50.76%</td>
-            <td>0.60</td>
-            <td>2.38</td>
-            <td>25.19%</td>
-            <td>4.24</td>
-            <td>9.55</td>
-            <td>44.38%</td>
-            <td>9.11</td>
-            <td>0.78</td>
-            <td>2.35</td>
-            <td>3.13</td>
-            <td>1.82</td>
-            <td>0.56</td>
-            <td>0.11</td>
-            <td>1.85</td>
-            <td>26.09</td>
-        </tr>
-    
-        <tr data-games="23"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Kelvin</td>
-            <td>23</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>4.39</td>
-            <td>9.43</td>
-            <td>46.54%</td>
-            <td>0.22</td>
-            <td>1.17</td>
-            <td>18.52%</td>
-            <td>4.61</td>
-            <td>10.61</td>
-            <td>43.44%</td>
-            <td>9.43</td>
-            <td>1.48</td>
-            <td>3.61</td>
-            <td>5.09</td>
-            <td>1.22</td>
-            <td>0.70</td>
-            <td>0.35</td>
-            <td>1.70</td>
-            <td>30.10</td>
-        </tr>
-    
-        <tr data-games="33"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Khang</td>
-            <td>33</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.85</td>
-            <td>5.58</td>
-            <td>51.09%</td>
-            <td>0.64</td>
-            <td>2.27</td>
-            <td>28.00%</td>
-            <td>3.48</td>
-            <td>7.85</td>
-            <td>44.40%</td>
-            <td>7.61</td>
-            <td>1.52</td>
-            <td>1.91</td>
-            <td>3.42</td>
-            <td>2.03</td>
-            <td>0.55</td>
-            <td>0.06</td>
-            <td>1.18</td>
-            <td>24.84</td>
-        </tr>
-    
-        <tr data-games="14"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Kris</td>
-            <td>14</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.29</td>
-            <td>5.50</td>
-            <td>41.56%</td>
-            <td>0.07</td>
-            <td>0.43</td>
-            <td>16.67%</td>
-            <td>2.36</td>
-            <td>5.93</td>
-            <td>39.76%</td>
-            <td>4.79</td>
-            <td>2.00</td>
-            <td>2.93</td>
-            <td>4.93</td>
-            <td>2.07</td>
-            <td>0.71</td>
-            <td>0.07</td>
-            <td>0.64</td>
-            <td>22.60</td>
-        </tr>
-    
-        <tr data-games="51"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Larry</td>
-            <td>51</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.73</td>
-            <td>6.27</td>
-            <td>43.44%</td>
-            <td>0.18</td>
-            <td>0.80</td>
-            <td>21.95%</td>
-            <td>2.90</td>
-            <td>7.08</td>
-            <td>41.00%</td>
-            <td>5.98</td>
-            <td>2.76</td>
-            <td>3.75</td>
-            <td>6.51</td>
-            <td>1.27</td>
-            <td>1.37</td>
-            <td>0.14</td>
-            <td>0.57</td>
-            <td>28.29</td>
-        </tr>
-    
-        <tr data-games="51"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Lennard</td>
-            <td>51</td>
-            <td>0.00</td>
-            <td>0.04</td>
-            <td>0.00%</td>
-            <td>0.63</td>
-            <td>1.90</td>
-            <td>32.99%</td>
-            <td>1.51</td>
-            <td>6.67</td>
-            <td>22.65%</td>
-            <td>2.14</td>
-            <td>8.57</td>
-            <td>24.94%</td>
-            <td>5.78</td>
-            <td>0.63</td>
-            <td>2.27</td>
-            <td>2.90</td>
-            <td>2.16</td>
-            <td>1.20</td>
-            <td>0.00</td>
-            <td>1.10</td>
-            <td>18.08</td>
-        </tr>
-    
-        <tr data-games="84"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Lester</td>
-            <td>84</td>
-            <td>0.00</td>
-            <td>0.02</td>
-            <td>0.00%</td>
-            <td>1.89</td>
-            <td>4.71</td>
-            <td>40.15%</td>
-            <td>0.32</td>
-            <td>1.38</td>
-            <td>23.28%</td>
-            <td>2.21</td>
-            <td>6.10</td>
-            <td>36.33%</td>
-            <td>4.75</td>
-            <td>1.10</td>
-            <td>2.86</td>
-            <td>3.95</td>
-            <td>3.57</td>
-            <td>1.20</td>
-            <td>0.24</td>
-            <td>1.82</td>
-            <td>23.04</td>
-        </tr>
-    
-        <tr data-games="42"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Lil Chee</td>
-            <td>42</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.45</td>
-            <td>0.95</td>
-            <td>47.50%</td>
-            <td>0.55</td>
-            <td>1.71</td>
-            <td>31.94%</td>
-            <td>1.00</td>
-            <td>2.67</td>
-            <td>37.50%</td>
-            <td>2.55</td>
-            <td>0.62</td>
-            <td>2.10</td>
-            <td>2.71</td>
-            <td>2.71</td>
-            <td>2.02</td>
-            <td>0.05</td>
-            <td>1.02</td>
-            <td>18.59</td>
-        </tr>
-    
-        <tr data-games="75"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Louis</td>
-            <td>75</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.77</td>
-            <td>5.95</td>
-            <td>46.64%</td>
-            <td>0.31</td>
-            <td>1.16</td>
-            <td>26.44%</td>
-            <td>3.08</td>
-            <td>7.11</td>
-            <td>43.34%</td>
-            <td>6.47</td>
-            <td>1.07</td>
-            <td>3.40</td>
-            <td>4.47</td>
-            <td>3.03</td>
-            <td>0.56</td>
-            <td>0.03</td>
-            <td>1.13</td>
-            <td>26.09</td>
-        </tr>
-    
-        <tr data-games="15"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Marvin</td>
-            <td>15</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.93</td>
-            <td>2.67</td>
-            <td>35.00%</td>
-            <td>0.73</td>
-            <td>3.40</td>
-            <td>21.57%</td>
-            <td>1.67</td>
-            <td>6.07</td>
-            <td>27.47%</td>
-            <td>4.07</td>
-            <td>0.40</td>
-            <td>1.13</td>
-            <td>1.53</td>
-            <td>2.13</td>
-            <td>1.20</td>
-            <td>0.00</td>
-            <td>1.67</td>
-            <td>13.09</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Michael</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.33</td>
-            <td>4.33</td>
-            <td>30.77%</td>
-            <td>0.00</td>
-            <td>4.00</td>
-            <td>0.00%</td>
-            <td>1.33</td>
-            <td>8.33</td>
-            <td>16.00%</td>
-            <td>2.67</td>
-            <td>1.00</td>
-            <td>1.33</td>
-            <td>2.33</td>
-            <td>2.67</td>
-            <td>0.33</td>
-            <td>0.00</td>
-            <td>2.00</td>
-            <td>6.00</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Mike</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>3.67</td>
-            <td>6.00</td>
-            <td>61.11%</td>
-            <td>0.00</td>
-            <td>1.33</td>
-            <td>0.00%</td>
-            <td>3.67</td>
-            <td>7.33</td>
-            <td>50.00%</td>
-            <td>7.33</td>
-            <td>2.67</td>
-            <td>5.00</td>
-            <td>7.67</td>
-            <td>1.00</td>
-            <td>1.33</td>
-            <td>0.33</td>
-            <td>1.00</td>
-            <td>32.70</td>
-        </tr>
-    
-        <tr data-games="36"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Mo</td>
-            <td>36</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.28</td>
-            <td>5.36</td>
-            <td>42.49%</td>
-            <td>0.75</td>
-            <td>3.67</td>
-            <td>20.45%</td>
-            <td>3.03</td>
-            <td>9.03</td>
-            <td>33.54%</td>
-            <td>6.81</td>
-            <td>0.97</td>
-            <td>1.47</td>
-            <td>2.44</td>
-            <td>1.25</td>
-            <td>0.42</td>
-            <td>0.03</td>
-            <td>0.86</td>
-            <td>18.04</td>
-        </tr>
-    
-        <tr data-games="18"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Moritz</td>
-            <td>18</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>3.72</td>
-            <td>7.72</td>
-            <td>48.20%</td>
-            <td>1.50</td>
-            <td>5.00</td>
-            <td>30.00%</td>
-            <td>5.22</td>
-            <td>12.72</td>
-            <td>41.05%</td>
-            <td>11.94</td>
-            <td>1.28</td>
-            <td>3.28</td>
-            <td>4.56</td>
-            <td>3.28</td>
-            <td>1.17</td>
-            <td>0.22</td>
-            <td>1.33</td>
-            <td>39.32</td>
-        </tr>
-    
-        <tr data-games="36"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Otto</td>
-            <td>36</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.42</td>
-            <td>4.44</td>
-            <td>54.37%</td>
-            <td>1.75</td>
-            <td>5.28</td>
-            <td>33.16%</td>
-            <td>4.17</td>
-            <td>9.72</td>
-            <td>42.86%</td>
-            <td>10.08</td>
-            <td>0.89</td>
-            <td>1.86</td>
-            <td>2.75</td>
-            <td>1.50</td>
-            <td>1.03</td>
-            <td>0.00</td>
-            <td>1.06</td>
-            <td>28.90</td>
-        </tr>
-    
-        <tr data-games="9"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>PC</td>
-            <td>9</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.44</td>
-            <td>2.89</td>
-            <td>50.00%</td>
-            <td>1.22</td>
-            <td>3.78</td>
-            <td>32.35%</td>
-            <td>2.67</td>
-            <td>6.67</td>
-            <td>40.00%</td>
-            <td>6.56</td>
-            <td>1.89</td>
-            <td>3.67</td>
-            <td>5.56</td>
-            <td>1.44</td>
-            <td>0.56</td>
-            <td>0.22</td>
-            <td>1.44</td>
-            <td>23.78</td>
-        </tr>
-    
-        <tr data-games="6"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Park</td>
-            <td>6</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.67</td>
-            <td>1.83</td>
-            <td>36.36%</td>
-            <td>2.67</td>
-            <td>5.33</td>
-            <td>50.00%</td>
-            <td>3.33</td>
-            <td>7.17</td>
-            <td>46.51%</td>
-            <td>9.33</td>
-            <td>1.00</td>
-            <td>2.50</td>
-            <td>3.50</td>
-            <td>0.83</td>
-            <td>0.67</td>
-            <td>0.00</td>
-            <td>0.67</td>
-            <td>27.90</td>
-        </tr>
-    
-        <tr data-games="54"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Raph</td>
-            <td>54</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.37</td>
-            <td>3.61</td>
-            <td>37.95%</td>
-            <td>0.59</td>
-            <td>2.15</td>
-            <td>27.59%</td>
-            <td>1.96</td>
-            <td>5.76</td>
-            <td>34.08%</td>
-            <td>4.52</td>
-            <td>0.57</td>
-            <td>2.20</td>
-            <td>2.78</td>
-            <td>2.72</td>
-            <td>0.76</td>
-            <td>0.11</td>
-            <td>1.80</td>
-            <td>17.08</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Rhys</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>4.67</td>
-            <td>10.00</td>
-            <td>46.67%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>4.67</td>
-            <td>10.00</td>
-            <td>46.67%</td>
-            <td>9.33</td>
-            <td>2.33</td>
-            <td>7.33</td>
-            <td>9.67</td>
-            <td>0.67</td>
-            <td>0.00</td>
-            <td>1.33</td>
-            <td>1.00</td>
-            <td>38.83</td>
-        </tr>
-    
-        <tr data-games="54"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            data-min-50-games=true
-            >
-            <td>Roberto</td>
-            <td>54</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.17</td>
-            <td>5.98</td>
-            <td>36.22%</td>
-            <td>0.06</td>
-            <td>0.39</td>
-            <td>14.29%</td>
-            <td>2.22</td>
-            <td>6.37</td>
-            <td>34.88%</td>
-            <td>4.50</td>
-            <td>1.11</td>
-            <td>3.19</td>
-            <td>4.30</td>
-            <td>1.46</td>
-            <td>0.76</td>
-            <td>0.06</td>
-            <td>1.07</td>
-            <td>18.51</td>
-        </tr>
-    
-        <tr data-games="30"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Ronnie</td>
-            <td>30</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.37</td>
-            <td>4.40</td>
-            <td>31.06%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.37</td>
-            <td>4.40</td>
-            <td>31.06%</td>
-            <td>2.73</td>
-            <td>1.20</td>
-            <td>2.00</td>
-            <td>3.20</td>
-            <td>1.57</td>
-            <td>1.73</td>
-            <td>0.13</td>
-            <td>1.43</td>
-            <td>15.79</td>
-        </tr>
-    
-        <tr data-games="9"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Sam</td>
-            <td>9</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.56</td>
-            <td>7.56</td>
-            <td>33.82%</td>
-            <td>0.11</td>
-            <td>0.44</td>
-            <td>25.00%</td>
-            <td>2.67</td>
-            <td>8.00</td>
-            <td>33.33%</td>
-            <td>5.44</td>
-            <td>1.67</td>
-            <td>4.00</td>
-            <td>5.67</td>
-            <td>1.44</td>
-            <td>0.44</td>
-            <td>0.56</td>
-            <td>1.00</td>
-            <td>22.90</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Stasi</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.67</td>
-            <td>6.67</td>
-            <td>40.00%</td>
-            <td>0.33</td>
-            <td>3.00</td>
-            <td>11.11%</td>
-            <td>3.00</td>
-            <td>9.67</td>
-            <td>31.03%</td>
-            <td>6.33</td>
-            <td>1.67</td>
-            <td>4.67</td>
-            <td>6.33</td>
-            <td>1.67</td>
-            <td>0.67</td>
-            <td>0.00</td>
-            <td>1.33</td>
-            <td>22.90</td>
-        </tr>
-    
-        <tr data-games="38"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Terry</td>
-            <td>38</td>
-            <td>0.00</td>
-            <td>0.03</td>
-            <td>0.00%</td>
-            <td>4.16</td>
-            <td>8.18</td>
-            <td>50.80%</td>
-            <td>0.11</td>
-            <td>0.63</td>
-            <td>16.67%</td>
-            <td>4.26</td>
-            <td>8.82</td>
-            <td>48.36%</td>
-            <td>8.63</td>
-            <td>1.89</td>
-            <td>3.92</td>
-            <td>5.82</td>
-            <td>1.21</td>
-            <td>0.55</td>
-            <td>0.11</td>
-            <td>0.71</td>
-            <td>31.11</td>
-        </tr>
-    
-        <tr data-games="21"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Thuan</td>
-            <td>21</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>3.95</td>
-            <td>8.05</td>
-            <td>49.11%</td>
-            <td>0.05</td>
-            <td>0.52</td>
-            <td>9.09%</td>
-            <td>4.00</td>
-            <td>8.57</td>
-            <td>46.67%</td>
-            <td>8.05</td>
-            <td>3.10</td>
-            <td>4.05</td>
-            <td>7.14</td>
-            <td>1.52</td>
-            <td>1.52</td>
-            <td>0.29</td>
-            <td>1.24</td>
-            <td>34.60</td>
-        </tr>
-    
-        <tr data-games="27"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Tom</td>
-            <td>27</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.07</td>
-            <td>2.11</td>
-            <td>50.88%</td>
-            <td>1.59</td>
-            <td>5.37</td>
-            <td>29.66%</td>
-            <td>2.67</td>
-            <td>7.48</td>
-            <td>35.64%</td>
-            <td>6.93</td>
-            <td>1.33</td>
-            <td>2.41</td>
-            <td>3.74</td>
-            <td>2.15</td>
-            <td>0.85</td>
-            <td>0.15</td>
-            <td>1.33</td>
-            <td>23.10</td>
-        </tr>
-    
-        <tr data-games="33"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Trevor</td>
-            <td>33</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.82</td>
-            <td>3.82</td>
-            <td>47.62%</td>
-            <td>0.12</td>
-            <td>0.88</td>
-            <td>13.79%</td>
-            <td>1.94</td>
-            <td>4.70</td>
-            <td>41.29%</td>
-            <td>4.00</td>
-            <td>1.48</td>
-            <td>5.85</td>
-            <td>7.33</td>
-            <td>4.15</td>
-            <td>0.91</td>
-            <td>0.03</td>
-            <td>1.73</td>
-            <td>26.94</td>
-        </tr>
-    
-        <tr data-games="39"
-            data-min-0-games=true
-            data-min-10-games=true
-            data-min-30-games=true
-            
-            >
-            <td>Viet</td>
-            <td>39</td>
-            <td>0.03</td>
-            <td>0.05</td>
-            <td>1.28%</td>
-            <td>2.64</td>
-            <td>4.79</td>
-            <td>55.08%</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>2.64</td>
-            <td>4.79</td>
-            <td>55.08%</td>
-            <td>5.31</td>
-            <td>1.36</td>
-            <td>2.79</td>
-            <td>4.15</td>
-            <td>1.79</td>
-            <td>0.79</td>
-            <td>0.00</td>
-            <td>0.74</td>
-            <td>23.28</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Will</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>0.33</td>
-            <td>2.67</td>
-            <td>12.50%</td>
-            <td>0.00</td>
-            <td>0.33</td>
-            <td>0.00%</td>
-            <td>0.33</td>
-            <td>3.00</td>
-            <td>11.11%</td>
-            <td>0.67</td>
-            <td>1.67</td>
-            <td>2.67</td>
-            <td>4.33</td>
-            <td>1.00</td>
-            <td>0.67</td>
-            <td>0.00</td>
-            <td>1.00</td>
-            <td>8.23</td>
-        </tr>
-    
-        <tr data-games="3"
-            data-min-0-games=true
-            
-            
-            
-            >
-            <td>Wins</td>
-            <td>3</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.00</td>
-            <td>4.33</td>
-            <td>23.08%</td>
-            <td>0.00</td>
-            <td>0.33</td>
-            <td>0.00%</td>
-            <td>1.00</td>
-            <td>4.67</td>
-            <td>21.43%</td>
-            <td>2.00</td>
-            <td>0.67</td>
-            <td>1.67</td>
-            <td>2.33</td>
-            <td>0.33</td>
-            <td>0.33</td>
-            <td>0.00</td>
-            <td>1.00</td>
-            <td>5.73</td>
-        </tr>
-    
-        <tr data-games="15"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Xavi</td>
-            <td>15</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>5.67</td>
-            <td>12.00</td>
-            <td>47.22%</td>
-            <td>0.33</td>
-            <td>2.13</td>
-            <td>15.63%</td>
-            <td>6.00</td>
-            <td>14.13</td>
-            <td>42.45%</td>
-            <td>12.33</td>
-            <td>2.47</td>
-            <td>6.20</td>
-            <td>8.67</td>
-            <td>1.67</td>
-            <td>1.20</td>
-            <td>0.20</td>
-            <td>1.40</td>
-            <td>43.77</td>
-        </tr>
-    
-        <tr data-games="12"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Yon</td>
-            <td>12</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>4.25</td>
-            <td>7.00</td>
-            <td>60.71%</td>
-            <td>0.67</td>
-            <td>2.08</td>
-            <td>32.00%</td>
-            <td>4.92</td>
-            <td>9.08</td>
-            <td>54.13%</td>
-            <td>10.50</td>
-            <td>1.58</td>
-            <td>3.67</td>
-            <td>5.25</td>
-            <td>3.58</td>
-            <td>1.67</td>
-            <td>0.08</td>
-            <td>1.17</td>
-            <td>42.06</td>
-        </tr>
-    
-        <tr data-games="15"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Zac</td>
-            <td>15</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>1.93</td>
-            <td>5.20</td>
-            <td>37.18%</td>
-            <td>1.13</td>
-            <td>4.00</td>
-            <td>28.33%</td>
-            <td>3.07</td>
-            <td>9.20</td>
-            <td>33.33%</td>
-            <td>7.27</td>
-            <td>0.60</td>
-            <td>5.27</td>
-            <td>5.87</td>
-            <td>1.80</td>
-            <td>1.73</td>
-            <td>0.33</td>
-            <td>1.47</td>
-            <td>29.03</td>
-        </tr>
-    
-        <tr data-games="12"
-            data-min-0-games=true
-            data-min-10-games=true
-            
-            
-            >
-            <td>Zarko</td>
-            <td>12</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0.00%</td>
-            <td>3.00</td>
-            <td>5.08</td>
-            <td>59.02%</td>
-            <td>0.92</td>
-            <td>3.42</td>
-            <td>26.83%</td>
-            <td>3.92</td>
-            <td>8.50</td>
-            <td>46.08%</td>
-            <td>8.75</td>
-            <td>1.50</td>
-            <td>3.17</td>
-            <td>4.67</td>
-            <td>0.83</td>
-            <td>1.17</td>
-            <td>0.42</td>
-            <td>1.50</td>
-            <td>29.01</td>
-        </tr>
-    
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Games</th>
+                <th>FTM</th>
+                <th>FTA</th>
+                <th>FT%</th>
+                <th>2PM</th>
+                <th>2PA</th>
+                <th>2P%</th>
+                <th>3PM</th>
+                <th>3PA</th>
+                <th>3P%</th>
+                <th>FGM</th>
+                <th>FGA</th>
+                <th>FG%</th>
+                <th>PTS</th>
+                <th>OREB</th>
+                <th>DREB</th>
+                <th>REB</th>
+                <th>AST</th>
+                <th>STL</th>
+                <th>BLK</th>
+                <th>TOV</th>
+                <th>Fan Pts</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr data-games="6"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Adam</td>
+                <td>6</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.33</td>
+                <td>5.67</td>
+                <td>41.18%</td>
+                <td>0.33</td>
+                <td>1.50</td>
+                <td>22.22%</td>
+                <td>2.67</td>
+                <td>7.17</td>
+                <td>37.21%</td>
+                <td>5.67</td>
+                <td>0.83</td>
+                <td>3.67</td>
+                <td>4.50</td>
+                <td>2.67</td>
+                <td>0.50</td>
+                <td>0.50</td>
+                <td>3.00</td>
+                <td>20.32</td>
+            </tr>
+        
+            <tr data-games="75"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Alan</td>
+                <td>75</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.64</td>
+                <td>1.56</td>
+                <td>41.03%</td>
+                <td>1.09</td>
+                <td>4.32</td>
+                <td>25.31%</td>
+                <td>1.73</td>
+                <td>5.88</td>
+                <td>29.48%</td>
+                <td>4.56</td>
+                <td>0.57</td>
+                <td>2.65</td>
+                <td>3.23</td>
+                <td>1.92</td>
+                <td>0.92</td>
+                <td>0.13</td>
+                <td>1.00</td>
+                <td>17.24</td>
+            </tr>
+        
+            <tr data-games="6"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Andy</td>
+                <td>6</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.17</td>
+                <td>3.00</td>
+                <td>72.22%</td>
+                <td>1.33</td>
+                <td>4.83</td>
+                <td>27.59%</td>
+                <td>3.50</td>
+                <td>7.83</td>
+                <td>44.68%</td>
+                <td>8.33</td>
+                <td>0.67</td>
+                <td>2.83</td>
+                <td>3.50</td>
+                <td>1.83</td>
+                <td>0.50</td>
+                <td>0.00</td>
+                <td>1.00</td>
+                <td>25.52</td>
+            </tr>
+        
+            <tr data-games="2"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Angus</td>
+                <td>2</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>3.50</td>
+                <td>7.50</td>
+                <td>46.67%</td>
+                <td>1.00</td>
+                <td>3.50</td>
+                <td>28.57%</td>
+                <td>4.50</td>
+                <td>11.00</td>
+                <td>40.91%</td>
+                <td>10.00</td>
+                <td>3.50</td>
+                <td>5.50</td>
+                <td>9.00</td>
+                <td>2.00</td>
+                <td>0.50</td>
+                <td>3.00</td>
+                <td>3.00</td>
+                <td>42.55</td>
+            </tr>
+        
+            <tr data-games="38"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Anson</td>
+                <td>38</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>4.29</td>
+                <td>7.37</td>
+                <td>58.21%</td>
+                <td>1.21</td>
+                <td>3.47</td>
+                <td>34.85%</td>
+                <td>5.50</td>
+                <td>10.84</td>
+                <td>50.73%</td>
+                <td>12.21</td>
+                <td>1.92</td>
+                <td>1.45</td>
+                <td>3.37</td>
+                <td>2.76</td>
+                <td>1.32</td>
+                <td>0.05</td>
+                <td>2.21</td>
+                <td>37.57</td>
+            </tr>
+        
+            <tr data-games="12"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Anthony</td>
+                <td>12</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>3.00</td>
+                <td>8.92</td>
+                <td>33.64%</td>
+                <td>0.00</td>
+                <td>0.25</td>
+                <td>0.00%</td>
+                <td>3.00</td>
+                <td>9.17</td>
+                <td>32.73%</td>
+                <td>6.00</td>
+                <td>1.50</td>
+                <td>4.58</td>
+                <td>6.08</td>
+                <td>3.50</td>
+                <td>1.42</td>
+                <td>0.25</td>
+                <td>0.83</td>
+                <td>30.92</td>
+            </tr>
+        
+            <tr data-games="69"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Axyl</td>
+                <td>69</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.13</td>
+                <td>5.78</td>
+                <td>36.84%</td>
+                <td>0.43</td>
+                <td>2.55</td>
+                <td>17.05%</td>
+                <td>2.57</td>
+                <td>8.33</td>
+                <td>30.78%</td>
+                <td>5.57</td>
+                <td>1.45</td>
+                <td>5.13</td>
+                <td>6.58</td>
+                <td>2.45</td>
+                <td>1.28</td>
+                <td>0.94</td>
+                <td>1.20</td>
+                <td>28.60</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>B. Tay</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.33</td>
+                <td>1.67</td>
+                <td>20.00%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.33</td>
+                <td>1.67</td>
+                <td>20.00%</td>
+                <td>0.67</td>
+                <td>1.33</td>
+                <td>1.67</td>
+                <td>3.00</td>
+                <td>0.33</td>
+                <td>1.67</td>
+                <td>0.00</td>
+                <td>0.33</td>
+                <td>10.33</td>
+            </tr>
+        
+            <tr data-games="81"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Ben</td>
+                <td>81</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.88</td>
+                <td>1.84</td>
+                <td>47.65%</td>
+                <td>1.49</td>
+                <td>5.05</td>
+                <td>29.58%</td>
+                <td>2.37</td>
+                <td>6.89</td>
+                <td>34.41%</td>
+                <td>6.23</td>
+                <td>0.62</td>
+                <td>1.93</td>
+                <td>2.54</td>
+                <td>2.79</td>
+                <td>0.74</td>
+                <td>0.04</td>
+                <td>0.96</td>
+                <td>21.16</td>
+            </tr>
+        
+            <tr data-games="9"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Biyanka</td>
+                <td>9</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>3.33</td>
+                <td>9.56</td>
+                <td>34.88%</td>
+                <td>0.00</td>
+                <td>0.67</td>
+                <td>0.00%</td>
+                <td>3.33</td>
+                <td>10.22</td>
+                <td>32.61%</td>
+                <td>6.67</td>
+                <td>1.00</td>
+                <td>2.33</td>
+                <td>3.33</td>
+                <td>2.67</td>
+                <td>0.44</td>
+                <td>0.00</td>
+                <td>1.00</td>
+                <td>22.18</td>
+            </tr>
+        
+            <tr data-games="22"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Brendon</td>
+                <td>22</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.23</td>
+                <td>3.91</td>
+                <td>31.40%</td>
+                <td>0.09</td>
+                <td>1.41</td>
+                <td>6.45%</td>
+                <td>1.32</td>
+                <td>5.32</td>
+                <td>24.79%</td>
+                <td>2.73</td>
+                <td>0.91</td>
+                <td>0.95</td>
+                <td>1.86</td>
+                <td>1.32</td>
+                <td>0.77</td>
+                <td>0.00</td>
+                <td>1.05</td>
+                <td>9.41</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Brian</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.00</td>
+                <td>3.00</td>
+                <td>33.33%</td>
+                <td>1.33</td>
+                <td>3.33</td>
+                <td>40.00%</td>
+                <td>2.33</td>
+                <td>6.33</td>
+                <td>36.84%</td>
+                <td>6.00</td>
+                <td>0.67</td>
+                <td>4.33</td>
+                <td>5.00</td>
+                <td>2.00</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>1.00</td>
+                <td>21.40</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Cameron</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.67</td>
+                <td>6.00</td>
+                <td>44.44%</td>
+                <td>0.00</td>
+                <td>0.33</td>
+                <td>0.00%</td>
+                <td>2.67</td>
+                <td>6.33</td>
+                <td>42.11%</td>
+                <td>5.33</td>
+                <td>1.33</td>
+                <td>5.67</td>
+                <td>7.00</td>
+                <td>1.33</td>
+                <td>0.00</td>
+                <td>0.33</td>
+                <td>1.67</td>
+                <td>22.23</td>
+            </tr>
+        
+            <tr data-games="6"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Chad</td>
+                <td>6</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.83</td>
+                <td>6.17</td>
+                <td>45.95%</td>
+                <td>0.00</td>
+                <td>0.33</td>
+                <td>0.00%</td>
+                <td>2.83</td>
+                <td>6.50</td>
+                <td>43.59%</td>
+                <td>5.67</td>
+                <td>3.83</td>
+                <td>5.00</td>
+                <td>8.83</td>
+                <td>1.33</td>
+                <td>0.50</td>
+                <td>0.17</td>
+                <td>0.50</td>
+                <td>29.20</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Charlie</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.00</td>
+                <td>4.67</td>
+                <td>42.86%</td>
+                <td>0.00</td>
+                <td>0.33</td>
+                <td>0.00%</td>
+                <td>2.00</td>
+                <td>5.00</td>
+                <td>40.00%</td>
+                <td>4.00</td>
+                <td>2.67</td>
+                <td>3.00</td>
+                <td>5.67</td>
+                <td>1.33</td>
+                <td>1.67</td>
+                <td>0.00</td>
+                <td>1.67</td>
+                <td>21.17</td>
+            </tr>
+        
+            <tr data-games="51"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Chee</td>
+                <td>51</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.90</td>
+                <td>1.76</td>
+                <td>51.11%</td>
+                <td>2.33</td>
+                <td>8.10</td>
+                <td>28.81%</td>
+                <td>3.24</td>
+                <td>9.86</td>
+                <td>32.80%</td>
+                <td>8.80</td>
+                <td>1.37</td>
+                <td>3.98</td>
+                <td>5.35</td>
+                <td>1.84</td>
+                <td>0.98</td>
+                <td>0.37</td>
+                <td>0.76</td>
+                <td>29.70</td>
+            </tr>
+        
+            <tr data-games="36"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Chris</td>
+                <td>36</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.89</td>
+                <td>5.58</td>
+                <td>33.83%</td>
+                <td>0.06</td>
+                <td>0.69</td>
+                <td>8.00%</td>
+                <td>1.94</td>
+                <td>6.28</td>
+                <td>30.97%</td>
+                <td>3.94</td>
+                <td>1.42</td>
+                <td>3.94</td>
+                <td>5.36</td>
+                <td>1.06</td>
+                <td>0.81</td>
+                <td>0.17</td>
+                <td>1.06</td>
+                <td>18.05</td>
+            </tr>
+        
+            <tr data-games="6"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Cuong</td>
+                <td>6</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.67</td>
+                <td>4.33</td>
+                <td>38.46%</td>
+                <td>1.50</td>
+                <td>7.00</td>
+                <td>21.43%</td>
+                <td>3.17</td>
+                <td>11.33</td>
+                <td>27.94%</td>
+                <td>7.83</td>
+                <td>0.83</td>
+                <td>0.67</td>
+                <td>1.50</td>
+                <td>1.50</td>
+                <td>0.83</td>
+                <td>0.00</td>
+                <td>0.50</td>
+                <td>18.82</td>
+            </tr>
+        
+            <tr data-games="48"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Cyrus</td>
+                <td>48</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>3.77</td>
+                <td>7.38</td>
+                <td>51.13%</td>
+                <td>0.10</td>
+                <td>0.29</td>
+                <td>35.71%</td>
+                <td>3.88</td>
+                <td>7.67</td>
+                <td>50.54%</td>
+                <td>7.85</td>
+                <td>2.56</td>
+                <td>4.23</td>
+                <td>6.79</td>
+                <td>1.48</td>
+                <td>1.02</td>
+                <td>0.21</td>
+                <td>1.69</td>
+                <td>31.51</td>
+            </tr>
+        
+            <tr data-games="20"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>D. Laan</td>
+                <td>20</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.60</td>
+                <td>6.10</td>
+                <td>42.62%</td>
+                <td>0.25</td>
+                <td>1.85</td>
+                <td>13.51%</td>
+                <td>2.85</td>
+                <td>7.95</td>
+                <td>35.85%</td>
+                <td>5.95</td>
+                <td>1.00</td>
+                <td>2.45</td>
+                <td>3.45</td>
+                <td>2.85</td>
+                <td>2.40</td>
+                <td>0.05</td>
+                <td>1.80</td>
+                <td>25.99</td>
+            </tr>
+        
+            <tr data-games="66"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>D. Le</td>
+                <td>66</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.50</td>
+                <td>1.62</td>
+                <td>30.84%</td>
+                <td>1.71</td>
+                <td>6.26</td>
+                <td>27.36%</td>
+                <td>2.21</td>
+                <td>7.88</td>
+                <td>28.08%</td>
+                <td>6.14</td>
+                <td>0.58</td>
+                <td>2.26</td>
+                <td>2.83</td>
+                <td>0.92</td>
+                <td>0.41</td>
+                <td>0.05</td>
+                <td>0.65</td>
+                <td>15.92</td>
+            </tr>
+        
+            <tr data-games="12"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>D. Seah</td>
+                <td>12</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.58</td>
+                <td>4.83</td>
+                <td>32.76%</td>
+                <td>0.17</td>
+                <td>1.50</td>
+                <td>11.11%</td>
+                <td>1.75</td>
+                <td>6.33</td>
+                <td>27.63%</td>
+                <td>3.67</td>
+                <td>1.17</td>
+                <td>2.08</td>
+                <td>3.25</td>
+                <td>0.75</td>
+                <td>0.58</td>
+                <td>0.25</td>
+                <td>0.50</td>
+                <td>13.69</td>
+            </tr>
+        
+            <tr data-games="14"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>D. Shoeba</td>
+                <td>14</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.43</td>
+                <td>5.43</td>
+                <td>44.74%</td>
+                <td>1.64</td>
+                <td>4.07</td>
+                <td>40.35%</td>
+                <td>4.07</td>
+                <td>9.50</td>
+                <td>42.86%</td>
+                <td>9.79</td>
+                <td>3.71</td>
+                <td>6.21</td>
+                <td>9.93</td>
+                <td>2.29</td>
+                <td>1.00</td>
+                <td>0.21</td>
+                <td>1.21</td>
+                <td>41.35</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Dai</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.00</td>
+                <td>5.67</td>
+                <td>35.29%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.00</td>
+                <td>5.67</td>
+                <td>35.29%</td>
+                <td>4.00</td>
+                <td>0.33</td>
+                <td>4.00</td>
+                <td>4.33</td>
+                <td>4.33</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>2.33</td>
+                <td>18.53</td>
+            </tr>
+        
+            <tr data-games="15"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Derek</td>
+                <td>15</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.73</td>
+                <td>5.80</td>
+                <td>47.13%</td>
+                <td>0.07</td>
+                <td>0.73</td>
+                <td>9.09%</td>
+                <td>2.80</td>
+                <td>6.53</td>
+                <td>42.86%</td>
+                <td>5.67</td>
+                <td>0.80</td>
+                <td>4.20</td>
+                <td>5.00</td>
+                <td>2.47</td>
+                <td>0.93</td>
+                <td>0.07</td>
+                <td>1.67</td>
+                <td>24.16</td>
+            </tr>
+        
+            <tr data-games="57"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Doug</td>
+                <td>57</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.30</td>
+                <td>5.65</td>
+                <td>40.68%</td>
+                <td>0.37</td>
+                <td>1.96</td>
+                <td>18.75%</td>
+                <td>2.67</td>
+                <td>7.61</td>
+                <td>35.02%</td>
+                <td>5.70</td>
+                <td>0.93</td>
+                <td>1.63</td>
+                <td>2.56</td>
+                <td>1.07</td>
+                <td>0.68</td>
+                <td>0.02</td>
+                <td>1.30</td>
+                <td>16.28</td>
+            </tr>
+        
+            <tr data-games="24"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Dung</td>
+                <td>24</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.33</td>
+                <td>6.00</td>
+                <td>38.89%</td>
+                <td>0.21</td>
+                <td>1.17</td>
+                <td>17.86%</td>
+                <td>2.54</td>
+                <td>7.17</td>
+                <td>35.47%</td>
+                <td>5.29</td>
+                <td>1.33</td>
+                <td>3.08</td>
+                <td>4.42</td>
+                <td>1.79</td>
+                <td>0.50</td>
+                <td>0.13</td>
+                <td>0.96</td>
+                <td>20.44</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Felix</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.33</td>
+                <td>6.67</td>
+                <td>35.00%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.33</td>
+                <td>6.67</td>
+                <td>35.00%</td>
+                <td>4.67</td>
+                <td>1.00</td>
+                <td>2.67</td>
+                <td>3.67</td>
+                <td>2.67</td>
+                <td>0.33</td>
+                <td>0.00</td>
+                <td>2.33</td>
+                <td>16.50</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Feng</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.00</td>
+                <td>3.00</td>
+                <td>0.00%</td>
+                <td>0.00</td>
+                <td>0.33</td>
+                <td>0.00%</td>
+                <td>0.00</td>
+                <td>3.33</td>
+                <td>0.00%</td>
+                <td>0.00</td>
+                <td>0.33</td>
+                <td>2.00</td>
+                <td>2.33</td>
+                <td>0.33</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>1.00</td>
+                <td>-0.33</td>
+            </tr>
+        
+            <tr data-games="59"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Gav</td>
+                <td>59</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.22</td>
+                <td>4.03</td>
+                <td>30.25%</td>
+                <td>0.00</td>
+                <td>0.15</td>
+                <td>0.00%</td>
+                <td>1.22</td>
+                <td>4.19</td>
+                <td>29.15%</td>
+                <td>2.44</td>
+                <td>1.29</td>
+                <td>1.41</td>
+                <td>2.69</td>
+                <td>1.95</td>
+                <td>1.07</td>
+                <td>0.08</td>
+                <td>1.12</td>
+                <td>13.48</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Gav 2</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.00</td>
+                <td>6.33</td>
+                <td>31.58%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.00</td>
+                <td>6.33</td>
+                <td>31.58%</td>
+                <td>4.00</td>
+                <td>0.33</td>
+                <td>4.00</td>
+                <td>4.33</td>
+                <td>0.67</td>
+                <td>1.67</td>
+                <td>0.00</td>
+                <td>3.00</td>
+                <td>14.40</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Gideon</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>5.67</td>
+                <td>12.00</td>
+                <td>47.22%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>5.67</td>
+                <td>12.00</td>
+                <td>47.22%</td>
+                <td>11.33</td>
+                <td>3.00</td>
+                <td>1.67</td>
+                <td>4.67</td>
+                <td>2.33</td>
+                <td>1.00</td>
+                <td>0.00</td>
+                <td>0.67</td>
+                <td>38.93</td>
+            </tr>
+        
+            <tr data-games="21"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Glenn</td>
+                <td>21</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.10</td>
+                <td>5.71</td>
+                <td>36.67%</td>
+                <td>0.71</td>
+                <td>2.05</td>
+                <td>34.88%</td>
+                <td>2.81</td>
+                <td>7.76</td>
+                <td>36.20%</td>
+                <td>6.33</td>
+                <td>1.24</td>
+                <td>1.33</td>
+                <td>2.57</td>
+                <td>1.81</td>
+                <td>1.33</td>
+                <td>0.00</td>
+                <td>1.19</td>
+                <td>21.64</td>
+            </tr>
+        
+            <tr data-games="12"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Gordon</td>
+                <td>12</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.08</td>
+                <td>0.08</td>
+                <td>100.00%</td>
+                <td>1.67</td>
+                <td>4.50</td>
+                <td>37.04%</td>
+                <td>1.75</td>
+                <td>4.58</td>
+                <td>38.18%</td>
+                <td>5.17</td>
+                <td>0.25</td>
+                <td>1.17</td>
+                <td>1.42</td>
+                <td>1.92</td>
+                <td>0.50</td>
+                <td>0.00</td>
+                <td>1.08</td>
+                <td>15.33</td>
+            </tr>
+        
+            <tr data-games="51"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Hendo</td>
+                <td>51</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.47</td>
+                <td>5.12</td>
+                <td>48.28%</td>
+                <td>0.08</td>
+                <td>0.39</td>
+                <td>20.00%</td>
+                <td>2.55</td>
+                <td>5.51</td>
+                <td>46.26%</td>
+                <td>5.18</td>
+                <td>1.39</td>
+                <td>2.92</td>
+                <td>4.31</td>
+                <td>1.00</td>
+                <td>0.37</td>
+                <td>0.20</td>
+                <td>1.31</td>
+                <td>19.03</td>
+            </tr>
+        
+            <tr data-games="6"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Heng</td>
+                <td>6</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.33</td>
+                <td>2.33</td>
+                <td>14.29%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.33</td>
+                <td>2.33</td>
+                <td>14.29%</td>
+                <td>0.67</td>
+                <td>1.50</td>
+                <td>2.67</td>
+                <td>4.17</td>
+                <td>0.50</td>
+                <td>0.50</td>
+                <td>0.00</td>
+                <td>0.50</td>
+                <td>8.12</td>
+            </tr>
+        
+            <tr data-games="68"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Huy</td>
+                <td>68</td>
+                <td>0.01</td>
+                <td>0.03</td>
+                <td>0.74%</td>
+                <td>2.99</td>
+                <td>5.66</td>
+                <td>52.73%</td>
+                <td>1.09</td>
+                <td>3.54</td>
+                <td>30.71%</td>
+                <td>4.07</td>
+                <td>9.21</td>
+                <td>44.25%</td>
+                <td>9.25</td>
+                <td>0.46</td>
+                <td>0.91</td>
+                <td>1.37</td>
+                <td>1.85</td>
+                <td>1.69</td>
+                <td>0.10</td>
+                <td>0.91</td>
+                <td>28.85</td>
+            </tr>
+        
+            <tr data-games="6"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Hyun</td>
+                <td>6</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.17</td>
+                <td>2.17</td>
+                <td>53.85%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.17</td>
+                <td>2.17</td>
+                <td>53.85%</td>
+                <td>2.33</td>
+                <td>0.17</td>
+                <td>0.33</td>
+                <td>0.50</td>
+                <td>1.83</td>
+                <td>1.00</td>
+                <td>0.00</td>
+                <td>1.33</td>
+                <td>10.23</td>
+            </tr>
+        
+            <tr data-games="18"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Jake</td>
+                <td>18</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.17</td>
+                <td>4.44</td>
+                <td>48.75%</td>
+                <td>0.72</td>
+                <td>2.67</td>
+                <td>27.08%</td>
+                <td>2.89</td>
+                <td>7.11</td>
+                <td>40.63%</td>
+                <td>6.50</td>
+                <td>1.50</td>
+                <td>3.22</td>
+                <td>4.72</td>
+                <td>4.00</td>
+                <td>1.11</td>
+                <td>0.00</td>
+                <td>1.28</td>
+                <td>29.05</td>
+            </tr>
+        
+            <tr data-games="15"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Jason</td>
+                <td>15</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.33</td>
+                <td>3.33</td>
+                <td>40.00%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.33</td>
+                <td>3.33</td>
+                <td>40.00%</td>
+                <td>2.67</td>
+                <td>2.53</td>
+                <td>5.33</td>
+                <td>7.87</td>
+                <td>1.53</td>
+                <td>0.80</td>
+                <td>0.67</td>
+                <td>0.93</td>
+                <td>23.07</td>
+            </tr>
+        
+            <tr data-games="18"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Jayden</td>
+                <td>18</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.39</td>
+                <td>4.89</td>
+                <td>28.41%</td>
+                <td>0.17</td>
+                <td>2.06</td>
+                <td>8.11%</td>
+                <td>1.56</td>
+                <td>6.94</td>
+                <td>22.40%</td>
+                <td>3.28</td>
+                <td>0.67</td>
+                <td>0.67</td>
+                <td>1.33</td>
+                <td>1.22</td>
+                <td>0.56</td>
+                <td>0.00</td>
+                <td>1.00</td>
+                <td>8.06</td>
+            </tr>
+        
+            <tr data-games="6"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Jayson</td>
+                <td>6</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>6.50</td>
+                <td>14.83</td>
+                <td>43.82%</td>
+                <td>0.83</td>
+                <td>3.00</td>
+                <td>27.78%</td>
+                <td>7.33</td>
+                <td>17.83</td>
+                <td>41.12%</td>
+                <td>15.50</td>
+                <td>1.50</td>
+                <td>5.00</td>
+                <td>6.50</td>
+                <td>4.67</td>
+                <td>1.33</td>
+                <td>0.50</td>
+                <td>1.83</td>
+                <td>53.43</td>
+            </tr>
+        
+            <tr data-games="66"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Jeen</td>
+                <td>66</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.97</td>
+                <td>2.41</td>
+                <td>40.25%</td>
+                <td>0.06</td>
+                <td>0.68</td>
+                <td>8.89%</td>
+                <td>1.03</td>
+                <td>3.09</td>
+                <td>33.33%</td>
+                <td>2.12</td>
+                <td>1.03</td>
+                <td>1.23</td>
+                <td>2.26</td>
+                <td>1.71</td>
+                <td>0.94</td>
+                <td>0.12</td>
+                <td>1.17</td>
+                <td>11.52</td>
+            </tr>
+        
+            <tr data-games="57"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Jerry</td>
+                <td>57</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.51</td>
+                <td>4.49</td>
+                <td>33.59%</td>
+                <td>0.04</td>
+                <td>0.12</td>
+                <td>28.57%</td>
+                <td>1.54</td>
+                <td>4.61</td>
+                <td>33.46%</td>
+                <td>3.12</td>
+                <td>0.63</td>
+                <td>3.05</td>
+                <td>3.68</td>
+                <td>1.68</td>
+                <td>0.88</td>
+                <td>0.07</td>
+                <td>1.56</td>
+                <td>14.69</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Jimmy</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>3.00</td>
+                <td>8.67</td>
+                <td>34.62%</td>
+                <td>1.33</td>
+                <td>2.00</td>
+                <td>66.67%</td>
+                <td>4.33</td>
+                <td>10.67</td>
+                <td>40.63%</td>
+                <td>10.00</td>
+                <td>0.33</td>
+                <td>4.33</td>
+                <td>4.67</td>
+                <td>1.33</td>
+                <td>1.33</td>
+                <td>0.00</td>
+                <td>2.33</td>
+                <td>30.53</td>
+            </tr>
+        
+            <tr data-games="45"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Josh</td>
+                <td>45</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.09</td>
+                <td>5.62</td>
+                <td>37.15%</td>
+                <td>0.16</td>
+                <td>1.11</td>
+                <td>14.00%</td>
+                <td>2.24</td>
+                <td>6.73</td>
+                <td>33.33%</td>
+                <td>4.64</td>
+                <td>1.40</td>
+                <td>2.53</td>
+                <td>3.93</td>
+                <td>1.47</td>
+                <td>1.13</td>
+                <td>0.13</td>
+                <td>0.89</td>
+                <td>19.52</td>
+            </tr>
+        
+            <tr data-games="24"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Jun</td>
+                <td>24</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.83</td>
+                <td>2.63</td>
+                <td>31.75%</td>
+                <td>0.00</td>
+                <td>0.04</td>
+                <td>0.00%</td>
+                <td>0.83</td>
+                <td>2.67</td>
+                <td>31.25%</td>
+                <td>1.67</td>
+                <td>1.46</td>
+                <td>2.42</td>
+                <td>3.88</td>
+                <td>3.33</td>
+                <td>1.29</td>
+                <td>0.04</td>
+                <td>1.38</td>
+                <td>16.84</td>
+            </tr>
+        
+            <tr data-games="55"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Jun Hao</td>
+                <td>55</td>
+                <td>0.04</td>
+                <td>0.04</td>
+                <td>1.82%</td>
+                <td>3.64</td>
+                <td>7.16</td>
+                <td>50.76%</td>
+                <td>0.60</td>
+                <td>2.38</td>
+                <td>25.19%</td>
+                <td>4.24</td>
+                <td>9.55</td>
+                <td>44.38%</td>
+                <td>9.11</td>
+                <td>0.78</td>
+                <td>2.35</td>
+                <td>3.13</td>
+                <td>1.82</td>
+                <td>0.56</td>
+                <td>0.11</td>
+                <td>1.85</td>
+                <td>26.09</td>
+            </tr>
+        
+            <tr data-games="23"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Kelvin</td>
+                <td>23</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>4.39</td>
+                <td>9.43</td>
+                <td>46.54%</td>
+                <td>0.22</td>
+                <td>1.17</td>
+                <td>18.52%</td>
+                <td>4.61</td>
+                <td>10.61</td>
+                <td>43.44%</td>
+                <td>9.43</td>
+                <td>1.48</td>
+                <td>3.61</td>
+                <td>5.09</td>
+                <td>1.22</td>
+                <td>0.70</td>
+                <td>0.35</td>
+                <td>1.70</td>
+                <td>30.10</td>
+            </tr>
+        
+            <tr data-games="33"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Khang</td>
+                <td>33</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.85</td>
+                <td>5.58</td>
+                <td>51.09%</td>
+                <td>0.64</td>
+                <td>2.27</td>
+                <td>28.00%</td>
+                <td>3.48</td>
+                <td>7.85</td>
+                <td>44.40%</td>
+                <td>7.61</td>
+                <td>1.52</td>
+                <td>1.91</td>
+                <td>3.42</td>
+                <td>2.03</td>
+                <td>0.55</td>
+                <td>0.06</td>
+                <td>1.18</td>
+                <td>24.84</td>
+            </tr>
+        
+            <tr data-games="14"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Kris</td>
+                <td>14</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.29</td>
+                <td>5.50</td>
+                <td>41.56%</td>
+                <td>0.07</td>
+                <td>0.43</td>
+                <td>16.67%</td>
+                <td>2.36</td>
+                <td>5.93</td>
+                <td>39.76%</td>
+                <td>4.79</td>
+                <td>2.00</td>
+                <td>2.93</td>
+                <td>4.93</td>
+                <td>2.07</td>
+                <td>0.71</td>
+                <td>0.07</td>
+                <td>0.64</td>
+                <td>22.60</td>
+            </tr>
+        
+            <tr data-games="51"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Larry</td>
+                <td>51</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.73</td>
+                <td>6.27</td>
+                <td>43.44%</td>
+                <td>0.18</td>
+                <td>0.80</td>
+                <td>21.95%</td>
+                <td>2.90</td>
+                <td>7.08</td>
+                <td>41.00%</td>
+                <td>5.98</td>
+                <td>2.76</td>
+                <td>3.75</td>
+                <td>6.51</td>
+                <td>1.27</td>
+                <td>1.37</td>
+                <td>0.14</td>
+                <td>0.57</td>
+                <td>28.29</td>
+            </tr>
+        
+            <tr data-games="51"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Lennard</td>
+                <td>51</td>
+                <td>0.00</td>
+                <td>0.04</td>
+                <td>0.00%</td>
+                <td>0.63</td>
+                <td>1.90</td>
+                <td>32.99%</td>
+                <td>1.51</td>
+                <td>6.67</td>
+                <td>22.65%</td>
+                <td>2.14</td>
+                <td>8.57</td>
+                <td>24.94%</td>
+                <td>5.78</td>
+                <td>0.63</td>
+                <td>2.27</td>
+                <td>2.90</td>
+                <td>2.16</td>
+                <td>1.20</td>
+                <td>0.00</td>
+                <td>1.10</td>
+                <td>18.08</td>
+            </tr>
+        
+            <tr data-games="84"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Lester</td>
+                <td>84</td>
+                <td>0.00</td>
+                <td>0.02</td>
+                <td>0.00%</td>
+                <td>1.89</td>
+                <td>4.71</td>
+                <td>40.15%</td>
+                <td>0.32</td>
+                <td>1.38</td>
+                <td>23.28%</td>
+                <td>2.21</td>
+                <td>6.10</td>
+                <td>36.33%</td>
+                <td>4.75</td>
+                <td>1.10</td>
+                <td>2.86</td>
+                <td>3.95</td>
+                <td>3.57</td>
+                <td>1.20</td>
+                <td>0.24</td>
+                <td>1.82</td>
+                <td>23.04</td>
+            </tr>
+        
+            <tr data-games="42"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Lil Chee</td>
+                <td>42</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.45</td>
+                <td>0.95</td>
+                <td>47.50%</td>
+                <td>0.55</td>
+                <td>1.71</td>
+                <td>31.94%</td>
+                <td>1.00</td>
+                <td>2.67</td>
+                <td>37.50%</td>
+                <td>2.55</td>
+                <td>0.62</td>
+                <td>2.10</td>
+                <td>2.71</td>
+                <td>2.71</td>
+                <td>2.02</td>
+                <td>0.05</td>
+                <td>1.02</td>
+                <td>18.59</td>
+            </tr>
+        
+            <tr data-games="75"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Louis</td>
+                <td>75</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.77</td>
+                <td>5.95</td>
+                <td>46.64%</td>
+                <td>0.31</td>
+                <td>1.16</td>
+                <td>26.44%</td>
+                <td>3.08</td>
+                <td>7.11</td>
+                <td>43.34%</td>
+                <td>6.47</td>
+                <td>1.07</td>
+                <td>3.40</td>
+                <td>4.47</td>
+                <td>3.03</td>
+                <td>0.56</td>
+                <td>0.03</td>
+                <td>1.13</td>
+                <td>26.09</td>
+            </tr>
+        
+            <tr data-games="15"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Marvin</td>
+                <td>15</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.93</td>
+                <td>2.67</td>
+                <td>35.00%</td>
+                <td>0.73</td>
+                <td>3.40</td>
+                <td>21.57%</td>
+                <td>1.67</td>
+                <td>6.07</td>
+                <td>27.47%</td>
+                <td>4.07</td>
+                <td>0.40</td>
+                <td>1.13</td>
+                <td>1.53</td>
+                <td>2.13</td>
+                <td>1.20</td>
+                <td>0.00</td>
+                <td>1.67</td>
+                <td>13.09</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Michael</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.33</td>
+                <td>4.33</td>
+                <td>30.77%</td>
+                <td>0.00</td>
+                <td>4.00</td>
+                <td>0.00%</td>
+                <td>1.33</td>
+                <td>8.33</td>
+                <td>16.00%</td>
+                <td>2.67</td>
+                <td>1.00</td>
+                <td>1.33</td>
+                <td>2.33</td>
+                <td>2.67</td>
+                <td>0.33</td>
+                <td>0.00</td>
+                <td>2.00</td>
+                <td>6.00</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Mike</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>3.67</td>
+                <td>6.00</td>
+                <td>61.11%</td>
+                <td>0.00</td>
+                <td>1.33</td>
+                <td>0.00%</td>
+                <td>3.67</td>
+                <td>7.33</td>
+                <td>50.00%</td>
+                <td>7.33</td>
+                <td>2.67</td>
+                <td>5.00</td>
+                <td>7.67</td>
+                <td>1.00</td>
+                <td>1.33</td>
+                <td>0.33</td>
+                <td>1.00</td>
+                <td>32.70</td>
+            </tr>
+        
+            <tr data-games="36"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Mo</td>
+                <td>36</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.28</td>
+                <td>5.36</td>
+                <td>42.49%</td>
+                <td>0.75</td>
+                <td>3.67</td>
+                <td>20.45%</td>
+                <td>3.03</td>
+                <td>9.03</td>
+                <td>33.54%</td>
+                <td>6.81</td>
+                <td>0.97</td>
+                <td>1.47</td>
+                <td>2.44</td>
+                <td>1.25</td>
+                <td>0.42</td>
+                <td>0.03</td>
+                <td>0.86</td>
+                <td>18.04</td>
+            </tr>
+        
+            <tr data-games="18"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Moritz</td>
+                <td>18</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>3.72</td>
+                <td>7.72</td>
+                <td>48.20%</td>
+                <td>1.50</td>
+                <td>5.00</td>
+                <td>30.00%</td>
+                <td>5.22</td>
+                <td>12.72</td>
+                <td>41.05%</td>
+                <td>11.94</td>
+                <td>1.28</td>
+                <td>3.28</td>
+                <td>4.56</td>
+                <td>3.28</td>
+                <td>1.17</td>
+                <td>0.22</td>
+                <td>1.33</td>
+                <td>39.32</td>
+            </tr>
+        
+            <tr data-games="36"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Otto</td>
+                <td>36</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.42</td>
+                <td>4.44</td>
+                <td>54.37%</td>
+                <td>1.75</td>
+                <td>5.28</td>
+                <td>33.16%</td>
+                <td>4.17</td>
+                <td>9.72</td>
+                <td>42.86%</td>
+                <td>10.08</td>
+                <td>0.89</td>
+                <td>1.86</td>
+                <td>2.75</td>
+                <td>1.50</td>
+                <td>1.03</td>
+                <td>0.00</td>
+                <td>1.06</td>
+                <td>28.90</td>
+            </tr>
+        
+            <tr data-games="9"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>PC</td>
+                <td>9</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.44</td>
+                <td>2.89</td>
+                <td>50.00%</td>
+                <td>1.22</td>
+                <td>3.78</td>
+                <td>32.35%</td>
+                <td>2.67</td>
+                <td>6.67</td>
+                <td>40.00%</td>
+                <td>6.56</td>
+                <td>1.89</td>
+                <td>3.67</td>
+                <td>5.56</td>
+                <td>1.44</td>
+                <td>0.56</td>
+                <td>0.22</td>
+                <td>1.44</td>
+                <td>23.78</td>
+            </tr>
+        
+            <tr data-games="6"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Park</td>
+                <td>6</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.67</td>
+                <td>1.83</td>
+                <td>36.36%</td>
+                <td>2.67</td>
+                <td>5.33</td>
+                <td>50.00%</td>
+                <td>3.33</td>
+                <td>7.17</td>
+                <td>46.51%</td>
+                <td>9.33</td>
+                <td>1.00</td>
+                <td>2.50</td>
+                <td>3.50</td>
+                <td>0.83</td>
+                <td>0.67</td>
+                <td>0.00</td>
+                <td>0.67</td>
+                <td>27.90</td>
+            </tr>
+        
+            <tr data-games="54"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Raph</td>
+                <td>54</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.37</td>
+                <td>3.61</td>
+                <td>37.95%</td>
+                <td>0.59</td>
+                <td>2.15</td>
+                <td>27.59%</td>
+                <td>1.96</td>
+                <td>5.76</td>
+                <td>34.08%</td>
+                <td>4.52</td>
+                <td>0.57</td>
+                <td>2.20</td>
+                <td>2.78</td>
+                <td>2.72</td>
+                <td>0.76</td>
+                <td>0.11</td>
+                <td>1.80</td>
+                <td>17.08</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Rhys</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>4.67</td>
+                <td>10.00</td>
+                <td>46.67%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>4.67</td>
+                <td>10.00</td>
+                <td>46.67%</td>
+                <td>9.33</td>
+                <td>2.33</td>
+                <td>7.33</td>
+                <td>9.67</td>
+                <td>0.67</td>
+                <td>0.00</td>
+                <td>1.33</td>
+                <td>1.00</td>
+                <td>38.83</td>
+            </tr>
+        
+            <tr data-games="54"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                data-min-50-games=true
+                >
+                <td>Roberto</td>
+                <td>54</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.17</td>
+                <td>5.98</td>
+                <td>36.22%</td>
+                <td>0.06</td>
+                <td>0.39</td>
+                <td>14.29%</td>
+                <td>2.22</td>
+                <td>6.37</td>
+                <td>34.88%</td>
+                <td>4.50</td>
+                <td>1.11</td>
+                <td>3.19</td>
+                <td>4.30</td>
+                <td>1.46</td>
+                <td>0.76</td>
+                <td>0.06</td>
+                <td>1.07</td>
+                <td>18.51</td>
+            </tr>
+        
+            <tr data-games="30"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Ronnie</td>
+                <td>30</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.37</td>
+                <td>4.40</td>
+                <td>31.06%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.37</td>
+                <td>4.40</td>
+                <td>31.06%</td>
+                <td>2.73</td>
+                <td>1.20</td>
+                <td>2.00</td>
+                <td>3.20</td>
+                <td>1.57</td>
+                <td>1.73</td>
+                <td>0.13</td>
+                <td>1.43</td>
+                <td>15.79</td>
+            </tr>
+        
+            <tr data-games="9"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Sam</td>
+                <td>9</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.56</td>
+                <td>7.56</td>
+                <td>33.82%</td>
+                <td>0.11</td>
+                <td>0.44</td>
+                <td>25.00%</td>
+                <td>2.67</td>
+                <td>8.00</td>
+                <td>33.33%</td>
+                <td>5.44</td>
+                <td>1.67</td>
+                <td>4.00</td>
+                <td>5.67</td>
+                <td>1.44</td>
+                <td>0.44</td>
+                <td>0.56</td>
+                <td>1.00</td>
+                <td>22.90</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Stasi</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.67</td>
+                <td>6.67</td>
+                <td>40.00%</td>
+                <td>0.33</td>
+                <td>3.00</td>
+                <td>11.11%</td>
+                <td>3.00</td>
+                <td>9.67</td>
+                <td>31.03%</td>
+                <td>6.33</td>
+                <td>1.67</td>
+                <td>4.67</td>
+                <td>6.33</td>
+                <td>1.67</td>
+                <td>0.67</td>
+                <td>0.00</td>
+                <td>1.33</td>
+                <td>22.90</td>
+            </tr>
+        
+            <tr data-games="38"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Terry</td>
+                <td>38</td>
+                <td>0.00</td>
+                <td>0.03</td>
+                <td>0.00%</td>
+                <td>4.16</td>
+                <td>8.18</td>
+                <td>50.80%</td>
+                <td>0.11</td>
+                <td>0.63</td>
+                <td>16.67%</td>
+                <td>4.26</td>
+                <td>8.82</td>
+                <td>48.36%</td>
+                <td>8.63</td>
+                <td>1.89</td>
+                <td>3.92</td>
+                <td>5.82</td>
+                <td>1.21</td>
+                <td>0.55</td>
+                <td>0.11</td>
+                <td>0.71</td>
+                <td>31.11</td>
+            </tr>
+        
+            <tr data-games="21"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Thuan</td>
+                <td>21</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>3.95</td>
+                <td>8.05</td>
+                <td>49.11%</td>
+                <td>0.05</td>
+                <td>0.52</td>
+                <td>9.09%</td>
+                <td>4.00</td>
+                <td>8.57</td>
+                <td>46.67%</td>
+                <td>8.05</td>
+                <td>3.10</td>
+                <td>4.05</td>
+                <td>7.14</td>
+                <td>1.52</td>
+                <td>1.52</td>
+                <td>0.29</td>
+                <td>1.24</td>
+                <td>34.60</td>
+            </tr>
+        
+            <tr data-games="27"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Tom</td>
+                <td>27</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.07</td>
+                <td>2.11</td>
+                <td>50.88%</td>
+                <td>1.59</td>
+                <td>5.37</td>
+                <td>29.66%</td>
+                <td>2.67</td>
+                <td>7.48</td>
+                <td>35.64%</td>
+                <td>6.93</td>
+                <td>1.33</td>
+                <td>2.41</td>
+                <td>3.74</td>
+                <td>2.15</td>
+                <td>0.85</td>
+                <td>0.15</td>
+                <td>1.33</td>
+                <td>23.10</td>
+            </tr>
+        
+            <tr data-games="33"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Trevor</td>
+                <td>33</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.82</td>
+                <td>3.82</td>
+                <td>47.62%</td>
+                <td>0.12</td>
+                <td>0.88</td>
+                <td>13.79%</td>
+                <td>1.94</td>
+                <td>4.70</td>
+                <td>41.29%</td>
+                <td>4.00</td>
+                <td>1.48</td>
+                <td>5.85</td>
+                <td>7.33</td>
+                <td>4.15</td>
+                <td>0.91</td>
+                <td>0.03</td>
+                <td>1.73</td>
+                <td>26.94</td>
+            </tr>
+        
+            <tr data-games="39"
+                data-min-0-games=true
+                data-min-10-games=true
+                data-min-30-games=true
+                
+                >
+                <td>Viet</td>
+                <td>39</td>
+                <td>0.03</td>
+                <td>0.05</td>
+                <td>1.28%</td>
+                <td>2.64</td>
+                <td>4.79</td>
+                <td>55.08%</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>2.64</td>
+                <td>4.79</td>
+                <td>55.08%</td>
+                <td>5.31</td>
+                <td>1.36</td>
+                <td>2.79</td>
+                <td>4.15</td>
+                <td>1.79</td>
+                <td>0.79</td>
+                <td>0.00</td>
+                <td>0.74</td>
+                <td>23.28</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Will</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>0.33</td>
+                <td>2.67</td>
+                <td>12.50%</td>
+                <td>0.00</td>
+                <td>0.33</td>
+                <td>0.00%</td>
+                <td>0.33</td>
+                <td>3.00</td>
+                <td>11.11%</td>
+                <td>0.67</td>
+                <td>1.67</td>
+                <td>2.67</td>
+                <td>4.33</td>
+                <td>1.00</td>
+                <td>0.67</td>
+                <td>0.00</td>
+                <td>1.00</td>
+                <td>8.23</td>
+            </tr>
+        
+            <tr data-games="3"
+                data-min-0-games=true
+                
+                
+                
+                >
+                <td>Wins</td>
+                <td>3</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.00</td>
+                <td>4.33</td>
+                <td>23.08%</td>
+                <td>0.00</td>
+                <td>0.33</td>
+                <td>0.00%</td>
+                <td>1.00</td>
+                <td>4.67</td>
+                <td>21.43%</td>
+                <td>2.00</td>
+                <td>0.67</td>
+                <td>1.67</td>
+                <td>2.33</td>
+                <td>0.33</td>
+                <td>0.33</td>
+                <td>0.00</td>
+                <td>1.00</td>
+                <td>5.73</td>
+            </tr>
+        
+            <tr data-games="15"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Xavi</td>
+                <td>15</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>5.67</td>
+                <td>12.00</td>
+                <td>47.22%</td>
+                <td>0.33</td>
+                <td>2.13</td>
+                <td>15.63%</td>
+                <td>6.00</td>
+                <td>14.13</td>
+                <td>42.45%</td>
+                <td>12.33</td>
+                <td>2.47</td>
+                <td>6.20</td>
+                <td>8.67</td>
+                <td>1.67</td>
+                <td>1.20</td>
+                <td>0.20</td>
+                <td>1.40</td>
+                <td>43.77</td>
+            </tr>
+        
+            <tr data-games="12"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Yon</td>
+                <td>12</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>4.25</td>
+                <td>7.00</td>
+                <td>60.71%</td>
+                <td>0.67</td>
+                <td>2.08</td>
+                <td>32.00%</td>
+                <td>4.92</td>
+                <td>9.08</td>
+                <td>54.13%</td>
+                <td>10.50</td>
+                <td>1.58</td>
+                <td>3.67</td>
+                <td>5.25</td>
+                <td>3.58</td>
+                <td>1.67</td>
+                <td>0.08</td>
+                <td>1.17</td>
+                <td>42.06</td>
+            </tr>
+        
+            <tr data-games="15"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Zac</td>
+                <td>15</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>1.93</td>
+                <td>5.20</td>
+                <td>37.18%</td>
+                <td>1.13</td>
+                <td>4.00</td>
+                <td>28.33%</td>
+                <td>3.07</td>
+                <td>9.20</td>
+                <td>33.33%</td>
+                <td>7.27</td>
+                <td>0.60</td>
+                <td>5.27</td>
+                <td>5.87</td>
+                <td>1.80</td>
+                <td>1.73</td>
+                <td>0.33</td>
+                <td>1.47</td>
+                <td>29.03</td>
+            </tr>
+        
+            <tr data-games="12"
+                data-min-0-games=true
+                data-min-10-games=true
+                
+                
+                >
+                <td>Zarko</td>
+                <td>12</td>
+                <td>0.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>3.00</td>
+                <td>5.08</td>
+                <td>59.02%</td>
+                <td>0.92</td>
+                <td>3.42</td>
+                <td>26.83%</td>
+                <td>3.92</td>
+                <td>8.50</td>
+                <td>46.08%</td>
+                <td>8.75</td>
+                <td>1.50</td>
+                <td>3.17</td>
+                <td>4.67</td>
+                <td>0.83</td>
+                <td>1.17</td>
+                <td>0.42</td>
+                <td>1.50</td>
+                <td>29.01</td>
+            </tr>
+        
+        </tbody>
     </table>
 </div>
     </main>

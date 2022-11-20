@@ -38,6 +38,11 @@ git push origin master
 
 ## TODO: Instructions for each page?
 
+## TODO: Charts
+
+Charts i think have to be loaded as a collection then maybe i just load the one collection item into the player-stats page?
+Or do it via layout chaining somehow where the data is sent into the template.
+
 # References
 
 https://sia.codes/posts/architecting-data-in-eleventy/

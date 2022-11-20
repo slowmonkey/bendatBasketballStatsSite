@@ -8,6 +8,7 @@ services:
     working_dir: /app
     # environment:
     #   - DEBUG=Eleventy*
-    command: ["npx", "-p", "@11ty/eleventy", "eleventy", "--watch", "--serve"]
+    # command: ["npx", "-p", "@11ty/eleventy", "eleventy", "--watch", "--serve"]
+    command: /bin/bash -c "npm install && npx eleventy --watch --serve"
     ports:
       - 8080:8080

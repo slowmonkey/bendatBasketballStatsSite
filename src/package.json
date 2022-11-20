@@ -13,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.2"
+    "@11ty/eleventy": "^1.0.2",
+    "eleventy-charts": "^1.0.3"
   },
   "dependencies": {
     "pg": "^8.8.0"

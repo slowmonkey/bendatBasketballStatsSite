@@ -1,0 +1,173 @@
+---
+layout: base
+permalink: /
+---
+
+<p>Welcome to Bendat Basketball stats</p>
+
+<p>Currently this site hosts only the follow years of data.</p>
+<p>2022</p>
+
+<h1>Leader Board 2022</h1>
+
+<table class="stats-table">
+    <tbody>
+        <tr>
+            <td>
+                <h2>Total Points</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Points</th>
+                            <th>Player</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for totalPointsItem in stats.leaderBoardStats.totals.TotalPoints %}
+                            {% for playerDetails in totalPointsItem.players %}
+                                <tr>
+                                    <td>{{ totalPointsItem.statValue }}</td>
+                                    <td>{{ playerDetails.name }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                <h2>Total Rebounds</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Rebounds</th>
+                            <th>Player</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for totalPointsItem in stats.leaderBoardStats.totals.TotalRebounds %}
+                            {% for playerDetails in totalPointsItem.players %}
+                                <tr>
+                                    <td>{{ totalPointsItem.statValue }}</td>
+                                    <td>{{ playerDetails.name }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <h2>Total Offensive Rebounds</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Offensive Rebounds</th>
+                            <th>Player</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for totalPointsItem in stats.leaderBoardStats.totals.OReb %}
+                            {% for playerDetails in totalPointsItem.players %}
+                                <tr>
+                                    <td>{{ totalPointsItem.statValue }}</td>
+                                    <td>{{ playerDetails.name }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <h2>Total Defensive Rebounds</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Defensive Rebounds</th>
+                            <th>Player</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for totalPointsItem in stats.leaderBoardStats.totals.DReb %}
+                            {% for playerDetails in totalPointsItem.players %}
+                                <tr>
+                                    <td>{{ totalPointsItem.statValue }}</td>
+                                    <td>{{ playerDetails.name }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                <h2>Total Assists</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Assists</th>
+                            <th>Player</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for totalPointsItem in stats.leaderBoardStats.totals.Assists %}
+                            {% for playerDetails in totalPointsItem.players %}
+                                <tr>
+                                    <td>{{ totalPointsItem.statValue }}</td>
+                                    <td>{{ playerDetails.name }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <h2>Total Steals</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Steals</th>
+                            <th>Player</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for totalPointsItem in stats.leaderBoardStats.totals.Steals %}
+                            {% for playerDetails in totalPointsItem.players %}
+                                <tr>
+                                    <td>{{ totalPointsItem.statValue }}</td>
+                                    <td>{{ playerDetails.name }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <h2>Total Blocks</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Blocks</th>
+                            <th>Player</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for totalPointsItem in stats.leaderBoardStats.totals.Blocks %}
+                            {% for playerDetails in totalPointsItem.players %}
+                                <tr>
+                                    <td>{{ totalPointsItem.statValue }}</td>
+                                    <td>{{ playerDetails.name }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

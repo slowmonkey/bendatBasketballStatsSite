@@ -10,22 +10,33 @@ permalink: "player-stats/{{ player.name | slugify }}/"
 <div class="player-selection-drop-down">
     <select name="player-names-dropdown" id="player-names-dropdown" class="dropdown">
         <option value="{{ '/player-stats-home/' | url }}">Unselected</option>
-    {% for playerStat in stats.playersStats %}
-        {% set slugifiedPlayerName = [playerStat.name] | slugify %}
-        {% set itemValue = ["/player-stats/", slugifiedPlayerName, "/"] | join %}
-        <option {% if playerStat.name === player.name %}
+        {% for playerStat in stats.playersStats %}
+            {% set slugifiedPlayerStatName = [playerStat.name] | slugify %}
+            {% set itemValue = ["/player-stats/", slugifiedPlayerStatName, "/"] | join %}
+            <option {% if playerStat.name === player.name %}
                     selected=true
                 {% endif %} value="{{ itemValue | url }}">{{ playerStat.name }}</option>
-    {% endfor %}
+        {% endfor %}
     </select>
 </div>
 
 <script type="text/javascript">
     var urlmenu = document.getElementById('player-names-dropdown');
-    urlmenu.onchange = function() {
-        window.location = `${this.options[this.selectedIndex].value}`;
+    urlmenu.onchange = function () {
+        window.location = `${this
+            .options[this.selectedIndex]
+            .value}`;
     };
 </script>
+
+<div class="slowmonkeytab">
+    {# <button class="tablinks active" onclick="openTab(event, 'PlayerStats')">Player Stats</button>
+    <button class="tablinks" onclick="openTab(event, 'PlayerCharts')">Charts</button> #}
+    {% set slugifiedPlayerName = [player.name] | slugify %}
+    {% set chartUrl = ["/player-charts/", slugifiedPlayerName, "/"] | join %}
+    <button class="tablinks active" onclick="">Player Stats</button>
+    {# <button class="tablinks" disabled onclick="location.href='{{ chartUrl | url }}'">Charts</button> #}
+</div>
 
 <table class="stats-table sortable">
     <tr>
@@ -56,34 +67,34 @@ permalink: "player-stats/{{ player.name | slugify }}/"
         <th>Fan Pts</th>
         <th>Win/Loss</th>
     </tr>
-{% for item in player.stats %}
-    <tr>
-        <td>{{ item.Date | statsdate }}</td>
-        <td>{{ item.Team }}</td>
-        <td>{{ item.Opponent }}</td>
-        <td>{{ item.Game }}</td>
-        <td>{{ item.FTM }}</td>
-        <td>{{ item.FTA }}</td>
-        <td>{{ item["FT%"] | percentage }}</td>
-        <td>{{ item.2PM }}</td>
-        <td>{{ item.2PA }}</td>
-        <td>{{ item["2PT%"] | percentage }}</td>
-        <td>{{ item.3PM }}</td>
-        <td>{{ item.3PA }}</td>
-        <td>{{ item["3PT%"] | percentage }}</td>
-        <td>{{ item.FGM }}</td>
-        <td>{{ item.FGA }}</td>
-        <td>{{ item["FG%"] | percentage }}</td>
-        <td>{{ item.TotalPoints }}</td>
-        <td>{{ item.OReb }}</td>
-        <td>{{ item.DReb }}</td>
-        <td>{{ item.TotalRebounds }}</td>
-        <td>{{ item.Assists }}</td>
-        <td>{{ item.Steals }}</td>
-        <td>{{ item.Blocks }}</td>
-        <td>{{ item.TOV }}</td>
-        <td>{{ item.FanPoints }}</td>
-        <td>{{ item["Win/Loss"] }}</td>
-    </tr>
-{% endfor %}
+    {% for item in player.stats %}
+        <tr>
+            <td>{{ item.Date | statsdate }}</td>
+            <td>{{ item.Team }}</td>
+            <td>{{ item.Opponent }}</td>
+            <td>{{ item.Game }}</td>
+            <td>{{ item.FTM }}</td>
+            <td>{{ item.FTA }}</td>
+            <td>{{ item["FT%"] | percentage }}</td>
+            <td>{{ item.2PM }}</td>
+            <td>{{ item.2PA }}</td>
+            <td>{{ item["2PT%"] | percentage }}</td>
+            <td>{{ item.3PM }}</td>
+            <td>{{ item.3PA }}</td>
+            <td>{{ item["3PT%"] | percentage }}</td>
+            <td>{{ item.FGM }}</td>
+            <td>{{ item.FGA }}</td>
+            <td>{{ item["FG%"] | percentage }}</td>
+            <td>{{ item.TotalPoints }}</td>
+            <td>{{ item.OReb }}</td>
+            <td>{{ item.DReb }}</td>
+            <td>{{ item.TotalRebounds }}</td>
+            <td>{{ item.Assists }}</td>
+            <td>{{ item.Steals }}</td>
+            <td>{{ item.Blocks }}</td>
+            <td>{{ item.TOV }}</td>
+            <td>{{ item.FanPoints }}</td>
+            <td>{{ item["Win/Loss"] }}</td>
+        </tr>
+    {% endfor %}
 </table>

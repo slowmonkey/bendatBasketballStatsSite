@@ -1,0 +1,31 @@
+<!-- 
+Trying to do a link for the tabs
+<div class="player-selection-drop-down">
+    <select name="player-names-dropdown" id="player-names-dropdown" class="dropdown">
+        <option value="{{ '/player-stats-home/' | url }}">Unselected</option>
+        {% for playerStat in stats.playersStats %}
+            {% set slugifiedPlayerStatName = [playerStat.name] | slugify %}
+            {% set itemValue = ["/player-stats/", slugifiedPlayerStatName, "/"] | join %}
+            <option {% if playerStat.name === player.name %}
+                    selected=true
+                {% endif %} value="{{ itemValue | url }}">{{ playerStat.name }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<script type="text/javascript">
+    var urlmenu = document.getElementById('player-names-dropdown');
+    urlmenu.onchange = function () {
+        window.location = `${this
+            .options[this.selectedIndex]
+            .value}`;
+    };
+</script>
+
+<div class="slowmonkeytab">
+    {% set slugifiedPlayerName = [player.name] | slugify %}
+    {% set playerStatsUrl = ["/player-stats/", slugifiedPlayerName, "/"] | join %}
+    <button class="tablinks" onclick="location.href='{{ playerStatsUrl | url }}'">Player Stats</button>
+    <button class="tablinks active" onclick="'">Charts</button>
+</div>
+

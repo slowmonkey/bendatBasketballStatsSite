@@ -45,7 +45,7 @@
 
         
 
-        .withrank thead {
+        .stats-table thead {
             background-color:#eee;
             color:#666666;
             font-weight: bold;
@@ -101,14 +101,14 @@
         }
 
         /* Style the tab */
-        .tab {
+        .slowmonkeytab {
             overflow: hidden;
             border: 1px solid #ccc;
             background-color: #f1f1f1;
         }
 
         /* Style the buttons that are used to open the tab content */
-        .tab button {
+        .slowmonkeytab button {
             background-color: inherit;
             float: left;
             border: none;
@@ -119,17 +119,17 @@
         }
 
         /* Change background color of buttons on hover */
-        .tab button:hover {
+        .slowmonkeytab button:hover {
             background-color: #ddd;
         }
 
         /* Create an active/current tablink class */
-        .tab button.active {
+        .slowmonkeytab button.active {
             background-color: #ccc;
         }
 
         /* Style the tab content */
-        .tabcontent {
+        .slowmonkeytabcontent {
             display: none;
             padding: 6px 12px;
             border: 1px solid #ccc;
@@ -162,6 +162,10 @@
             -moz-transition: box-shadow 200ms, border-color 200ms;
             transition: box-shadow 200ms, border-color 200ms;
             white-space: nowrap; 
+        }
+
+        .chart-container {
+            width: 100%; height: 100%; margin: 0; padding: 0; 
         }
     </style>
 
