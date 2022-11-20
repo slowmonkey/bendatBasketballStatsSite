@@ -3,8 +3,9 @@ title: "Weekly Stats Home"
 ---
 
 <div class="week-selection-drop-down">
+    <label for"week-dropdown" class="dropdown-label">Week:</label>
     <select name="week-dropdown" id="week-dropdown" class="dropdown">
-        <option selected value="{{ '/week-stats-home/' | url }}">Unselected</option>
+        <option selected value="{{ '/weekly-stats-home/' | url }}">Unselected</option>
     {% for availableWeek in stats.availableWeeks %}
         {% set dateValue = ["/weekly-stats/", availableWeek, "/"] | join %}
         <option value="{{ dateValue | url }}">{{ availableWeek }}</option>
@@ -18,5 +19,3 @@ title: "Weekly Stats Home"
         window.location = `${this.options[this.selectedIndex].value}`;
     };
 </script>
-
-<p>Please select a week to start</p>

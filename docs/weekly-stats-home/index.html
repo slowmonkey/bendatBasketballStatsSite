@@ -57,7 +57,7 @@
                 position: sticky;
                 top: 0;
             }
-             #;
+            #;
         }
 
         .stats-table thead {
@@ -118,6 +118,13 @@
             border-bottom: 2px solid #009879;
         }
 
+        .stats-table.sortable tbody tr:nth-child(2n) td {
+            background: #f3f3f3;
+        }
+        .stats-table.sortable tbody tr:nth-child(2n+1) td {
+            background: white;
+        }
+
         /* Style the tab */
         .slowmonkeytab {
             overflow: hidden;
@@ -173,7 +180,7 @@
             .dropdown:hover .dropdown-content {
                 display: block;
             }
-             #;
+            #;
         }
 
         .dropdown {
@@ -248,8 +255,9 @@
     <main>
         
 <div class="week-selection-drop-down">
+    <label for"week-dropdown" class="dropdown-label">Week:</label>
     <select name="week-dropdown" id="week-dropdown" class="dropdown">
-        <option selected value="/bendatBasketballStatsSite/week-stats-home/">Unselected</option>
+        <option selected value="/bendatBasketballStatsSite/weekly-stats-home/">Unselected</option>
     
         
         <option value="/bendatBasketballStatsSite/weekly-stats/2022-10-25/">2022-10-25</option>
@@ -344,8 +352,6 @@
         window.location = `${this.options[this.selectedIndex].value}`;
     };
 </script>
-
-<p>Please select a week to start</p>
     </main>
 </body>
 

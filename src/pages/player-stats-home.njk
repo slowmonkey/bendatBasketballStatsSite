@@ -3,21 +3,22 @@ title: "Player Stats Home"
 ---
 
 <div class="player-selection-drop-down">
+    <label for"player-names-dropdown" class="dropdown-label">Player:</label>
     <select name="player-names-dropdown" id="player-names-dropdown" class="dropdown">
         <option selected value="{{ '/player-stats-home/' | url }}">Unselected</option>
-    {% for playerName in stats.players %}
-        {% set slugifiedPlayerName = [playerName] | slugify %}
-        {% set itemValue = ["/player-stats/", slugifiedPlayerName, "/"] | join %}
-        <option value="{{ itemValue | url }}">{{ playerName }}</option>
-    {% endfor %}
+        {% for playerName in stats.players %}
+            {% set slugifiedPlayerName = [playerName] | slugify %}
+            {% set itemValue = ["/player-stats/", slugifiedPlayerName, "/"] | join %}
+            <option value="{{ itemValue | url }}">{{ playerName }}</option>
+        {% endfor %}
     </select>
 </div>
 
 <script type="text/javascript">
     var urlmenu = document.getElementById('player-names-dropdown');
-    urlmenu.onchange = function() {
-        window.location = `${this.options[this.selectedIndex].value}`;
+    urlmenu.onchange = function () {
+        window.location = `${this
+            .options[this.selectedIndex]
+            .value}`;
     };
 </script>
-
-<p>Please select a player to start</p>
