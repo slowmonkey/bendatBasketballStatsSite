@@ -2,7 +2,6 @@
 title: "Yearly Stats"
 ---
 
-
 <div class="yearly-min-games-filter">
     <label for"yearly-min-games-dropdown" class="dropdown-label">Minimum Games:</label>
     <select name="yearly-min-games-dropdown" id="yearly-min-games-dropdown" class="dropdown">
@@ -17,95 +16,22 @@ title: "Yearly Stats"
     <label for"year-dropdown" class="dropdown-label">Year:</label>
     <select name="year-dropdown" id="year-dropdown" class="dropdown">
         <option value="2022" selected>2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
     </select>
 </div>
-
-<script type="text/javascript">
-    var selectedFilters = {
-        games: ""
-    };
-
-    var minGamesMenu = document.getElementById('yearly-min-games-dropdown');
-    minGamesMenu.onchange = function() {
-        filterByGames(this.options[this.selectedIndex].value);
-    };
-
-    var yearMenu = document.getElementById('year-dropdown');
-    yearMenu.onchange = function() {
-        filterByYear(this.options[this.selectedIndex].value);
-    };
-
-    function filterByGames(games) {
-        let querySelector = `[data-min-0-games=true]`;
-        switch (games) {
-            case "10":
-                querySelector = `[data-min-10-games=true]`;
-            break;
-            case "30":
-                querySelector = `[data-min-30-games=true]`;
-            break;
-            case "50":
-                querySelector = `[data-min-50-games=true]`;
-            break;
-        }
-
-        selectedFilters.games = querySelector;
-
-        applyFilters();
-    }
-
-    function filterByYear(year) {
-        let querySelector = `[data-year="${year}"]`;
-        selectedFilters.year = querySelector;
-
-        applyFilters();
-    }
-
-    function applyFilters(){
-        // Use any class here, just hide all the items.
-        document.querySelectorAll("tr[data-games]").forEach(i => {
-            i.setAttribute("hidden", true);
-        });
-
-        let combinedQuerySelectors = selectedFilters.games;
-
-        document.querySelectorAll(combinedQuerySelectors).forEach(i => {
-            i.removeAttribute("hidden");
-        });
-    }
-
-    function openTab(evt, tabName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    } 
-</script>
 
 <div class="slowmonkeytab">
     <button class="tablinks active" onclick="openTab(event, 'Totals')">Totals</button>
     <button class="tablinks" onclick="openTab(event, 'Averages')">Averages Per Game</button>
 </div>
 
-<div id="Totals" class="tabcontent" style="display: block;">
+<div id="Totals" class="slowmonkeytabcontent" style="display: block;">
     <table class="stats-table sortable withrank">
         <thead>
             <tr>
                 <th>Player<span id="sorttable_sortrevind">&nbsp;▴</span></th>
+                <th>Year</th>
                 <th>Games</th>
                 <th>FTM</th>
                 <th>FTA</th>
@@ -133,8 +59,8 @@ title: "Yearly Stats"
             </tr>
         </thead>
         <tbody>
-        {% for item in stats.yearlyStats %}
-            <tr data-games="{{ item.Games }}"
+            {% for item in stats.yearlyStats %}
+                <tr data-games="{{ item.Games }}"
                 data-min-0-games=true
                 {% if item.Games >= 10 %}data-min-10-games=true{% endif %}
                 {% if item.Games >= 30 %}data-min-30-games=true{% endif %}
@@ -142,42 +68,44 @@ title: "Yearly Stats"
 
                 data-year="{{ item.Year }}"
                 >
-                <td>{{ item.Player }}</td>
-                <td>{{ item.Games }}</td>
-                <td>{{ item.FTM }}</td>
-                <td>{{ item.FTA }}</td>
-                <td>{{ item["FT%"] | percentage }}</td>
-                <td>{{ item.2PM }}</td>
-                <td>{{ item.2PA }}</td>
-                <td>{{ item["2PT%"] | percentage }}</td>
-                <td>{{ item.3PM }}</td>
-                <td>{{ item.3PA }}</td>
-                <td>{{ item["3PT%"] | percentage }}</td>
-                <td>{{ item.FGM }}</td>
-                <td>{{ item.FGA }}</td>
-                <td>{{ item["FG%"] | percentage }}</td>
-                <td>{{ item.TotalPoints }}</td>
-                <td>{{ item.OReb }}</td>
-                <td>{{ item.DReb }}</td>
-                <td>{{ item.TotalRebounds }}</td>
-                <td>{{ item.Assists }}</td>
-                <td>{{ item.Steals }}</td>
-                <td>{{ item.Blocks }}</td>
-                <td>{{ item.TOV }}</td>
-                <td>{{ item.Wins }}</td>
-                <td>{{ item.Losses }}</td>        
-                <td>{{ item.FanPoints }}</td>
-            </tr>
-        {% endfor %}
+                    <td>{{ item.Player }}</td>
+                    <td>{{ item.Year }}</td>
+                    <td>{{ item.Games }}</td>
+                    <td>{{ item.FTM }}</td>
+                    <td>{{ item.FTA }}</td>
+                    <td>{{ item["FT%"] | percentage }}</td>
+                    <td>{{ item.2PM }}</td>
+                    <td>{{ item.2PA }}</td>
+                    <td>{{ item["2PT%"] | percentage }}</td>
+                    <td>{{ item.3PM }}</td>
+                    <td>{{ item.3PA }}</td>
+                    <td>{{ item["3PT%"] | percentage }}</td>
+                    <td>{{ item.FGM }}</td>
+                    <td>{{ item.FGA }}</td>
+                    <td>{{ item["FG%"] | percentage }}</td>
+                    <td>{{ item.TotalPoints }}</td>
+                    <td>{{ item.OReb }}</td>
+                    <td>{{ item.DReb }}</td>
+                    <td>{{ item.TotalRebounds }}</td>
+                    <td>{{ item.Assists }}</td>
+                    <td>{{ item.Steals }}</td>
+                    <td>{{ item.Blocks }}</td>
+                    <td>{{ item.TOV }}</td>
+                    <td>{{ item.Wins }}</td>
+                    <td>{{ item.Losses }}</td>
+                    <td>{{ item.FanPoints }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
 
-<div id="Averages" class="tabcontent">
+<div id="Averages" class="slowmonkeytabcontent">
     <table class="stats-table sortable withrank">
         <thead>
             <tr>
                 <th>Player</th>
+                <th>Year</th>
                 <th>Games</th>
                 <th>FTM</th>
                 <th>FTA</th>
@@ -203,38 +131,131 @@ title: "Yearly Stats"
             </tr>
         </thead>
         <tbody>
-        {% for item in stats.yearlyStatsAverage %}
-            <tr data-games="{{ item.Games }}"
+            {% for item in stats.yearlyStatsAverage %}
+                <tr data-games="{{ item.Games }}"
                 data-min-0-games=true
                 {% if item.Games >= 10 %}data-min-10-games=true{% endif %}
                 {% if item.Games >= 30 %}data-min-30-games=true{% endif %}
                 {% if item.Games >= 50 %}data-min-50-games=true{% endif %}
+
+                data-year="{{ item.Year }}"
                 >
-                <td>{{ item.Player }}</td>
-                <td>{{ item.Games }}</td>
-                <td>{{ item.FTM | twoDecimalPoints }}</td>
-                <td>{{ item.FTA | twoDecimalPoints }}</td>
-                <td>{{ item["FT%"] | percentage }}</td>
-                <td>{{ item.2PM | twoDecimalPoints }}</td>
-                <td>{{ item.2PA | twoDecimalPoints }}</td>
-                <td>{{ item["2PT%"] | percentage}}</td>
-                <td>{{ item.3PM | twoDecimalPoints }}</td>
-                <td>{{ item.3PA | twoDecimalPoints }}</td>
-                <td>{{ item["3PT%"] | percentage }}</td>
-                <td>{{ item.FGM | twoDecimalPoints }}</td>
-                <td>{{ item.FGA | twoDecimalPoints }}</td>
-                <td>{{ item["FG%"] | percentage }}</td>
-                <td>{{ item.TotalPoints | twoDecimalPoints }}</td>
-                <td>{{ item.OReb | twoDecimalPoints }}</td>
-                <td>{{ item.DReb | twoDecimalPoints }}</td>
-                <td>{{ item.TotalRebounds | twoDecimalPoints }}</td>
-                <td>{{ item.Assists | twoDecimalPoints }}</td>
-                <td>{{ item.Steals | twoDecimalPoints }}</td>
-                <td>{{ item.Blocks | twoDecimalPoints }}</td>
-                <td>{{ item.TOV | twoDecimalPoints }}</td>
-                <td>{{ item.FanPoints | twoDecimalPoints }}</td>
-            </tr>
-        {% endfor %}
+                    <td>{{ item.Player }}</td>
+                    <td>{{ item.Year }}</td>
+                    <td>{{ item.Games }}</td>
+                    <td>{{ item.FTM | twoDecimalPoints }}</td>
+                    <td>{{ item.FTA | twoDecimalPoints }}</td>
+                    <td>{{ item["FT%"] | percentage }}</td>
+                    <td>{{ item.2PM | twoDecimalPoints }}</td>
+                    <td>{{ item.2PA | twoDecimalPoints }}</td>
+                    <td>{{ item["2PT%"] | percentage}}</td>
+                    <td>{{ item.3PM | twoDecimalPoints }}</td>
+                    <td>{{ item.3PA | twoDecimalPoints }}</td>
+                    <td>{{ item["3PT%"] | percentage }}</td>
+                    <td>{{ item.FGM | twoDecimalPoints }}</td>
+                    <td>{{ item.FGA | twoDecimalPoints }}</td>
+                    <td>{{ item["FG%"] | percentage }}</td>
+                    <td>{{ item.TotalPoints | twoDecimalPoints }}</td>
+                    <td>{{ item.OReb | twoDecimalPoints }}</td>
+                    <td>{{ item.DReb | twoDecimalPoints }}</td>
+                    <td>{{ item.TotalRebounds | twoDecimalPoints }}</td>
+                    <td>{{ item.Assists | twoDecimalPoints }}</td>
+                    <td>{{ item.Steals | twoDecimalPoints }}</td>
+                    <td>{{ item.Blocks | twoDecimalPoints }}</td>
+                    <td>{{ item.TOV | twoDecimalPoints }}</td>
+                    <td>{{ item.FanPoints | twoDecimalPoints }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+    var selectedFilters = {
+        games: ``,
+        year: `[data-year="2022"]`
+    };
+
+    var minGamesMenu = document.getElementById('yearly-min-games-dropdown');
+    minGamesMenu.onchange = function () {
+        filterByGames(this.options[this.selectedIndex].value);
+    };
+
+    var yearMenu = document.getElementById('year-dropdown');
+    yearMenu.onchange = function () {
+        filterByYear(this.options[this.selectedIndex].value);
+    };
+
+    function filterByGames(games) {
+        let querySelector = `[data-min-0-games=true]`;
+        switch (games) {
+            case "10":
+                querySelector = `[data-min-10-games=true]`;
+                break;
+            case "30":
+                querySelector = `[data-min-30-games=true]`;
+                break;
+            case "50":
+                querySelector = `[data-min-50-games=true]`;
+                break;
+        }
+
+        selectedFilters.games = querySelector;
+
+        applyFilters();
+    }
+
+    function filterByYear(year) {
+        let querySelector = `[data-year="${year}"]`;
+        selectedFilters.year = querySelector;
+
+        applyFilters();
+    }
+
+    function applyFilters() {
+        // Use any class here, just hide all the items.
+        document
+            .querySelectorAll("tr[data-games]")
+            .forEach(i => {
+                i.setAttribute("hidden", true);
+            });
+
+        let combinedQuerySelectors = `${selectedFilters.games}${selectedFilters.year}`;
+
+        document
+            .querySelectorAll(combinedQuerySelectors)
+            .forEach(i => {
+                i.removeAttribute("hidden");
+            });
+    }
+
+    function openTab(evt, tabName) {
+        // Declare all variables
+        var i,
+            tabcontent,
+            tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("slowmonkeytabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i]
+                .className
+                .replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document
+            .getElementById(tabName)
+            .style
+            .display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    applyFilters();
+</script>

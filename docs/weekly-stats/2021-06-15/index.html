@@ -1,0 +1,5273 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Bendat Basketball Stats
+        
+    </title>
+
+    <style>
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: #4285f4;
+            overflow: hidden;
+        }
+
+        /* Style the links inside the navigation bar */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a.selected {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add an active class to highlight the current page */
+        .topnav a[data-state="active"] {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        /* Hide the link that should open and close the topnav on small screens */
+        .topnav .icon {
+            display: none;
+        }
+
+        {
+            # .stats-table thead tr {
+                background-color: #009879;
+                color: #ffffff;
+                text-align: left;
+            }
+
+            .stats-table th {
+                background: white;
+                position: sticky;
+                top: 0;
+            }
+            #;
+        }
+
+        .stats-table thead {
+            background-color: #eee;
+            color: #666666;
+            font-weight: bold;
+            cursor: default;
+        }
+
+        .withrank tbody {
+            counter-reset: sortabletablescope;
+        }
+
+        .withrank thead tr::before {
+            content: "";
+            display: table-cell;
+        }
+
+        .withrank tbody tr::before {
+            content: counter(sortabletablescope);
+            counter-increment: sortabletablescope;
+            display: table-cell;
+            padding: 12px 15px;
+        }
+
+        .stats-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 10pt;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            {
+                # position: relative;
+                #;
+            }
+        }
+
+        .stats-table td,
+        .stats-table th {
+            padding: 12px 15px;
+        }
+
+        .stats-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .stats-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .stats-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        .stats-table .with-border {
+            border-top: 2px solid #009879;
+            border-bottom: 2px solid #009879;
+        }
+
+        .stats-table.sortable tbody tr:nth-child(2n) td {
+            background: #f3f3f3;
+        }
+        .stats-table.sortable tbody tr:nth-child(2n+1) td {
+            background: white;
+        }
+
+        /* Style the tab */
+        .slowmonkeytab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons that are used to open the tab content */
+        .slowmonkeytab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+        /* Change background color of buttons on hover */
+        .slowmonkeytab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .slowmonkeytab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .slowmonkeytabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        {
+            # .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            #;
+        }
+
+        .dropdown {
+            position: relative;
+            -webkit-appearance: button;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: middle;
+            height: 2.2em;
+            margin: 8px;
+            padding: 0.3em 0.6em;
+            background: white;
+            border: 1px solid #aaaaaa;
+            border-radius: 0.3em;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 0.85em;
+            font-weight: normal;
+            overflow: hidden;
+            text-shadow: 0 1px 0 white;
+            -webkit-transition: box-shadow 200ms, border-color 200ms;
+            -moz-transition: box-shadow 200ms, border-color 200ms;
+            transition: box-shadow 200ms, border-color 200ms;
+            white-space: nowrap;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LLK0QWHF90"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-LLK0QWHF90');
+    </script>
+</head>
+
+<body>
+    <div class="topnav">
+        
+            <a href="/bendatBasketballStatsSite/"
+                
+            >Home</a>
+        
+            <a href="/bendatBasketballStatsSite/weekly-stats-home/"
+                
+            >Weekly Stats</a>
+        
+            <a href="/bendatBasketballStatsSite/player-stats-home/"
+                
+            >Player Stats</a>
+        
+            <a href="/bendatBasketballStatsSite/yearly-stats/"
+                
+            >Yearly Stats</a>
+        
+    </div>
+    <main>
+        
+
+<div class="week-selection-drop-down">
+    <label for"week-dropdown" class="dropdown-label">Week:</label>
+    <select name="week-dropdown" id="week-dropdown" class="dropdown">
+        <option value="/bendatBasketballStatsSite/weekly-stats-home/">Unselected</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-10-25/">2022-10-25</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-10-18/">2022-10-18</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-10-11/">2022-10-11</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-09-20/">2022-09-20</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-09-06/">2022-09-06</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-08-23/">2022-08-23</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-08-16/">2022-08-16</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-07-19/">2022-07-19</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-28/">2022-06-28</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-21/">2022-06-21</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-14/">2022-06-14</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-06-07/">2022-06-07</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-05-31/">2022-05-31</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-05-17/">2022-05-17</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-05-10/">2022-05-10</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-04-26/">2022-04-26</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-04-05/">2022-04-05</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-29/">2022-03-29</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-22/">2022-03-22</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-15/">2022-03-15</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-07/">2022-03-07</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-03-01/">2022-03-01</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-22/">2022-02-22</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-15/">2022-02-15</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-08/">2022-02-08</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-02-01/">2022-02-01</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-01-11/">2022-01-11</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2022-01-04/">2022-01-04</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-12-07/">2021-12-07</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-11-30/">2021-11-30</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-11-23/">2021-11-23</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-11-16/">2021-11-16</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-11-09/">2021-11-09</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-11-02/">2021-11-02</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-10-26/">2021-10-26</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-10-19/">2021-10-19</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-10-12/">2021-10-12</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-10-05/">2021-10-05</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-09-28/">2021-09-28</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-09-21/">2021-09-21</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-09-14/">2021-09-14</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-09-07/">2021-09-07</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-08-31/">2021-08-31</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-08-24/">2021-08-24</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-08-17/">2021-08-17</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-08-10/">2021-08-10</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-07-28/">2021-07-28</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-07-20/">2021-07-20</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-07-13/">2021-07-13</option>
+        
+            
+            <option  
+                    selected=true 
+                 value="/bendatBasketballStatsSite/weekly-stats/2021-06-15/">2021-06-15</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-06-08/">2021-06-08</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-06-01/">2021-06-01</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-05-25/">2021-05-25</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-05-18/">2021-05-18</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-05-11/">2021-05-11</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-04-20/">2021-04-20</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-04-13/">2021-04-13</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-03-16/">2021-03-16</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-03-09/">2021-03-09</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-03-02/">2021-03-02</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-02-23/">2021-02-23</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-02-16/">2021-02-16</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2021-01-19/">2021-01-19</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-12-08/">2020-12-08</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-12-01/">2020-12-01</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-11-24/">2020-11-24</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-11-17/">2020-11-17</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-11-09/">2020-11-09</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-10-27/">2020-10-27</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-10-20/">2020-10-20</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-10-13/">2020-10-13</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-10-11/">2020-10-11</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-09-22/">2020-09-22</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-09-15/">2020-09-15</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-02-24/">2020-02-24</option>
+        
+            
+            <option  value="/bendatBasketballStatsSite/weekly-stats/2020-02-17/">2020-02-17</option>
+        
+    </select>
+</div>
+
+<script type="text/javascript">
+    var urlmenu = document.getElementById('week-dropdown');
+    urlmenu.onchange = function () {
+        window.location = `${this
+            .options[this.selectedIndex]
+            .value}`;
+    };
+</script>
+
+<div class="slowmonkeytab">
+    <button class="tablinks active" onclick="openTab(event, 'TeamSummary')">Team Summary</button>
+    <button class="tablinks" onclick="openTab(event, 'PlayerSummary')">Player Summary</button>
+    <button class="tablinks" onclick="openTab(event, 'PlayerAverages')">Player Averages Per Game</button>
+    <button class="tablinks" onclick="openTab(event, 'Games')">Games</button>
+</div>
+
+<div id="TeamSummary" class="slowmonkeytabcontent" style="display: block;">
+    
+        
+            <table class="stats-table sortable">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Games</th>
+                        <th>FTM</th>
+                        <th>FTA</th>
+                        <th>FT%</th>
+                        <th>2PM</th>
+                        <th>2PA</th>
+                        <th>2P%</th>
+                        <th>3PM</th>
+                        <th>3PA</th>
+                        <th>3P%</th>
+                        <th>FGM</th>
+                        <th>FGA</th>
+                        <th>FG%</th>
+                        <th>PTS</th>
+                        <th>OREB</th>
+                        <th>DREB</th>
+                        <th>REB</th>
+                        <th>AST</th>
+                        <th>STL</th>
+                        <th>BLK</th>
+                        <th>TOV</th>
+                        <th>Fan Pts</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Huy</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>13</td>
+                                <td>19</td>
+                                <td>68.42%</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>0.00%</td>
+                                <td>13</td>
+                                <td>24</td>
+                                <td>54.17%</td>
+                                <td>26</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>5</td>
+                                <td>7</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>3</td>
+                                <td>80.2</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Louis</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>9</td>
+                                <td>14</td>
+                                <td>64.29%</td>
+                                <td>2</td>
+                                <td>7</td>
+                                <td>28.57%</td>
+                                <td>11</td>
+                                <td>21</td>
+                                <td>52.38%</td>
+                                <td>24</td>
+                                <td>2</td>
+                                <td>10</td>
+                                <td>12</td>
+                                <td>8</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>6</td>
+                                <td>75.8</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Adam</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>100.00%</td>
+                                <td>7</td>
+                                <td>18</td>
+                                <td>38.89%</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>0.00%</td>
+                                <td>7</td>
+                                <td>20</td>
+                                <td>35.00%</td>
+                                <td>16</td>
+                                <td>4</td>
+                                <td>15</td>
+                                <td>19</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td>69.5</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Derek</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>5</td>
+                                <td>8</td>
+                                <td>62.50%</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>0.00%</td>
+                                <td>5</td>
+                                <td>10</td>
+                                <td>50.00%</td>
+                                <td>10</td>
+                                <td>2</td>
+                                <td>8</td>
+                                <td>10</td>
+                                <td>8</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>49.0</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                            <tr>
+                                <td>Keangee</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>3</td>
+                                <td>9</td>
+                                <td>33.33%</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0.00%</td>
+                                <td>3</td>
+                                <td>10</td>
+                                <td>30.00%</td>
+                                <td>6</td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>6</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>32.5</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Dung</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>2</td>
+                                <td>11</td>
+                                <td>18.18%</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0.00%</td>
+                                <td>2</td>
+                                <td>12</td>
+                                <td>16.67%</td>
+                                <td>4</td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>30.1</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                </tbody>
+                <tfoot>
+                    <tr class="with-border">
+                        <td>
+                            <b>Avg Per Game</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>0.67</td>
+                        <td>0.67</td>
+                        <td>100.00%</td>
+                        <td>13.00</td>
+                        <td>26.33</td>
+                        <td>49.37%</td>
+                        <td>0.67</td>
+                        <td>6.00</td>
+                        <td>11.11%</td>
+                        <td>13.67</td>
+                        <td>32.33</td>
+                        <td>42.27%</td>
+                        <td>28.67</td>
+                        <td>6.67</td>
+                        <td>14.67</td>
+                        <td>21.33</td>
+                        <td>11.67</td>
+                        <td>2.33</td>
+                        <td>0.33</td>
+                        <td>5.67</td>
+                        <td>112.37</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Total</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>100.00%</td>
+                        <td>39</td>
+                        <td>79</td>
+                        <td>49.37%</td>
+                        <td>2</td>
+                        <td>18</td>
+                        <td>11.11%</td>
+                        <td>41</td>
+                        <td>97</td>
+                        <td>42.27%</td>
+                        <td>86</td>
+                        <td>20</td>
+                        <td>44</td>
+                        <td>64</td>
+                        <td>35</td>
+                        <td>7</td>
+                        <td>1</td>
+                        <td>17</td>
+                        <td>337.1</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        
+    
+        
+            <table class="stats-table sortable">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Games</th>
+                        <th>FTM</th>
+                        <th>FTA</th>
+                        <th>FT%</th>
+                        <th>2PM</th>
+                        <th>2PA</th>
+                        <th>2P%</th>
+                        <th>3PM</th>
+                        <th>3PA</th>
+                        <th>3P%</th>
+                        <th>FGM</th>
+                        <th>FGA</th>
+                        <th>FG%</th>
+                        <th>PTS</th>
+                        <th>OREB</th>
+                        <th>DREB</th>
+                        <th>REB</th>
+                        <th>AST</th>
+                        <th>STL</th>
+                        <th>BLK</th>
+                        <th>TOV</th>
+                        <th>Fan Pts</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Andy</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>8</td>
+                                <td>14</td>
+                                <td>57.14%</td>
+                                <td>2</td>
+                                <td>13</td>
+                                <td>15.38%</td>
+                                <td>10</td>
+                                <td>27</td>
+                                <td>37.04%</td>
+                                <td>22</td>
+                                <td>7</td>
+                                <td>10</td>
+                                <td>17</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>3</td>
+                                <td>76.1</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Doug</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>11</td>
+                                <td>19</td>
+                                <td>57.89%</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0.00%</td>
+                                <td>11</td>
+                                <td>20</td>
+                                <td>55.00%</td>
+                                <td>22</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>63.5</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Lester</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>7</td>
+                                <td>17</td>
+                                <td>41.18%</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>7</td>
+                                <td>17</td>
+                                <td>41.18%</td>
+                                <td>14</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>7</td>
+                                <td>9</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>54.6</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                            <tr>
+                                <td>Terry</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>5</td>
+                                <td>17</td>
+                                <td>29.41%</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0.00%</td>
+                                <td>5</td>
+                                <td>18</td>
+                                <td>27.78%</td>
+                                <td>10</td>
+                                <td>5</td>
+                                <td>9</td>
+                                <td>14</td>
+                                <td>6</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>52.9</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Richard</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>50.00%</td>
+                                <td>2</td>
+                                <td>12</td>
+                                <td>16.67%</td>
+                                <td>4</td>
+                                <td>16</td>
+                                <td>25.00%</td>
+                                <td>10</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>7</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>31.3</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                            <tr>
+                                <td>Brendan</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>50.00%</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>50.00%</td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>7</td>
+                                <td>9</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td>30.7</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                </tbody>
+                <tfoot>
+                    <tr class="with-border">
+                        <td>
+                            <b>Avg Per Game</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00%</td>
+                        <td>11.67</td>
+                        <td>25.00</td>
+                        <td>46.67%</td>
+                        <td>1.33</td>
+                        <td>9.00</td>
+                        <td>14.81%</td>
+                        <td>13.00</td>
+                        <td>34.00</td>
+                        <td>38.24%</td>
+                        <td>27.33</td>
+                        <td>7.67</td>
+                        <td>11.67</td>
+                        <td>19.33</td>
+                        <td>9.67</td>
+                        <td>3.67</td>
+                        <td>0.00</td>
+                        <td>5.00</td>
+                        <td>103.03</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Total</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0.00%</td>
+                        <td>35</td>
+                        <td>75</td>
+                        <td>46.67%</td>
+                        <td>4</td>
+                        <td>27</td>
+                        <td>14.81%</td>
+                        <td>39</td>
+                        <td>102</td>
+                        <td>38.24%</td>
+                        <td>82</td>
+                        <td>23</td>
+                        <td>35</td>
+                        <td>58</td>
+                        <td>29</td>
+                        <td>11</td>
+                        <td>0</td>
+                        <td>15</td>
+                        <td>309.1</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        
+    
+        
+            <table class="stats-table sortable">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Games</th>
+                        <th>FTM</th>
+                        <th>FTA</th>
+                        <th>FT%</th>
+                        <th>2PM</th>
+                        <th>2PA</th>
+                        <th>2P%</th>
+                        <th>3PM</th>
+                        <th>3PA</th>
+                        <th>3P%</th>
+                        <th>FGM</th>
+                        <th>FGA</th>
+                        <th>FG%</th>
+                        <th>PTS</th>
+                        <th>OREB</th>
+                        <th>DREB</th>
+                        <th>REB</th>
+                        <th>AST</th>
+                        <th>STL</th>
+                        <th>BLK</th>
+                        <th>TOV</th>
+                        <th>Fan Pts</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Josh</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>5</td>
+                                <td>15</td>
+                                <td>33.33%</td>
+                                <td>1</td>
+                                <td>5</td>
+                                <td>20.00%</td>
+                                <td>6</td>
+                                <td>20</td>
+                                <td>30.00%</td>
+                                <td>13</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>16</td>
+                                <td>4</td>
+                                <td>7</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>74.5</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>D. Le</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>9</td>
+                                <td>18</td>
+                                <td>50.00%</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>0.00%</td>
+                                <td>9</td>
+                                <td>20</td>
+                                <td>45.00%</td>
+                                <td>18</td>
+                                <td>1</td>
+                                <td>6</td>
+                                <td>7</td>
+                                <td>9</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td>65.5</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                            <tr>
+                                <td>Khang</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>9</td>
+                                <td>21</td>
+                                <td>42.86%</td>
+                                <td>1</td>
+                                <td>6</td>
+                                <td>16.67%</td>
+                                <td>10</td>
+                                <td>27</td>
+                                <td>37.04%</td>
+                                <td>21</td>
+                                <td>5</td>
+                                <td>6</td>
+                                <td>11</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>63.6</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Ben</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>2</td>
+                                <td>7</td>
+                                <td>28.57%</td>
+                                <td>3</td>
+                                <td>9</td>
+                                <td>33.33%</td>
+                                <td>5</td>
+                                <td>16</td>
+                                <td>31.25%</td>
+                                <td>13</td>
+                                <td>1</td>
+                                <td>10</td>
+                                <td>11</td>
+                                <td>6</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td>52.8</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Roberto</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>4</td>
+                                <td>17</td>
+                                <td>23.53%</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>4</td>
+                                <td>17</td>
+                                <td>23.53%</td>
+                                <td>8</td>
+                                <td>2</td>
+                                <td>6</td>
+                                <td>8</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>3</td>
+                                <td>24.1</td>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                </tbody>
+                <tfoot>
+                    <tr class="with-border">
+                        <td>
+                            <b>Avg Per Game</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00%</td>
+                        <td>9.67</td>
+                        <td>26.00</td>
+                        <td>37.18%</td>
+                        <td>1.67</td>
+                        <td>7.33</td>
+                        <td>22.73%</td>
+                        <td>11.33</td>
+                        <td>33.33</td>
+                        <td>34.00%</td>
+                        <td>24.33</td>
+                        <td>5.67</td>
+                        <td>12.00</td>
+                        <td>17.67</td>
+                        <td>9.00</td>
+                        <td>4.67</td>
+                        <td>0.33</td>
+                        <td>6.00</td>
+                        <td>93.50</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Total</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0.00%</td>
+                        <td>29</td>
+                        <td>78</td>
+                        <td>37.18%</td>
+                        <td>5</td>
+                        <td>22</td>
+                        <td>22.73%</td>
+                        <td>34</td>
+                        <td>100</td>
+                        <td>34.00%</td>
+                        <td>73</td>
+                        <td>17</td>
+                        <td>36</td>
+                        <td>53</td>
+                        <td>27</td>
+                        <td>14</td>
+                        <td>1</td>
+                        <td>18</td>
+                        <td>280.5</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        
+    
+        
+            <table class="stats-table sortable">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Games</th>
+                        <th>FTM</th>
+                        <th>FTA</th>
+                        <th>FT%</th>
+                        <th>2PM</th>
+                        <th>2PA</th>
+                        <th>2P%</th>
+                        <th>3PM</th>
+                        <th>3PA</th>
+                        <th>3P%</th>
+                        <th>FGM</th>
+                        <th>FGA</th>
+                        <th>FG%</th>
+                        <th>PTS</th>
+                        <th>OREB</th>
+                        <th>DREB</th>
+                        <th>REB</th>
+                        <th>AST</th>
+                        <th>STL</th>
+                        <th>BLK</th>
+                        <th>TOV</th>
+                        <th>Fan Pts</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        
+                            <tr>
+                                <td>Anthony</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>11</td>
+                                <td>23</td>
+                                <td>47.83%</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>50.00%</td>
+                                <td>13</td>
+                                <td>27</td>
+                                <td>48.15%</td>
+                                <td>28</td>
+                                <td>6</td>
+                                <td>5</td>
+                                <td>11</td>
+                                <td>8</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>94.6</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                            <tr>
+                                <td>Jimmy</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>11</td>
+                                <td>27</td>
+                                <td>40.74%</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>11</td>
+                                <td>27</td>
+                                <td>40.74%</td>
+                                <td>22</td>
+                                <td>5</td>
+                                <td>11</td>
+                                <td>16</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>90.1</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>D. Le</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>50.00%</td>
+                                <td>3</td>
+                                <td>9</td>
+                                <td>33.33%</td>
+                                <td>5</td>
+                                <td>13</td>
+                                <td>38.46%</td>
+                                <td>13</td>
+                                <td>3</td>
+                                <td>7</td>
+                                <td>10</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>60.4</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                            <tr>
+                                <td>Hendo</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>7</td>
+                                <td>11</td>
+                                <td>63.64%</td>
+                                <td>1</td>
+                                <td>4</td>
+                                <td>25.00%</td>
+                                <td>8</td>
+                                <td>15</td>
+                                <td>53.33%</td>
+                                <td>17</td>
+                                <td>1</td>
+                                <td>6</td>
+                                <td>7</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>57.0</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Alan</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>50.00%</td>
+                                <td>0</td>
+                                <td>6</td>
+                                <td>0.00%</td>
+                                <td>2</td>
+                                <td>10</td>
+                                <td>20.00%</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>24.5</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                        
+                    
+                        
+                            <tr>
+                                <td>Gav</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>1</td>
+                                <td>7</td>
+                                <td>14.29%</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0.00%</td>
+                                <td>1</td>
+                                <td>7</td>
+                                <td>14.29%</td>
+                                <td>2</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>21.1</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        
+                    
+                </tbody>
+                <tfoot>
+                    <tr class="with-border">
+                        <td>
+                            <b>Avg Per Game</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00%</td>
+                        <td>11.33</td>
+                        <td>25.33</td>
+                        <td>44.74%</td>
+                        <td>2.00</td>
+                        <td>7.67</td>
+                        <td>26.09%</td>
+                        <td>13.33</td>
+                        <td>33.00</td>
+                        <td>40.40%</td>
+                        <td>28.67</td>
+                        <td>6.33</td>
+                        <td>11.33</td>
+                        <td>17.67</td>
+                        <td>9.67</td>
+                        <td>6.00</td>
+                        <td>0.33</td>
+                        <td>4.00</td>
+                        <td>115.90</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Total</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0.00%</td>
+                        <td>34</td>
+                        <td>76</td>
+                        <td>44.74%</td>
+                        <td>6</td>
+                        <td>23</td>
+                        <td>26.09%</td>
+                        <td>40</td>
+                        <td>99</td>
+                        <td>40.40%</td>
+                        <td>86</td>
+                        <td>19</td>
+                        <td>34</td>
+                        <td>53</td>
+                        <td>29</td>
+                        <td>18</td>
+                        <td>1</td>
+                        <td>12</td>
+                        <td>347.7</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        
+    
+        
+    
+        
+    
+</div>
+
+<div id="PlayerSummary" class="slowmonkeytabcontent">
+    <table class="stats-table sortable withrank">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Games</th>
+                <th>FTM</th>
+                <th>FTA</th>
+                <th>FT%</th>
+                <th>2PM</th>
+                <th>2PA</th>
+                <th>2P%</th>
+                <th>3PM</th>
+                <th>3PA</th>
+                <th>3P%</th>
+                <th>FGM</th>
+                <th>FGA</th>
+                <th>FG%</th>
+                <th>PTS</th>
+                <th>OREB</th>
+                <th>DREB</th>
+                <th>REB</th>
+                <th>AST</th>
+                <th>STL</th>
+                <th>BLK</th>
+                <th>TOV</th>
+                <th>Fan Pts</th>
+                <th>Wins</th>
+                <th>Losses</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr>
+                    <td>Anthony</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>11</td>
+                    <td>23</td>
+                    <td>47.83%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>50.00%</td>
+                    <td>13</td>
+                    <td>27</td>
+                    <td>48.15%</td>
+                    <td>28</td>
+                    <td>6</td>
+                    <td>5</td>
+                    <td>11</td>
+                    <td>8</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>94.6</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Jimmy</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>11</td>
+                    <td>27</td>
+                    <td>40.74%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>11</td>
+                    <td>27</td>
+                    <td>40.74%</td>
+                    <td>22</td>
+                    <td>5</td>
+                    <td>11</td>
+                    <td>16</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>90.1</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Huy</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>13</td>
+                    <td>19</td>
+                    <td>68.42%</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>13</td>
+                    <td>24</td>
+                    <td>54.17%</td>
+                    <td>26</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>80.2</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Andy</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>8</td>
+                    <td>14</td>
+                    <td>57.14%</td>
+                    <td>2</td>
+                    <td>13</td>
+                    <td>15.38%</td>
+                    <td>10</td>
+                    <td>27</td>
+                    <td>37.04%</td>
+                    <td>22</td>
+                    <td>7</td>
+                    <td>10</td>
+                    <td>17</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>76.1</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Louis</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>9</td>
+                    <td>14</td>
+                    <td>64.29%</td>
+                    <td>2</td>
+                    <td>7</td>
+                    <td>28.57%</td>
+                    <td>11</td>
+                    <td>21</td>
+                    <td>52.38%</td>
+                    <td>24</td>
+                    <td>2</td>
+                    <td>10</td>
+                    <td>12</td>
+                    <td>8</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>75.8</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Josh</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>15</td>
+                    <td>33.33%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>20.00%</td>
+                    <td>6</td>
+                    <td>20</td>
+                    <td>30.00%</td>
+                    <td>13</td>
+                    <td>8</td>
+                    <td>8</td>
+                    <td>16</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>74.5</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Adam</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>100.00%</td>
+                    <td>7</td>
+                    <td>18</td>
+                    <td>38.89%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>7</td>
+                    <td>20</td>
+                    <td>35.00%</td>
+                    <td>16</td>
+                    <td>4</td>
+                    <td>15</td>
+                    <td>19</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>69.5</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>D. Le</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>9</td>
+                    <td>18</td>
+                    <td>50.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>9</td>
+                    <td>20</td>
+                    <td>45.00%</td>
+                    <td>18</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>9</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>65.5</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Khang</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>9</td>
+                    <td>21</td>
+                    <td>42.86%</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>16.67%</td>
+                    <td>10</td>
+                    <td>27</td>
+                    <td>37.04%</td>
+                    <td>21</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>11</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>63.6</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Doug</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>11</td>
+                    <td>19</td>
+                    <td>57.89%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>11</td>
+                    <td>20</td>
+                    <td>55.00%</td>
+                    <td>22</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>63.5</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>D. Le</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>50.00%</td>
+                    <td>3</td>
+                    <td>9</td>
+                    <td>33.33%</td>
+                    <td>5</td>
+                    <td>13</td>
+                    <td>38.46%</td>
+                    <td>13</td>
+                    <td>3</td>
+                    <td>7</td>
+                    <td>10</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>60.4</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Hendo</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>7</td>
+                    <td>11</td>
+                    <td>63.64%</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>25.00%</td>
+                    <td>8</td>
+                    <td>15</td>
+                    <td>53.33%</td>
+                    <td>17</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>57.0</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Lester</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>7</td>
+                    <td>17</td>
+                    <td>41.18%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>7</td>
+                    <td>17</td>
+                    <td>41.18%</td>
+                    <td>14</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>9</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>54.6</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Terry</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>17</td>
+                    <td>29.41%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>18</td>
+                    <td>27.78%</td>
+                    <td>10</td>
+                    <td>5</td>
+                    <td>9</td>
+                    <td>14</td>
+                    <td>6</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>52.9</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Ben</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>7</td>
+                    <td>28.57%</td>
+                    <td>3</td>
+                    <td>9</td>
+                    <td>33.33%</td>
+                    <td>5</td>
+                    <td>16</td>
+                    <td>31.25%</td>
+                    <td>13</td>
+                    <td>1</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>52.8</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Derek</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>8</td>
+                    <td>62.50%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>10</td>
+                    <td>50.00%</td>
+                    <td>10</td>
+                    <td>2</td>
+                    <td>8</td>
+                    <td>10</td>
+                    <td>8</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>49.0</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Keangee</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>9</td>
+                    <td>33.33%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>10</td>
+                    <td>30.00%</td>
+                    <td>6</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>32.5</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Richard</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>50.00%</td>
+                    <td>2</td>
+                    <td>12</td>
+                    <td>16.67%</td>
+                    <td>4</td>
+                    <td>16</td>
+                    <td>25.00%</td>
+                    <td>10</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>7</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>31.3</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Brendan</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>50.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>50.00%</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>7</td>
+                    <td>9</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>30.7</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Dung</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>11</td>
+                    <td>18.18%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>12</td>
+                    <td>16.67%</td>
+                    <td>4</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td>12</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>30.1</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Alan</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>50.00%</td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>10</td>
+                    <td>20.00%</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>24.5</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+                <tr>
+                    <td>Roberto</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>17</td>
+                    <td>23.53%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>17</td>
+                    <td>23.53%</td>
+                    <td>8</td>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>8</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>24.1</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+            
+                <tr>
+                    <td>Gav</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>7</td>
+                    <td>14.29%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>7</td>
+                    <td>14.29%</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>21.1</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<div id="PlayerAverages" class="slowmonkeytabcontent">
+    <table class="stats-table sortable withrank">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Games</th>
+                <th>FTM</th>
+                <th>FTA</th>
+                <th>FT%</th>
+                <th>2PM</th>
+                <th>2PA</th>
+                <th>2P%</th>
+                <th>3PM</th>
+                <th>3PA</th>
+                <th>3P%</th>
+                <th>FGM</th>
+                <th>FGA</th>
+                <th>FG%</th>
+                <th>PTS</th>
+                <th>OREB</th>
+                <th>DREB</th>
+                <th>REB</th>
+                <th>AST</th>
+                <th>STL</th>
+                <th>BLK</th>
+                <th>TOV</th>
+                <th>Fan Pts</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr>
+                    <td>Anthony</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>3.67</td>
+                    <td>7.67</td>
+                    <td>47.83%</td>
+                    <td>0.67</td>
+                    <td>1.33</td>
+                    <td>50.00%</td>
+                    <td>4.33</td>
+                    <td>9.00</td>
+                    <td>48.15%</td>
+                    <td>9.33</td>
+                    <td>2.00</td>
+                    <td>1.67</td>
+                    <td>3.67</td>
+                    <td>2.67</td>
+                    <td>1.00</td>
+                    <td>0.00</td>
+                    <td>1.67</td>
+                    <td>31.53</td>
+                </tr>
+            
+                <tr>
+                    <td>Jimmy</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>3.67</td>
+                    <td>9.00</td>
+                    <td>40.74%</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>3.67</td>
+                    <td>9.00</td>
+                    <td>40.74%</td>
+                    <td>7.33</td>
+                    <td>1.67</td>
+                    <td>3.67</td>
+                    <td>5.33</td>
+                    <td>1.67</td>
+                    <td>1.33</td>
+                    <td>0.33</td>
+                    <td>1.00</td>
+                    <td>30.03</td>
+                </tr>
+            
+                <tr>
+                    <td>Huy</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>4.33</td>
+                    <td>6.33</td>
+                    <td>68.42%</td>
+                    <td>0.00</td>
+                    <td>1.67</td>
+                    <td>0.00%</td>
+                    <td>4.33</td>
+                    <td>8.00</td>
+                    <td>54.17%</td>
+                    <td>8.67</td>
+                    <td>0.67</td>
+                    <td>1.00</td>
+                    <td>1.67</td>
+                    <td>2.33</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>1.00</td>
+                    <td>26.73</td>
+                </tr>
+            
+                <tr>
+                    <td>Andy</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>2.67</td>
+                    <td>4.67</td>
+                    <td>57.14%</td>
+                    <td>0.67</td>
+                    <td>4.33</td>
+                    <td>15.38%</td>
+                    <td>3.33</td>
+                    <td>9.00</td>
+                    <td>37.04%</td>
+                    <td>7.33</td>
+                    <td>2.33</td>
+                    <td>3.33</td>
+                    <td>5.67</td>
+                    <td>1.67</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>1.00</td>
+                    <td>25.37</td>
+                </tr>
+            
+                <tr>
+                    <td>Louis</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>3.00</td>
+                    <td>4.67</td>
+                    <td>64.29%</td>
+                    <td>0.67</td>
+                    <td>2.33</td>
+                    <td>28.57%</td>
+                    <td>3.67</td>
+                    <td>7.00</td>
+                    <td>52.38%</td>
+                    <td>8.00</td>
+                    <td>0.67</td>
+                    <td>3.33</td>
+                    <td>4.00</td>
+                    <td>2.67</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>2.00</td>
+                    <td>25.27</td>
+                </tr>
+            
+                <tr>
+                    <td>Josh</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>1.67</td>
+                    <td>5.00</td>
+                    <td>33.33%</td>
+                    <td>0.33</td>
+                    <td>1.67</td>
+                    <td>20.00%</td>
+                    <td>2.00</td>
+                    <td>6.67</td>
+                    <td>30.00%</td>
+                    <td>4.33</td>
+                    <td>2.67</td>
+                    <td>2.67</td>
+                    <td>5.33</td>
+                    <td>1.33</td>
+                    <td>2.33</td>
+                    <td>0.33</td>
+                    <td>0.67</td>
+                    <td>24.83</td>
+                </tr>
+            
+                <tr>
+                    <td>Adam</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.67</td>
+                    <td>0.67</td>
+                    <td>100.00%</td>
+                    <td>2.33</td>
+                    <td>6.00</td>
+                    <td>38.89%</td>
+                    <td>0.00</td>
+                    <td>0.67</td>
+                    <td>0.00%</td>
+                    <td>2.33</td>
+                    <td>6.67</td>
+                    <td>35.00%</td>
+                    <td>5.33</td>
+                    <td>1.33</td>
+                    <td>5.00</td>
+                    <td>6.33</td>
+                    <td>1.67</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>1.33</td>
+                    <td>23.17</td>
+                </tr>
+            
+                <tr>
+                    <td>D. Le</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>3.00</td>
+                    <td>6.00</td>
+                    <td>50.00%</td>
+                    <td>0.00</td>
+                    <td>0.67</td>
+                    <td>0.00%</td>
+                    <td>3.00</td>
+                    <td>6.67</td>
+                    <td>45.00%</td>
+                    <td>6.00</td>
+                    <td>0.33</td>
+                    <td>2.00</td>
+                    <td>2.33</td>
+                    <td>3.00</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>1.33</td>
+                    <td>21.83</td>
+                </tr>
+            
+                <tr>
+                    <td>Khang</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>3.00</td>
+                    <td>7.00</td>
+                    <td>42.86%</td>
+                    <td>0.33</td>
+                    <td>2.00</td>
+                    <td>16.67%</td>
+                    <td>3.33</td>
+                    <td>9.00</td>
+                    <td>37.04%</td>
+                    <td>7.00</td>
+                    <td>1.67</td>
+                    <td>2.00</td>
+                    <td>3.67</td>
+                    <td>1.67</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>1.67</td>
+                    <td>21.20</td>
+                </tr>
+            
+                <tr>
+                    <td>Doug</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>3.67</td>
+                    <td>6.33</td>
+                    <td>57.89%</td>
+                    <td>0.00</td>
+                    <td>0.33</td>
+                    <td>0.00%</td>
+                    <td>3.67</td>
+                    <td>6.67</td>
+                    <td>55.00%</td>
+                    <td>7.33</td>
+                    <td>0.67</td>
+                    <td>0.67</td>
+                    <td>1.33</td>
+                    <td>0.33</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>0.33</td>
+                    <td>21.17</td>
+                </tr>
+            
+                <tr>
+                    <td>D. Le</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>0.67</td>
+                    <td>1.33</td>
+                    <td>50.00%</td>
+                    <td>1.00</td>
+                    <td>3.00</td>
+                    <td>33.33%</td>
+                    <td>1.67</td>
+                    <td>4.33</td>
+                    <td>38.46%</td>
+                    <td>4.33</td>
+                    <td>1.00</td>
+                    <td>2.33</td>
+                    <td>3.33</td>
+                    <td>1.67</td>
+                    <td>1.33</td>
+                    <td>0.00</td>
+                    <td>0.33</td>
+                    <td>20.13</td>
+                </tr>
+            
+                <tr>
+                    <td>Hendo</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>2.33</td>
+                    <td>3.67</td>
+                    <td>63.64%</td>
+                    <td>0.33</td>
+                    <td>1.33</td>
+                    <td>25.00%</td>
+                    <td>2.67</td>
+                    <td>5.00</td>
+                    <td>53.33%</td>
+                    <td>5.67</td>
+                    <td>0.33</td>
+                    <td>2.00</td>
+                    <td>2.33</td>
+                    <td>1.00</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>0.67</td>
+                    <td>19.00</td>
+                </tr>
+            
+                <tr>
+                    <td>Lester</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>2.33</td>
+                    <td>5.67</td>
+                    <td>41.18%</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>2.33</td>
+                    <td>5.67</td>
+                    <td>41.18%</td>
+                    <td>4.67</td>
+                    <td>1.00</td>
+                    <td>1.33</td>
+                    <td>2.33</td>
+                    <td>3.00</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>1.67</td>
+                    <td>18.20</td>
+                </tr>
+            
+                <tr>
+                    <td>Terry</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>1.67</td>
+                    <td>5.67</td>
+                    <td>29.41%</td>
+                    <td>0.00</td>
+                    <td>0.33</td>
+                    <td>0.00%</td>
+                    <td>1.67</td>
+                    <td>6.00</td>
+                    <td>27.78%</td>
+                    <td>3.33</td>
+                    <td>1.67</td>
+                    <td>3.00</td>
+                    <td>4.67</td>
+                    <td>2.00</td>
+                    <td>0.33</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>17.63</td>
+                </tr>
+            
+                <tr>
+                    <td>Ben</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>0.67</td>
+                    <td>2.33</td>
+                    <td>28.57%</td>
+                    <td>1.00</td>
+                    <td>3.00</td>
+                    <td>33.33%</td>
+                    <td>1.67</td>
+                    <td>5.33</td>
+                    <td>31.25%</td>
+                    <td>4.33</td>
+                    <td>0.33</td>
+                    <td>3.33</td>
+                    <td>3.67</td>
+                    <td>2.00</td>
+                    <td>1.00</td>
+                    <td>0.00</td>
+                    <td>1.33</td>
+                    <td>17.60</td>
+                </tr>
+            
+                <tr>
+                    <td>Derek</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>1.67</td>
+                    <td>2.67</td>
+                    <td>62.50%</td>
+                    <td>0.00</td>
+                    <td>0.67</td>
+                    <td>0.00%</td>
+                    <td>1.67</td>
+                    <td>3.33</td>
+                    <td>50.00%</td>
+                    <td>3.33</td>
+                    <td>0.67</td>
+                    <td>2.67</td>
+                    <td>3.33</td>
+                    <td>2.67</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.67</td>
+                    <td>16.33</td>
+                </tr>
+            
+                <tr>
+                    <td>Keangee</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>1.00</td>
+                    <td>3.00</td>
+                    <td>33.33%</td>
+                    <td>0.00</td>
+                    <td>0.33</td>
+                    <td>0.00%</td>
+                    <td>1.00</td>
+                    <td>3.33</td>
+                    <td>30.00%</td>
+                    <td>2.00</td>
+                    <td>1.33</td>
+                    <td>0.67</td>
+                    <td>2.00</td>
+                    <td>1.00</td>
+                    <td>1.00</td>
+                    <td>0.00</td>
+                    <td>0.33</td>
+                    <td>10.83</td>
+                </tr>
+            
+                <tr>
+                    <td>Richard</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>0.67</td>
+                    <td>1.33</td>
+                    <td>50.00%</td>
+                    <td>0.67</td>
+                    <td>4.00</td>
+                    <td>16.67%</td>
+                    <td>1.33</td>
+                    <td>5.33</td>
+                    <td>25.00%</td>
+                    <td>3.33</td>
+                    <td>1.33</td>
+                    <td>1.00</td>
+                    <td>2.33</td>
+                    <td>1.00</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>0.67</td>
+                    <td>10.43</td>
+                </tr>
+            
+                <tr>
+                    <td>Brendan</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>0.67</td>
+                    <td>1.33</td>
+                    <td>50.00%</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>0.67</td>
+                    <td>1.33</td>
+                    <td>50.00%</td>
+                    <td>1.33</td>
+                    <td>0.67</td>
+                    <td>2.33</td>
+                    <td>3.00</td>
+                    <td>1.67</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>1.33</td>
+                    <td>10.23</td>
+                </tr>
+            
+                <tr>
+                    <td>Dung</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>0.67</td>
+                    <td>3.67</td>
+                    <td>18.18%</td>
+                    <td>0.00</td>
+                    <td>0.33</td>
+                    <td>0.00%</td>
+                    <td>0.67</td>
+                    <td>4.00</td>
+                    <td>16.67%</td>
+                    <td>1.33</td>
+                    <td>2.00</td>
+                    <td>2.00</td>
+                    <td>4.00</td>
+                    <td>1.33</td>
+                    <td>0.00</td>
+                    <td>0.33</td>
+                    <td>0.33</td>
+                    <td>10.03</td>
+                </tr>
+            
+                <tr>
+                    <td>Alan</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>0.67</td>
+                    <td>1.33</td>
+                    <td>50.00%</td>
+                    <td>0.00</td>
+                    <td>2.00</td>
+                    <td>0.00%</td>
+                    <td>0.67</td>
+                    <td>3.33</td>
+                    <td>20.00%</td>
+                    <td>1.33</td>
+                    <td>1.00</td>
+                    <td>0.67</td>
+                    <td>1.67</td>
+                    <td>1.33</td>
+                    <td>1.00</td>
+                    <td>0.00</td>
+                    <td>0.33</td>
+                    <td>8.17</td>
+                </tr>
+            
+                <tr>
+                    <td>Roberto</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>1.33</td>
+                    <td>5.67</td>
+                    <td>23.53%</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>1.33</td>
+                    <td>5.67</td>
+                    <td>23.53%</td>
+                    <td>2.67</td>
+                    <td>0.67</td>
+                    <td>2.00</td>
+                    <td>2.67</td>
+                    <td>1.00</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>1.00</td>
+                    <td>8.03</td>
+                </tr>
+            
+                <tr>
+                    <td>Gav</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>0.33</td>
+                    <td>2.33</td>
+                    <td>14.29%</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>0.00%</td>
+                    <td>0.33</td>
+                    <td>2.33</td>
+                    <td>14.29%</td>
+                    <td>0.67</td>
+                    <td>0.33</td>
+                    <td>1.00</td>
+                    <td>1.33</td>
+                    <td>1.33</td>
+                    <td>0.67</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>7.03</td>
+                </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<div id="Games" class="slowmonkeytabcontent">
+    <table class="stats-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Opponent</th>
+                <th>Game</th>
+                <th>FTM</th>
+                <th>FTA</th>
+                <th>FT%</th>
+                <th>2PM</th>
+                <th>2PA</th>
+                <th>2P%</th>
+                <th>3PM</th>
+                <th>3PA</th>
+                <th>3P%</th>
+                <th>FGM</th>
+                <th>FGA</th>
+                <th>FG%</th>
+                <th>PTS</th>
+                <th>OREB</th>
+                <th>DREB</th>
+                <th>REB</th>
+                <th>AST</th>
+                <th>STL</th>
+                <th>BLK</th>
+                <th>TOV</th>
+                <th>Fan Pts</th>
+                <th>Win/Loss</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Adam</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>336</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>100.00%</td>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>8</td>
+                    <td>2</td>
+                    <td>7</td>
+                    <td>9</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>38.9</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Derek</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>6.6</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Dung</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>15.3</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Huy</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>6</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>13.8</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Keangee</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>11.1</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Louis</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>8</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>18.6</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Andy</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>14.4</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Brendan</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>6.6</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Doug</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>9</td>
+                    <td>0.00%</td>
+                    <td>6</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>22.2</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Lester</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>6</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>30.0</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Richard</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>15.4</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Terry</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>336</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>10.8</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Andy</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>9</td>
+                    <td>0.00%</td>
+                    <td>8</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>31.2</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Brendan</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>8</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>19.3</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Doug</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>23.8</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Lester</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>14.9</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Richard</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>11.3</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Terry</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>17.3</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Ben</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>8</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>31.8</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>D. Le</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>10</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>11</td>
+                    <td>0.00%</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>35.3</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Josh</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>23.7</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Khang</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>10</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>6</td>
+                    <td>11</td>
+                    <td>0.00%</td>
+                    <td>13</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>42.3</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Roberto</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>337</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.3</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Adam</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>9</td>
+                    <td>0.00%</td>
+                    <td>6</td>
+                    <td>0</td>
+                    <td>7</td>
+                    <td>7</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>24.7</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Derek</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>100.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>100.00%</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>25.6</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Dung</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>6.8</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Huy</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>9</td>
+                    <td>0.00%</td>
+                    <td>10</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>35.7</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Keangee</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>19.7</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Louis</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>7</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>27.1</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Ben</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>3.1</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>D. Le</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>21.5</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Josh</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>10</td>
+                    <td>0.00%</td>
+                    <td>8</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>6</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>28.0</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Khang</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>8.3</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Roberto</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>338</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>6</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>18.4</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Ben</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>17.9</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>D. Le</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>8.7</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Josh</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>22.8</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Khang</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>10</td>
+                    <td>0.00%</td>
+                    <td>6</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>13.0</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Roberto</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>5.4</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Alan</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>9.1</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Anthony</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>16.9</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>D. Le</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>13.7</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Gav</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.0</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Hendo</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>28.1</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Jimmy</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>341</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>8</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>33.6</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Adam</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>5.9</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Derek</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>16.8</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Dung</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>8.0</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Huy</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>8</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>9</td>
+                    <td>0.00%</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>30.7</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Keangee</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1.7</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Louis</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>100.00%</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>9</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>30.1</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Alan</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>8.7</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Anthony</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>6</td>
+                    <td>9</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>7</td>
+                    <td>10</td>
+                    <td>0.00%</td>
+                    <td>15</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>49.5</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>D. Le</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>28.4</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Gav</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>3.6</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Hendo</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>21.9</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Jimmy</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>342</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>15</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>5</td>
+                    <td>15</td>
+                    <td>0.00%</td>
+                    <td>10</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>39.0</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Andy</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>10</td>
+                    <td>0.00%</td>
+                    <td>9</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>7</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>30.5</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Brendan</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>4.8</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Doug</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>6</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>17.5</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Lester</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>9.7</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Richard</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>4.6</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Terry</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>24.8</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Alan</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>100.00%</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>6.7</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Anthony</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>7</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>9</td>
+                    <td>0.00%</td>
+                    <td>9</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>28.2</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>D. Le</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>6</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>18.3</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Gav</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>17.5</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Hendo</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>7.0</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2021-06-15</td>
+                    <td>Jimmy</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>343</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>17.5</td>
+                    <td>L</td>
+                </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        // Declare all variables
+        var i,
+            tabcontent,
+            tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("slowmonkeytabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i]
+                .className
+                .replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document
+            .getElementById(tabName)
+            .style
+            .display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+    </main>
+</body>
+
+</html>

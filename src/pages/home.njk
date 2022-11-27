@@ -2,166 +2,210 @@
 layout: base
 permalink: /
 ---
-<h1>Leader Board 2022</h1>
 
-<table class="stats-table">
-    <tbody>
-        <tr>
-            <td>
-                <h2>Total Points</h2>
-                <table class="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Points</th>
-                            <th>Player</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for totalPointsItem in stats.leaderBoardStats.totals.TotalPoints %}
-                            {% for playerDetails in totalPointsItem.players %}
-                                <tr>
-                                    <td>{{ totalPointsItem.statValue }}</td>
-                                    <td>{{ playerDetails.name }}</td>
-                                </tr>
-                            {% endfor %}
-                        {% endfor %}
+<h1>Leader Board</h1>
 
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>
-                <h2>Total Rebounds</h2>
-                <table class="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Rebounds</th>
-                            <th>Player</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for totalPointsItem in stats.leaderBoardStats.totals.TotalRebounds %}
-                            {% for playerDetails in totalPointsItem.players %}
-                                <tr>
-                                    <td>{{ totalPointsItem.statValue }}</td>
-                                    <td>{{ playerDetails.name }}</td>
-                                </tr>
-                            {% endfor %}
-                        {% endfor %}
+<div class="slowmonkeytab">
+    <button class="tablinks active" onclick="openTab(event, '2022')">2022</button>
+    <button class="tablinks" onclick="openTab(event, '2021')">2021</button>
+    <button class="tablinks" onclick="openTab(event, '2020')">2020</button>
+</div>
 
-                    </tbody>
-                </table>
-            </td>
-            <td>
-                <h2>Total Offensive Rebounds</h2>
-                <table class="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Offensive Rebounds</th>
-                            <th>Player</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for totalPointsItem in stats.leaderBoardStats.totals.OReb %}
-                            {% for playerDetails in totalPointsItem.players %}
+{% for year in[2022, 2021, 2020] %}
+    <div id="{{year}}" class="slowmonkeytabcontent" {% if year == 2022 %}style="display: block;"{% endif %}>
+        <table class="stats-table">
+            <tbody>
+                <tr>
+                    <td>
+                        <h2>Total Points</h2>
+                        <table class="stats-table">
+                            <thead>
                                 <tr>
-                                    <td>{{ totalPointsItem.statValue }}</td>
-                                    <td>{{ playerDetails.name }}</td>
+                                    <th>Points</th>
+                                    <th>Player</th>
                                 </tr>
-                            {% endfor %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </td>
-            <td>
-                <h2>Total Defensive Rebounds</h2>
-                <table class="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Defensive Rebounds</th>
-                            <th>Player</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for totalPointsItem in stats.leaderBoardStats.totals.DReb %}
-                            {% for playerDetails in totalPointsItem.players %}
+                            </thead>
+                            <tbody>
+                                {% for item in stats.leaderBoardStats[year].totals.TotalPoints %}
+                                    <tr>
+                                        <td>{{ item.TotalPoints }}</td>
+                                        <td>{{ item.Player }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <h2>FG%</h2>
+                        <table class="stats-table">
+                            <thead>
                                 <tr>
-                                    <td>{{ totalPointsItem.statValue }}</td>
-                                    <td>{{ playerDetails.name }}</td>
+                                    <th>FG%</th>
+                                    <th>Player</th>
                                 </tr>
-                            {% endfor %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>
-                <h2>Total Assists</h2>
-                <table class="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Assists</th>
-                            <th>Player</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for totalPointsItem in stats.leaderBoardStats.totals.Assists %}
-                            {% for playerDetails in totalPointsItem.players %}
+                            </thead>
+                            <tbody>
+                                {% for item in stats.leaderBoardStats[year].totals["FG%"] %}
+                                    <tr>
+                                        <td>{{ item["FG%"] | percentage }}</td>
+                                        <td>{{ item.Player }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        <h2>Total Rebounds</h2>
+                        <table class="stats-table">
+                            <thead>
                                 <tr>
-                                    <td>{{ totalPointsItem.statValue }}</td>
-                                    <td>{{ playerDetails.name }}</td>
+                                    <th>Rebounds</th>
+                                    <th>Player</th>
                                 </tr>
-                            {% endfor %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </td>
-            <td>
-                <h2>Total Steals</h2>
-                <table class="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Steals</th>
-                            <th>Player</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for totalPointsItem in stats.leaderBoardStats.totals.Steals %}
-                            {% for playerDetails in totalPointsItem.players %}
+                            </thead>
+                            <tbody>
+                                {% for item in stats.leaderBoardStats[year].totals.TotalRebounds %}
+                                    <tr>
+                                        <td>{{ item.TotalRebounds }}</td>
+                                        <td>{{ item.Player }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <h2>Total Offensive Rebounds</h2>
+                        <table class="stats-table">
+                            <thead>
                                 <tr>
-                                    <td>{{ totalPointsItem.statValue }}</td>
-                                    <td>{{ playerDetails.name }}</td>
+                                    <th>Offensive Rebounds</th>
+                                    <th>Player</th>
                                 </tr>
-                            {% endfor %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </td>
-            <td>
-                <h2>Total Blocks</h2>
-                <table class="stats-table">
-                    <thead>
-                        <tr>
-                            <th>Blocks</th>
-                            <th>Player</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for totalPointsItem in stats.leaderBoardStats.totals.Blocks %}
-                            {% for playerDetails in totalPointsItem.players %}
+                            </thead>
+                            <tbody>
+                                {% for item in stats.leaderBoardStats[year].totals.OReb %}
+                                    <tr>
+                                        <td>{{ item.OReb }}</td>
+                                        <td>{{ item.Player }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <h2>Total Defensive Rebounds</h2>
+                        <table class="stats-table">
+                            <thead>
                                 <tr>
-                                    <td>{{ totalPointsItem.statValue }}</td>
-                                    <td>{{ playerDetails.name }}</td>
+                                    <th>Defensive Rebounds</th>
+                                    <th>Player</th>
                                 </tr>
-                            {% endfor %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </tbody>
-</table>
+                            </thead>
+                            <tbody>
+                                {% for item in stats.leaderBoardStats[year].totals.DReb %}
+                                    <tr>
+                                        <td>{{ item.DReb }}</td>
+                                        <td>{{ item.Player }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        <h2>Total Assists</h2>
+                        <table class="stats-table">
+                            <thead>
+                                <tr>
+                                    <th>Assists</th>
+                                    <th>Player</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in stats.leaderBoardStats[year].totals.Assists %}
+                                    <tr>
+                                        <td>{{ item.Assists }}</td>
+                                        <td>{{ item.Player }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <h2>Total Steals</h2>
+                        <table class="stats-table">
+                            <thead>
+                                <tr>
+                                    <th>Steals</th>
+                                    <th>Player</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in stats.leaderBoardStats[year].totals.Steals %}
+                                    <tr>
+                                        <td>{{ item.Steals }}</td>
+                                        <td>{{ item.Player }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <h2>Total Blocks</h2>
+                        <table class="stats-table">
+                            <thead>
+                                <tr>
+                                    <th>Blocks</th>
+                                    <th>Player</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in stats.leaderBoardStats[year].totals.Blocks %}
+                                    <tr>
+                                        <td>{{ item.Blocks }}</td>
+                                        <td>{{ item.Player }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endfor %}
+
+<script>
+    function openTab(evt, tabName) {
+        // Declare all variables
+        var i,
+            tabcontent,
+            tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("slowmonkeytabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i]
+                .className
+                .replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document
+            .getElementById(tabName)
+            .style
+            .display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>

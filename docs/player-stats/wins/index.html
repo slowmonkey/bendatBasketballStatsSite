@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <head>
     <title>
         Bendat Basketball Stats
@@ -267,6 +268,10 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/andrew/">Andrew</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/andy/">Andy</option>
         
             
@@ -296,6 +301,10 @@
             
             
             <option  value="/bendatBasketballStatsSite/player-stats/biyanka/">Biyanka</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/brendan/">Brendan</option>
         
             
             
@@ -359,11 +368,23 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/dhanvee/">Dhanvee</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/dio/">Dio</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/doug/">Doug</option>
         
             
             
             <option  value="/bendatBasketballStatsSite/player-stats/dung/">Dung</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/eli/">Eli</option>
         
             
             
@@ -403,6 +424,10 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/henry/">Henry</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/huy/">Huy</option>
         
             
@@ -411,7 +436,19 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/jack/">Jack</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/jacky/">Jacky</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/jake/">Jake</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/james/">James</option>
         
             
             
@@ -439,6 +476,10 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/john/">John</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/josh/">Josh</option>
         
             
@@ -448,6 +489,18 @@
             
             
             <option  value="/bendatBasketballStatsSite/player-stats/jun-hao/">Jun Hao</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/junyi/">Junyi</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/justin/">Justin</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/keangee/">Keangee</option>
         
             
             
@@ -483,6 +536,10 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/manusha/">Manusha</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/marvin/">Marvin</option>
         
             
@@ -515,11 +572,19 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/paul/">Paul</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/raph/">Raph</option>
         
             
             
             <option  value="/bendatBasketballStatsSite/player-stats/rhys/">Rhys</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/richard/">Richard</option>
         
             
             
@@ -535,7 +600,15 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/sonny/">Sonny</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/stasi/">Stasi</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/tao/">Tao</option>
         
             
             
@@ -543,7 +616,15 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/thinh/">Thinh</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/thuan/">Thuan</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/tim/">Tim</option>
         
             
             
@@ -559,6 +640,10 @@
         
             
             
+            <option  value="/bendatBasketballStatsSite/player-stats/vik/">Vik</option>
+        
+            
+            
             <option  value="/bendatBasketballStatsSite/player-stats/will/">Will</option>
         
             
@@ -570,6 +655,14 @@
             
             
             <option  value="/bendatBasketballStatsSite/player-stats/xavi/">Xavi</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/xavier/">Xavier</option>
+        
+            
+            
+            <option  value="/bendatBasketballStatsSite/player-stats/yin/">Yin</option>
         
             
             
@@ -595,132 +688,1045 @@
     };
 </script>
 
+
+
+
+
+
+
 <div class="slowmonkeytab">
-    
-    
-    
-    <button class="tablinks active" onclick="">Player Stats</button>
-    
+    <button class="tablinks active" onclick="openTab(event, 'PlayerStats')">Player Stats</button>
+    <button class="tablinks" onclick="openTab(event, 'PlayerYearlyTotals')">Player Yearly Totals</button>
+    <button class="tablinks" onclick="openTab(event, 'PlayerYearlyAverages')">Player Yearly Averages Per Game</button>
 </div>
 
-<table class="stats-table sortable">
-    <tr>
-        <th>Date</th>
-        <th>Team</th>
-        <th>Opponent</th>
-        <th>Game</th>
-        <th>FTM</th>
-        <th>FTA</th>
-        <th>FT%</th>
-        <th>2PM</th>
-        <th>2PA</th>
-        <th>2P%</th>
-        <th>3PM</th>
-        <th>3PA</th>
-        <th>3P%</th>
-        <th>FGM</th>
-        <th>FGA</th>
-        <th>FG%</th>
-        <th>PTS</th>
-        <th>OREB</th>
-        <th>DREB</th>
-        <th>REB</th>
-        <th>AST</th>
-        <th>STL</th>
-        <th>BLK</th>
-        <th>TOV</th>
-        <th>Fan Pts</th>
-        <th>Win/Loss</th>
-    </tr>
-    
-        <tr>
-            <td>2022-05-10</td>
-            <td>4</td>
-            <td>3</td>
-            <td>5</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0.00%</td>
-            <td>1</td>
-            <td>4</td>
-            <td>25.00%</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0.00%</td>
-            <td>1</td>
-            <td>4</td>
-            <td>25.00%</td>
-            <td>2</td>
-            <td>0</td>
-            <td>2</td>
-            <td>2</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>2</td>
-            <td>2.2</td>
-            <td>L</td>
-        </tr>
-    
-        <tr>
-            <td>2022-05-10</td>
-            <td>4</td>
-            <td>2</td>
-            <td>4</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0.00%</td>
-            <td>0</td>
-            <td>5</td>
-            <td>0.00%</td>
-            <td>0</td>
-            <td>1</td>
-            <td>0.00%</td>
-            <td>0</td>
-            <td>6</td>
-            <td>0.00%</td>
-            <td>0</td>
-            <td>2</td>
-            <td>3</td>
-            <td>5</td>
-            <td>1</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>4.8</td>
-            <td>W</td>
-        </tr>
-    
-        <tr>
-            <td>2022-05-10</td>
-            <td>4</td>
-            <td>1</td>
-            <td>3</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0.00%</td>
-            <td>2</td>
-            <td>4</td>
-            <td>50.00%</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0.00%</td>
-            <td>2</td>
-            <td>4</td>
-            <td>50.00%</td>
-            <td>4</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>1</td>
-            <td>0</td>
-            <td>1</td>
-            <td>10.2</td>
-            <td>L</td>
-        </tr>
-    
-</table>
+<div id="PlayerStats" class="slowmonkeytabcontent" style="display: block;">
+    <table class="stats-table sortable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Team</th>
+                <th>Opponent</th>
+                <th>Game</th>
+                <th>FTM</th>
+                <th>FTA</th>
+                <th>FT%</th>
+                <th>2PM</th>
+                <th>2PA</th>
+                <th>2P%</th>
+                <th>3PM</th>
+                <th>3PA</th>
+                <th>3P%</th>
+                <th>FGM</th>
+                <th>FGA</th>
+                <th>FG%</th>
+                <th>PTS</th>
+                <th>OREB</th>
+                <th>DREB</th>
+                <th>REB</th>
+                <th>AST</th>
+                <th>STL</th>
+                <th>BLK</th>
+                <th>TOV</th>
+                <th>Fan Pts</th>
+                <th>Win/Loss</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr>
+                    <td>2022-05-10</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>25.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>25.00%</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>2.2</td>
+                    <td>L</td>
+                </tr>
+            
+                <tr>
+                    <td>2022-05-10</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>0.00%</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>4.8</td>
+                    <td>W</td>
+                </tr>
+            
+                <tr>
+                    <td>2022-05-10</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>50.00%</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00%</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>50.00%</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>10.2</td>
+                    <td>L</td>
+                </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<div id="PlayerYearlyTotals" class="slowmonkeytabcontent">
+    <table class="stats-table">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Year</th>
+                <th>Games</th>
+                <th>FTM</th>
+                <th>FTA</th>
+                <th>FT%</th>
+                <th>2PM</th>
+                <th>2PA</th>
+                <th>2P%</th>
+                <th>3PM</th>
+                <th>3PA</th>
+                <th>3P%</th>
+                <th>FGM</th>
+                <th>FGA</th>
+                <th>FG%</th>
+                <th>PTS</th>
+                <th>OREB</th>
+                <th>DREB</th>
+                <th>REB</th>
+                <th>AST</th>
+                <th>STL</th>
+                <th>BLK</th>
+                <th>TOV</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Fan Pts</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>Wins</td>
+                        <td>2022</td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0.00%</td>
+                        <td>3</td>
+                        <td>13</td>
+                        <td>23.08%</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0.00%</td>
+                        <td>3</td>
+                        <td>14</td>
+                        <td>21.43%</td>
+                        <td>6</td>
+                        <td>2</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>17.2</td>
+                    </tr>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </tbody>
+    </table>
+</div>
+
+<div id="PlayerYearlyAverages" class="slowmonkeytabcontent">
+    <table class="stats-table">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Year</th>
+                <th>Games</th>
+                <th>FTM</th>
+                <th>FTA</th>
+                <th>FT%</th>
+                <th>2PM</th>
+                <th>2PA</th>
+                <th>2P%</th>
+                <th>3PM</th>
+                <th>3PA</th>
+                <th>3P%</th>
+                <th>FGM</th>
+                <th>FGA</th>
+                <th>FG%</th>
+                <th>PTS</th>
+                <th>OREB</th>
+                <th>DREB</th>
+                <th>REB</th>
+                <th>AST</th>
+                <th>STL</th>
+                <th>BLK</th>
+                <th>TOV</th>
+                <th>Fan Pts</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>Wins</td>
+                        <td>2022</td>
+                        <td>3</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00%</td>
+                        <td>1.00</td>
+                        <td>4.33</td>
+                        <td>23.08%</td>
+                        <td>0.00</td>
+                        <td>0.33</td>
+                        <td>0.00%</td>
+                        <td>1.00</td>
+                        <td>4.67</td>
+                        <td>21.43%</td>
+                        <td>2.00</td>
+                        <td>0.67</td>
+                        <td>1.67</td>
+                        <td>2.33</td>
+                        <td>0.33</td>
+                        <td>0.33</td>
+                        <td>0.00</td>
+                        <td>1.00</td>
+                        <td>5.73</td>
+                    </tr>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </tbody>
+    </table>
+</div>
+<script>
+    function openTab(evt, tabName) {
+        // Declare all variables
+        var i,
+            tabcontent,
+            tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("slowmonkeytabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i]
+                .className
+                .replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document
+            .getElementById(tabName)
+            .style
+            .display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
 
     </main>
 </body>

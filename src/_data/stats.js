@@ -1,244 +1,261 @@
 const { Client } = require("pg");
 const { DateTime } = require("luxon");
 
-async function getAllStats() {
-    const client = new Client({
-        host: "host.docker.internal",
-        port: 5432,
-        user: "postgres",
-        password: "postgres",
-        database: "bballstats"
-    });
+async function getAllStats(client) {
 
     let allStats = [];
-    try {
-        client.connect();
-        const playerTotalsPerGameQuery = client.query("SELECT * FROM bballstats.\"allStats\" LIMIT 10");
 
-        const response = await playerTotalsPerGameQuery;
-        allStats = response.rows;
+    const totalStatsQueryResult = await client.query(`SELECT COUNT(*) AS "TotalCount" FROM bballstats."allStats"`);
 
-    } catch (e) {
-        console.error(e);
+    const totalStatsCount = totalStatsQueryResult.rows[0].TotalCount;
+
+    const limitResultBy = 100;
+    const numberOfBatches = Math.floor(totalStatsCount / limitResultBy) + 1;
+
+    const allStatsQueries = [];
+
+    for (let batch = 0; batch <= numberOfBatches; batch++) {
+        const offset = batch * limitResultBy;
+
+        allStatsQueries.push(client.query(`SELECT * FROM bballstats."allStats" ORDER BY "Date", "Player", "Game" DESC LIMIT ${limitResultBy} OFFSET ${offset}`));
     }
+
+    const allStatsQueryResults = await Promise.all(allStatsQueries);
+    allStatsQueryResults.forEach((batchOfStats) => {
+        batchOfStats.rows.forEach((item) => {
+            allStats.push(item);
+        });
+    });
 
     return allStats;
 }
 
-async function getAllTimeStats() {
-    const client = new Client({
-        host: "host.docker.internal",
-        port: 5432,
-        user: "postgres",
-        password: "postgres",
-        database: "bballstats"
+
+async function getAvailableYears(client) {
+    let availableYears = [];
+    const availableYearsQuery = client.query(`SELECT DISTINCT "Year" FROM bballstats."playerTotalsPerYear" ORDER BY "Year" DESC`);
+
+    const response = await availableYearsQuery;
+    response.rows.forEach((row) => {
+        availableYears.push(row.Year);
     });
 
-    let allTimeStats = [];
-    try {
-        client.connect();
-        const allTimeStatsQuery = client.query("SELECT * FROM bballstats.\"playerAllTimeTotals\" ORDER BY \"Player\"");
-
-        const response = await allTimeStatsQuery;
-        allTimeStats = response.rows;
-
-    } catch (e) {
-        console.error(e);
-    }
-
-    return allTimeStats;
+    return availableYears;
 }
 
-async function getYearlyStats() {
-    const client = new Client({
-        host: "host.docker.internal",
-        port: 5432,
-        user: "postgres",
-        password: "postgres",
-        database: "bballstats"
+
+async function getAvailableWeeks(client, availableYears) {
+    let availableWeeks = {
+        allWeeks: []
+    };
+
+    const availableWeeksQueries = [];
+    availableYears.forEach((year) => {
+        availableWeeksQueries.push(client.query(`SELECT DISTINCT "Date" FROM bballstats."allStats" WHERE "Year"=${year} ORDER BY "Date" DESC`));
+        availableWeeks[year] = [];
     });
 
-    let yearlyStats = [];
-    try {
-        client.connect();
-        const yearlyStatsQuery = client.query("SELECT * FROM bballstats.\"playerTotalsPerYear\" ORDER BY \"Player\"");
+    let availableWeeksQueryResults = await Promise.all(availableWeeksQueries);
+    availableWeeksQueryResults.forEach((weeksByYearResult) => {
+        const year = weeksByYearResult.rows[0].Date.getFullYear();
 
-        const response = await yearlyStatsQuery;
-        yearlyStats = response.rows;
+        const weeksByYear = weeksByYearResult.rows;
 
-    } catch (e) {
-        console.error(e);
-    }
-
-    return yearlyStats;
-}
-
-async function getAvailableWeeks() {
-    const client = new Client({
-        host: "host.docker.internal",
-        port: 5432,
-        user: "postgres",
-        password: "postgres",
-        database: "bballstats"
+        weeksByYear.forEach((week) => {
+            availableWeeks[year].push(DateTime.fromJSDate(week.Date).toFormat("yyyy-MM-dd"));
+            availableWeeks.allWeeks.push(DateTime.fromJSDate(week.Date).toFormat("yyyy-MM-dd"));
+        });
     });
-
-    let availableWeeks = [];
-    try {
-        client.connect();
-        const availableWeeksQuery = client.query("SELECT DISTINCT \"Date\" FROM bballstats.\"allStats\" ORDER BY \"Date\" DESC");
-
-        const response = await availableWeeksQuery;
-        response.rows.forEach((row) => {
-            let isoDateValue = DateTime.fromJSDate(row.Date).toFormat("yyyy-MM-dd")
-            availableWeeks.push(isoDateValue);
-        })
-    } catch (e) {
-        console.error(e);
-    }
 
     return availableWeeks;
 }
 
-async function getWeeklyStats() {
-    const client = new Client({
-        host: "host.docker.internal",
-        port: 5432,
-        user: "postgres",
-        password: "postgres",
-        database: "bballstats"
-    });
+async function getAvailablePlayers(client) {
+    const availablePlayers = []
+    const playerCountQuery = client.query(`SELECT COUNT(DISTINCT "Player") AS "NumberOfPlayers" FROM bballstats."allStats"`);
 
-    let weeklyStatsMap = new Map();
-    let weeklyStats = [];
-    try {
-        client.connect();
+    const playerCountQueryResponse = await playerCountQuery;
+    const totalNumberOfPlayers = playerCountQueryResponse.rows[0].NumberOfPlayers;
 
-        // Get all the weeks available.
+    const limitResultBy = 100;
+    const numberOfBatches = Math.floor(totalNumberOfPlayers / limitResultBy) + 1;
 
-        const availableWeeksQuery = client.query("SELECT DISTINCT \"Date\" FROM bballstats.\"allStats\" ORDER BY \"Date\" DESC");
+    const playersQueries = [];
 
-        const response = await availableWeeksQuery;
-        let availableWeeks = response.rows;
-
-        let weeklyPlayerTotalStatsQuery = [];
-        let weeklyAllGamesStatsQuery = [];
-        let weeklyTeamTotalStatsQuery = [];
-
-        // For each week get the totals for each player per week
-        // Get all the games for each week
-
-        availableWeeks.forEach(async (week) => {
-            let dateValue = DateTime.fromJSDate(week.Date).toFormat("yyyy-MM-dd");
-            weeklyPlayerTotalStatsQuery.push(client.query(`SELECT * FROM bballstats."playerTotalsPerWeek" WHERE "Date" = '${dateValue}' ORDER BY "Player"`));
-            weeklyAllGamesStatsQuery.push(client.query(`SELECT * FROM bballstats."allStats" WHERE "Date" = '${dateValue}' ORDER BY "Game", "Team", "Player"`));
-            weeklyTeamTotalStatsQuery.push(client.query(`SELECT * FROM bballstats."teamTotalsPerWeek" WHERE "Date" = '${dateValue}' ORDER BY "Team"`));
-        });
-
-        let weeklyPlayerTotalStatsQueryResult = await Promise.all(weeklyPlayerTotalStatsQuery);
-
-        weeklyPlayerTotalStatsQueryResult.forEach((result) => {
-            let dateKey = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
-
-            let weeklyStatData = weeklyStatsMap.get(dateKey);
-
-            if (!weeklyStatData) {
-                weeklyStatData = { date: dateKey };
-            }
-            weeklyStatData.playerTotals = result.rows;
-
-            weeklyStatData.playerAverages = [];
-
-            result.rows.forEach((playerTotal) => {
-                let games = playerTotal.Games;
-                let playerAverage = {
-                    Date: playerTotal.Date,
-                    Player: playerTotal.Player,
-                    Team: playerTotal.Team,
-                    Games: playerTotal.Games,
-                    FTM: playerTotal.FTM / games,
-                    FTA: playerTotal.FTA / games,
-                    'FT%': playerTotal['FT%'],
-                    '2PM': playerTotal['2PM'] / games,
-                    '2PA': playerTotal['2PA'] / games,
-                    '2PT%': playerTotal['2PT%'],
-                    '3PM': playerTotal['3PM'] / games,
-                    '3PA': playerTotal['3PA'] / games,
-                    '3PT%': playerTotal['3PT%'],
-                    OReb: playerTotal.OReb / games,
-                    DReb: playerTotal.DReb / games,
-                    Assists: playerTotal.Assists / games,
-                    Steals: playerTotal.Steals / games,
-                    Blocks: playerTotal.Blocks / games,
-                    TOV: playerTotal.TOV / games,
-                    TotalPoints: playerTotal.TotalPoints / games,
-                    FGM: playerTotal.FGM / games,
-                    FGA: playerTotal.FGA / games,
-                    'FG%': playerTotal['FG%'],
-                    TotalRebounds: playerTotal.TotalRebounds / games,
-                    FanPoints: playerTotal.FanPoints / games
-                }
-
-                weeklyStatData.playerAverages.push(playerAverage);
-            })
-
-            weeklyStatsMap.set(dateKey, weeklyStatData);
-        });
-
-        let weeklyAllGamesStatsQueryResult = await Promise.all(weeklyAllGamesStatsQuery);
-        weeklyAllGamesStatsQueryResult.forEach((result) => {
-            let dateKey = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
-
-            let weeklyStatData = weeklyStatsMap.get(dateKey);
-
-            if (!weeklyStatData) {
-                weeklyStatData = { date: dateKey };
-            }
-            weeklyStatData.games = result.rows;
-
-            weeklyStatsMap.set(dateKey, weeklyStatData);
-        });
-
-        let weeklyTeamTotalStatsQueryResult = await Promise.all(weeklyTeamTotalStatsQuery);
-        weeklyTeamTotalStatsQueryResult.forEach((result) => {
-            let dateKey = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
-
-            let weeklyStatData = weeklyStatsMap.get(dateKey);
-
-            if (!weeklyStatData) {
-                weeklyStatData = { date: dateKey };
-            }
-
-            weeklyStatData.teamSummary = calculateTeamSummary(result.rows);
-
-            weeklyStatsMap.set(dateKey, weeklyStatData);
-        })
-
-        weeklyStatsMap.forEach((value, key) => {
-            weeklyStats.push(value);
-        });
-
-    } catch (e) {
-        console.error(e);
+    for (let batch = 0; batch < numberOfBatches; batch++) {
+        const offset = batch * limitResultBy;
+        playersQueries.push(client.query(`SELECT DISTINCT "Player" FROM bballstats."allStats" ORDER BY "Player" LIMIT ${limitResultBy} OFFSET ${offset}`))
     }
 
-    return weeklyStats;
+    const playersQueryResults = await Promise.all(playersQueries);
+    playersQueryResults.forEach((batchOfPlayers) => {
+        batchOfPlayers.rows.forEach((item) => {
+            availablePlayers.push(item.Player);
+        });
+    });
+
+    return availablePlayers;
+}
+
+async function getYearlyStats(client, availableYears) {
+
+    const yearlyStats = [];
+
+    const yearlyQueries = []
+
+    const yearlyTotalsCountResult = await client.query(`SELECT COUNT(*) AS "TotalCount" FROM bballstats."playerTotalsPerYear"`);
+    const yearlyTotalsCount = yearlyTotalsCountResult.rows[0].TotalCount;
+
+    const limitResultBy = 100;
+    const numberOfBatches = Math.floor(yearlyTotalsCount / limitResultBy) + 1;
+
+    for (let batch = 0; batch < numberOfBatches; batch++) {
+        const offset = batch * limitResultBy;
+        yearlyQueries.push(client.query(`SELECT * FROM bballstats."playerTotalsPerYear" ORDER BY "Year" DESC, "FanPoints" DESC LIMIT ${limitResultBy} OFFSET ${offset}`))
+    }
+
+    const yearlyQueryResults = await Promise.all(yearlyQueries);
+
+    yearlyQueryResults.forEach((yearResult) => {
+        yearlyStats.push(...yearResult.rows);
+    });
+
+    return yearlyStats;
+}
+
+function calculateYearlyStatsAverage(yearlyStats) {
+    let yearlyStatsAverage = [];
+
+    yearlyStats.forEach((item) => {
+        const games = item.Games;
+        yearlyStatsAverage.push({
+            Player: item.Player,
+            Year: item.Year,
+            Games: item.Games,
+            FTM: item.FTM / games,
+            FTA: item.FTA / games,
+            'FT%': item['FT%'],
+            '2PM': item['2PM'] / games,
+            '2PA': item['2PA'] / games,
+            '2PT%': item['2PT%'],
+            '3PM': item['3PM'] / games,
+            '3PA': item['3PA'] / games,
+            '3PT%': item['3PT%'],
+            OReb: item.OReb / games,
+            DReb: item.DReb / games,
+            Assists: item.Assists / games,
+            Steals: item.Steals / games,
+            Blocks: item.Blocks / games,
+            TOV: item.TOV / games,
+            TotalPoints: item.TotalPoints / games,
+            FGM: item.FGM / games,
+            FGA: item.FGA / games,
+            'FG%': item['FG%'],
+            TotalRebounds: item.TotalRebounds / games,
+            FanPoints: item.FanPoints / games
+        })
+    });
+
+    return yearlyStatsAverage;
+}
+
+
+function extractWeeklyPlayerTotalStats(weeklyStats, weeklyPlayerTotalStatsQueryResult) {
+    weeklyPlayerTotalStatsQueryResult.forEach((result) => {
+        let week = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
+
+        const playerAverages = [];
+
+        weeklyStats[week] = {
+            playerTotals: result.rows,
+            playerAverages: playerAverages
+        };
+
+        weeklyStats[week].playerTotals.sort(function (a, b) {
+            return b.FanPoints - a.FanPoints;
+        });
+
+        result.rows.forEach((playerTotal) => {
+            let games = playerTotal.Games;
+            let playerAverage = {
+                Date: playerTotal.Date,
+                Player: playerTotal.Player,
+                Team: playerTotal.Team,
+                Games: playerTotal.Games,
+                FTM: playerTotal.FTM / games,
+                FTA: playerTotal.FTA / games,
+                'FT%': playerTotal['FT%'],
+                '2PM': playerTotal['2PM'] / games,
+                '2PA': playerTotal['2PA'] / games,
+                '2PT%': playerTotal['2PT%'],
+                '3PM': playerTotal['3PM'] / games,
+                '3PA': playerTotal['3PA'] / games,
+                '3PT%': playerTotal['3PT%'],
+                OReb: playerTotal.OReb / games,
+                DReb: playerTotal.DReb / games,
+                Assists: playerTotal.Assists / games,
+                Steals: playerTotal.Steals / games,
+                Blocks: playerTotal.Blocks / games,
+                TOV: playerTotal.TOV / games,
+                TotalPoints: playerTotal.TotalPoints / games,
+                FGM: playerTotal.FGM / games,
+                FGA: playerTotal.FGA / games,
+                'FG%': playerTotal['FG%'],
+                TotalRebounds: playerTotal.TotalRebounds / games,
+                FanPoints: playerTotal.FanPoints / games
+            }
+
+            playerAverages.push(playerAverage);
+        });
+    });
+}
+
+function extractWeeklyAllGamesStats(weeklyStats, weeklyAllGamesStatsQueryResult) {
+    weeklyAllGamesStatsQueryResult.forEach((result) => {
+        let week = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
+        let year = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy");;
+
+        weeklyStats[week].games = result.rows;
+    });
+}
+
+function extractWeeklyTeamTotalStats(weeklyStats, weeklyTeamTotalStatsQueryResult) {
+    weeklyTeamTotalStatsQueryResult.forEach((result) => {
+        let week = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
+
+        weeklyStats[week].teamSummary = calculateTeamSummary(result.rows);
+    });
 }
 
 function calculateTeamSummary(teamTotals) {
     let returnResult = {
         team1: {
+            altered: false,
             totals: {},
             averages: {}
         },
         team2: {
+            altered: false,
             totals: {},
             averages: {}
         },
         team3: {
+            altered: false,
             totals: {},
             averages: {}
         },
         team4: {
+            altered: false,
+            totals: {},
+            averages: {}
+        },
+        team5: {
+            altered: false,
+            totals: {},
+            averages: {}
+        },
+        team6: {
+            altered: false,
             totals: {},
             averages: {}
         }
@@ -246,6 +263,7 @@ function calculateTeamSummary(teamTotals) {
 
     teamTotals.forEach((teamTotal) => {
         returnResult[`team${teamTotal.Team}`].totals = teamTotal;
+        returnResult[`team${teamTotal.Team}`].altered = true;
 
         let games = 3;
 
@@ -283,172 +301,148 @@ function calculateTeamSummary(teamTotals) {
     return returnResult;
 }
 
-async function getPlayers() {
-    const client = new Client({
-        host: "host.docker.internal",
-        port: 5432,
-        user: "postgres",
-        password: "postgres",
-        database: "bballstats"
+
+async function getWeeklyStats(client, availableYears, availableWeeks) {
+
+    const weeklyStats = {};
+
+    const weeklyPlayerTotalStatsQuery = [];
+    const weeklyAllGamesStatsQuery = [];
+    const weeklyTeamTotalStatsQuery = [];
+
+    availableWeeks.allWeeks.forEach((week) => {
+        weeklyStats[week] = {
+            date: week
+        };
+        // For each week get the totals for each player per week
+        // Get all the games for each week
+        // Get the team total stats for each week.
+
+        weeklyPlayerTotalStatsQuery.push(client.query(`SELECT * FROM bballstats."playerTotalsPerWeek" WHERE "Date" = '${week}' ORDER BY "Player"`));
+        weeklyAllGamesStatsQuery.push(client.query(`SELECT * FROM bballstats."allStats" WHERE "Date" = '${week}' ORDER BY "Game", "Team", "Player"`));
+        weeklyTeamTotalStatsQuery.push(client.query(`SELECT * FROM bballstats."teamTotalsPerWeek" WHERE "Date" = '${week}' ORDER BY "Team"`));
     });
 
-    let players = [];
-    try {
-        client.connect();
-        const playersQuery = client.query("SELECT DISTINCT \"Player\" FROM bballstats.\"allStats\" ORDER BY \"Player\"");
+    let weeklyPlayerTotalStatsQueryResults = await Promise.all(weeklyPlayerTotalStatsQuery);
+    extractWeeklyPlayerTotalStats(weeklyStats, weeklyPlayerTotalStatsQueryResults);
 
-        const response = await playersQuery;
-        response.rows.forEach((item) => {
-            players.push(item.Player);
-        });
+    let weeklyAllGamesStatsQueryResult = await Promise.all(weeklyAllGamesStatsQuery);
+    extractWeeklyAllGamesStats(weeklyStats, weeklyAllGamesStatsQueryResult);
 
-    } catch (e) {
-        console.error(e);
-    }
+    let weeklyTeamTotalStatsQueryResult = await Promise.all(weeklyTeamTotalStatsQuery);
+    extractWeeklyTeamTotalStats(weeklyStats, weeklyTeamTotalStatsQueryResult);
 
-    return players;
+    return weeklyStats;
 }
 
-async function getPlayersStats() {
-    const client = new Client({
-        host: "host.docker.internal",
-        port: 5432,
-        user: "postgres",
-        password: "postgres",
-        database: "bballstats"
-    });
+// Example game:
+// {
+//     Date: 2020-02-17T00:00:00.000Z,
+//     Year: '2020',
+//     Player: 'Ben',
+//     Team: '2',
+//     Opponent: '1',
+//     Game: '60',
+//     FTM: '0',
+//     FTA: '0',
+//     'FT%': '0',
+//     '2PM': '0',
+//     '2PA': '1',
+//     '2PT%': '0',
+//     '3PM': '0',
+//     '3PA': '3',
+//     '3PT%': '0',
+//     OReb: '0',
+//     DReb: '0',
+//     Assists: '0',
+//     Steals: '0',
+//     Blocks: '0',
+//     TOV: '1',
+//     'Win/Loss': 'L',
+//     Win: 0,
+//     Loss: 1,
+//     Draw: 0,
+//     FGM: '0',
+//     FGA: '4',
+//     'FG%': '0',
+//     TotalPoints: '0',
+//     TotalRebounds: '0',
+//     FanPoints: '-6.3'
+// }
 
-    let players = [];
-    let playerNames = [];
-    let playerStatsQueryResult = [];
-    try {
-        client.connect();
-        const playersQuery = client.query("SELECT DISTINCT \"Player\" FROM bballstats.\"allStats\" ORDER BY \"Player\"");
+function getPlayersStats(availablePlayers, allStats) {
 
-        const response = await playersQuery;
-        response.rows.forEach((item) => {
-            playerNames.push(item.Player);
-        });
+    let players = {};
 
-        let playerStatsQuery = [];
-
-        playerNames.forEach(async (player) => {
-            playerStatsQuery.push(client.query(`SELECT * FROM bballstats."allStats" WHERE "Player" = '${player}' ORDER BY "Player"`));
-        });
-
-        playerStatsQueryResult = await Promise.all(playerStatsQuery);
-
-        playerStatsQueryResult.forEach((result) => {
-            let str = "";
-            result.rows.forEach((item) => {
-                str = `${str}\n${DateTime.fromJSDate(item.Date).toFormat("yyyy-MM-dd")},${item.TotalPoints}`;
-            });
-            players.push({ name: result.rows[0].Player, stats: result.rows, totalpointsChartData: str });
-        });
-    } catch (e) {
-        console.error(e);
-    }
-
-    return players;
-}
-
-function calculateYearlyStatsAverage(yearlyStats) {
-    let yearlyStatsAverage = [];
-
-    yearlyStats.forEach((item) => {
-        const games = item.Games;
-        yearlyStatsAverage.push({
-            Player: item.Player,
-            Games: item.Games,
-            FTM: item.FTM / games,
-            FTA: item.FTA / games,
-            'FT%': item['FT%'] / games,
-            '2PM': item['2PM'] / games,
-            '2PA': item['2PA'] / games,
-            '2PT%': item['2PT%'],
-            '3PM': item['3PM'] / games,
-            '3PA': item['3PA'] / games,
-            '3PT%': item['3PT%'],
-            OReb: item.OReb / games,
-            DReb: item.DReb / games,
-            Assists: item.Assists / games,
-            Steals: item.Steals / games,
-            Blocks: item.Blocks / games,
-            TOV: item.TOV / games,
-            TotalPoints: item.TotalPoints / games,
-            FGM: item.FGM / games,
-            FGA: item.FGA / games,
-            'FG%': item['FG%'],
-            TotalRebounds: item.TotalRebounds / games,
-            FanPoints: item.FanPoints / games
-        })
-    });
-
-    return yearlyStatsAverage;
-}
-
-function getTopStat(statType, allStats, topNumberOfStats) {
-    let collatedStat = new Map();
-
-    // Go through every yearly stat. So stats are in totals already
-
-    allStats.forEach((statItem) => {
-        // If the collatedStat already has that stat value.
-        if (collatedStat.has(statItem[statType])) {
-            // Get the stat value
-            let playerMap = collatedStat.get(statItem[statType]);
-
-            // Check if the stat value already has that player
-            if (playerMap.has(statItem.Player)) {
-                // If so get the player and increment that player's count
-                let playerCount = playerMap.get(statItem.Player);
-                playerCount++;
-
-                playerMap.set(statItem.Player, playerCount);
-            } else {
-                // Else add that player with an initial count of 1
-                playerMap.set(statItem.Player, 1);
+    allStats.forEach((game) => {
+        if (!players.hasOwnProperty(game.Player)) {
+            players[game.Player] = {
+                games: [],
+                totalpointsChartData: ""
             }
-        } else {
-            // If the stat is not in the collated value create a new stat value
-            let playerMap = new Map();
-            playerMap.set(statItem.Player, 1);
-            collatedStat.set(parseInt(statItem[statType]), playerMap);
         }
+
+        players[game.Player].games.push(game);
+
+        // TODO: Might have to fix this.
+
+        let str = players[game.Player].totalpointsChartData;
+        if (str.length > 0) {
+            str = `${str}\n`;
+        }
+        players[game.Player].totalpointsChartData = `${str}${DateTime.fromJSDate(game.Date).toFormat("yyyy-MM-dd")},${game.TotalPoints}`
     });
 
-    let keys = [...collatedStat.keys()];
-    keys.sort(function (a, b) { return b - a });
+    let returnPlayerResult = [];
 
-    let topStats = []
+    availablePlayers.forEach((player) => {
+        if (!players[player]) {
+            console.warn(`No player data for ${player}`);
+            return;
+        }
 
-    for (let index = 0; index < topNumberOfStats && index < keys.length; index++) {
-        let players = collatedStat.get(keys[index]);
-        let playerDetails = [];
+        const playerGames = players[player].games;
 
-        players.forEach(function(value, key) {
-            playerDetails.push({name: key, count: value});
-        })
+        playerGames.sort(function (a, b) {
+            return new Date(b.Date) - new Date(a.Date);
+        });
 
-        topStats.push({ statValue: keys[index], players: playerDetails });
-    }
+        returnPlayerResult.push({ name: player, stats: playerGames, totalpointsChartData: players[player].totalpointsChartData });
+    });
 
-    return topStats;
+    return returnPlayerResult;
 }
 
-function calculateLeaderBoardStats(allStats) {
-    let leaderBoardStats = {
-        totals: {
-            TotalPoints: getTopStat("TotalPoints", allStats, 10),
-            TotalRebounds: getTopStat("TotalRebounds", allStats, 10),
-            OReb: getTopStat("OReb", allStats, 10),
-            DReb: getTopStat("DReb", allStats, 10),
-            Assists: getTopStat("Assists", allStats, 10),
-            Blocks: getTopStat("Blocks", allStats, 10),
-            Steals: getTopStat("Steals", allStats, 10),
-            FanPoints: getTopStat("FanPoints", allStats, 10),
+function getTopStat(statType, yearlyStats, year, topNumberOfStats) {
+    const filteredSetOfStatsByYear = yearlyStats.filter((item) => item.Year == year);
+
+    filteredSetOfStatsByYear.sort(function (a, b) {
+        return b[statType] - a[statType];
+    });
+
+    return filteredSetOfStatsByYear.slice(0, topNumberOfStats);
+}
+
+function calculateLeaderBoardStats(availableYears, yearlyStats) {
+    let leaderBoardStats = {}
+
+    const topX = 10;
+
+    availableYears.forEach((year) => {
+        leaderBoardStats[year] = {
+            totals: {
+                TotalPoints: getTopStat("TotalPoints", yearlyStats, year, topX),
+                "FG%": getTopStat("FG%", yearlyStats, year, topX),
+                TotalRebounds: getTopStat("TotalRebounds", yearlyStats, year, topX),
+                OReb: getTopStat("OReb", yearlyStats, year, topX),
+                DReb: getTopStat("DReb", yearlyStats, year, topX),
+                Assists: getTopStat("Assists", yearlyStats, year, topX),
+                Blocks: getTopStat("Blocks", yearlyStats, year, topX),
+                Steals: getTopStat("Steals", yearlyStats, year, topX),
+                FanPoints: getTopStat("FanPoints", yearlyStats, year, topX),
+            }
         }
-    }
+    });
 
     // Calculate best averages - all, 10, 30, 50 game minimums
 
@@ -459,29 +453,41 @@ function calculateLeaderBoardStats(allStats) {
 }
 
 module.exports = async function () {
-    // let allTimeStats = await getAllTimeStats();
+    const client = new Client({
+        host: "host.docker.internal",
+        port: 5432,
+        user: "postgres",
+        password: "postgres",
+        database: "bballstats"
+    });
 
-    // let allStats = await getAllStats();
+    try {
+        client.connect();
+    } catch (e) {
+        console.error(e);
+        throw e;
+    }
 
-    let yearlyStats = await getYearlyStats();
 
-    let leaderBoardStats = calculateLeaderBoardStats(yearlyStats);
-
-    let availableWeeks = await getAvailableWeeks();
-    let weeklyStats = await getWeeklyStats();
-    let players = await getPlayers();
-    let playersStats = await getPlayersStats();
-
+    let allStats = await getAllStats(client);
+    let availableYears = await getAvailableYears(client);
+    let availableWeeks = await getAvailableWeeks(client, availableYears);
+    let availablePlayers = await getAvailablePlayers(client);
+    let yearlyStats = await getYearlyStats(client, availableYears);
     let yearlyStatsAverage = calculateYearlyStatsAverage(yearlyStats);
+    let weeklyStats = await getWeeklyStats(client, availableYears, availableWeeks);
+    let playersStats = getPlayersStats(availablePlayers, allStats);
+    let leaderBoardStats = calculateLeaderBoardStats(availableYears, yearlyStats);
 
     return {
-        // allTimeStats: allTimeStats,
-        yearlyStats: yearlyStats,
-        leaderBoardStats: leaderBoardStats,
-        yearlyStatsAverage: yearlyStatsAverage,
+        allStats: allStats,
+        availableYears: availableYears,
         availableWeeks: availableWeeks,
+        players: availablePlayers,
+        yearlyStats: yearlyStats,
+        yearlyStatsAverage: yearlyStatsAverage,
         weeklyStats: weeklyStats,
-        players: players,
-        playersStats: playersStats
+        playersStats: playersStats,
+        leaderBoardStats: leaderBoardStats,
     };
 }

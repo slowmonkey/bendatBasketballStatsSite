@@ -6,7 +6,7 @@ title: "Weekly Stats Home"
     <label for"week-dropdown" class="dropdown-label">Week:</label>
     <select name="week-dropdown" id="week-dropdown" class="dropdown">
         <option selected value="{{ '/weekly-stats-home/' | url }}">Unselected</option>
-    {% for availableWeek in stats.availableWeeks %}
+    {% for availableWeek in stats.availableWeeks.allWeeks %}
         {% set dateValue = ["/weekly-stats/", availableWeek, "/"] | join %}
         <option value="{{ dateValue | url }}">{{ availableWeek }}</option>
     {% endfor %}
