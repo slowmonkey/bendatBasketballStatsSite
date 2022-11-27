@@ -8,7 +8,7 @@ permalink: "player-charts/{{ player.name | slugify }}/"
 ---
 # Per Game Charts
 ## Total Points
-```line-chart
+```bar-chart
 ---
 width: 800
 height: 500
@@ -28,7 +28,7 @@ Date,Value
 {% endfor %}```
 
 ## Rebounds
-```line-chart
+```bar-chart
 ---
 width: 800
 height: 500
@@ -38,7 +38,7 @@ Date,Value
 {% endfor %}```
 
 ## Assists
-```line-chart
+```bar-chart
 ---
 width: 800
 height: 500
@@ -48,7 +48,7 @@ Date,Value
 {% endfor %}```
 
 ## Steals
-```line-chart
+```bar-chart
 ---
 width: 800
 height: 500
@@ -58,7 +58,7 @@ Date,Value
 {% endfor %}```
 
 ## Blocks
-```line-chart
+```bar-chart
 ---
 width: 800
 height: 500
@@ -68,7 +68,7 @@ Date,Value
 {% endfor %}```
 
 ## Turnovers
-```line-chart
+```bar-chart
 ---
 width: 800
 height: 500

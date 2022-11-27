@@ -97,8 +97,7 @@ async function getAvailablePlayers(client) {
     return availablePlayers;
 }
 
-async function getYearlyStats(client, availableYears) {
-
+async function getYearlyStats(client) {
     const yearlyStats = [];
 
     const yearlyQueries = []
@@ -159,7 +158,65 @@ function calculateYearlyStatsAverage(yearlyStats) {
     return yearlyStatsAverage;
 }
 
+async function getCareerStats(client) {
+    const careerStats = [];
 
+    const careerQueries = []
+
+    const careerTotalsCountResult = await client.query(`SELECT COUNT(*) AS "TotalCount" FROM bballstats."playerTotalsPerYear"`);
+    const careerTotalsCount = careerTotalsCountResult.rows[0].TotalCount;
+
+    const limitResultBy = 100;
+    const numberOfBatches = Math.floor(careerTotalsCount / limitResultBy) + 1;
+
+    for (let batch = 0; batch < numberOfBatches; batch++) {
+        const offset = batch * limitResultBy;
+        careerQueries.push(client.query(`SELECT * FROM bballstats."playerTotalsCareer" ORDER BY "Player" LIMIT ${limitResultBy} OFFSET ${offset}`))
+    }
+
+    const careerQueryResults = await Promise.all(careerQueries);
+
+    careerQueryResults.forEach((careerResults) => {
+        careerStats.push(...careerResults.rows);
+    });
+
+    return careerStats;
+}
+
+function calculateCareerStatsAverage(careerStats) {
+    let careerStatsAverage = [];
+
+    careerStats.forEach((item) => {
+        const games = item.Games;
+        careerStatsAverage.push({
+            Player: item.Player,
+            Games: item.Games,
+            FTM: item.FTM / games,
+            FTA: item.FTA / games,
+            'FT%': item['FT%'],
+            '2PM': item['2PM'] / games,
+            '2PA': item['2PA'] / games,
+            '2PT%': item['2PT%'],
+            '3PM': item['3PM'] / games,
+            '3PA': item['3PA'] / games,
+            '3PT%': item['3PT%'],
+            OReb: item.OReb / games,
+            DReb: item.DReb / games,
+            Assists: item.Assists / games,
+            Steals: item.Steals / games,
+            Blocks: item.Blocks / games,
+            TOV: item.TOV / games,
+            TotalPoints: item.TotalPoints / games,
+            FGM: item.FGM / games,
+            FGA: item.FGA / games,
+            'FG%': item['FG%'],
+            TotalRebounds: item.TotalRebounds / games,
+            FanPoints: item.FanPoints / games
+        })
+    });
+
+    return careerStatsAverage;
+}
 function extractWeeklyPlayerTotalStats(weeklyStats, weeklyPlayerTotalStatsQueryResult) {
     weeklyPlayerTotalStatsQueryResult.forEach((result) => {
         let week = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
@@ -473,8 +530,10 @@ module.exports = async function () {
     let availableYears = await getAvailableYears(client);
     let availableWeeks = await getAvailableWeeks(client, availableYears);
     let availablePlayers = await getAvailablePlayers(client);
-    let yearlyStats = await getYearlyStats(client, availableYears);
+    let yearlyStats = await getYearlyStats(client);
     let yearlyStatsAverage = calculateYearlyStatsAverage(yearlyStats);
+    let careerStats = await getCareerStats(client);
+    let careerStatsAverage = calculateCareerStatsAverage(careerStats);
     let weeklyStats = await getWeeklyStats(client, availableYears, availableWeeks);
     let playersStats = getPlayersStats(availablePlayers, allStats);
     let leaderBoardStats = calculateLeaderBoardStats(availableYears, yearlyStats);
@@ -486,6 +545,8 @@ module.exports = async function () {
         players: availablePlayers,
         yearlyStats: yearlyStats,
         yearlyStatsAverage: yearlyStatsAverage,
+        careerStats: careerStats,
+        careerStatsAverage: careerStatsAverage,
         weeklyStats: weeklyStats,
         playersStats: playersStats,
         leaderBoardStats: leaderBoardStats,

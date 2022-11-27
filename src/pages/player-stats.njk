@@ -116,7 +116,6 @@ permalink: "player-stats/{{ player.name | slugify }}/"
     <table class="stats-table">
         <thead>
             <tr>
-                <th>Player</th>
                 <th>Year</th>
                 <th>Games</th>
                 <th>FTM</th>
@@ -148,7 +147,6 @@ permalink: "player-stats/{{ player.name | slugify }}/"
             {% for item in stats.yearlyStats %}
                 {% if item.Player == player.name %}
                     <tr>
-                        <td>{{ item.Player }}</td>
                         <td>{{ item.Year }}</td>
                         <td>{{ item.Games }}</td>
                         <td>{{ item.FTM }}</td>
@@ -178,6 +176,39 @@ permalink: "player-stats/{{ player.name | slugify }}/"
                 {% endif %}
             {% endfor %}
         </tbody>
+        <tfoot>
+            {% for item in stats.careerStats %}
+                {% if item.Player == player.name %}
+                    <tr>
+                        <td><b>Career</b></td>
+                        <td>{{ item.Games }}</td>
+                        <td>{{ item.FTM }}</td>
+                        <td>{{ item.FTA }}</td>
+                        <td>{{ item["FT%"] | percentage }}</td>
+                        <td>{{ item.2PM }}</td>
+                        <td>{{ item.2PA }}</td>
+                        <td>{{ item["2PT%"] | percentage }}</td>
+                        <td>{{ item.3PM }}</td>
+                        <td>{{ item.3PA }}</td>
+                        <td>{{ item["3PT%"] | percentage }}</td>
+                        <td>{{ item.FGM }}</td>
+                        <td>{{ item.FGA }}</td>
+                        <td>{{ item["FG%"] | percentage }}</td>
+                        <td>{{ item.TotalPoints }}</td>
+                        <td>{{ item.OReb }}</td>
+                        <td>{{ item.DReb }}</td>
+                        <td>{{ item.TotalRebounds }}</td>
+                        <td>{{ item.Assists }}</td>
+                        <td>{{ item.Steals }}</td>
+                        <td>{{ item.Blocks }}</td>
+                        <td>{{ item.TOV }}</td>
+                        <td>{{ item.Wins }}</td>
+                        <td>{{ item.Losses }}</td>
+                        <td>{{ item.FanPoints }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tfoot>
     </table>
 </div>
 
@@ -185,7 +216,6 @@ permalink: "player-stats/{{ player.name | slugify }}/"
     <table class="stats-table">
         <thead>
             <tr>
-                <th>Player</th>
                 <th>Year</th>
                 <th>Games</th>
                 <th>FTM</th>
@@ -215,7 +245,6 @@ permalink: "player-stats/{{ player.name | slugify }}/"
             {% for item in stats.yearlyStatsAverage %}
                 {% if item.Player == player.name %}
                     <tr>
-                        <td>{{ item.Player }}</td>
                         <td>{{ item.Year }}</td>
                         <td>{{ item.Games }}</td>
                         <td>{{ item.FTM | twoDecimalPoints }}</td>
@@ -243,6 +272,37 @@ permalink: "player-stats/{{ player.name | slugify }}/"
                 {% endif %}
             {% endfor %}
         </tbody>
+        <tfoot>
+            {% for item in stats.careerStatsAverage %}
+                {% if item.Player == player.name %}
+                    <tr>
+                        <td><b>Career</b></td>
+                        <td>{{ item.Games }}</td>
+                        <td>{{ item.FTM | twoDecimalPoints }}</td>
+                        <td>{{ item.FTA | twoDecimalPoints }}</td>
+                        <td>{{ item["FT%"] | percentage }}</td>
+                        <td>{{ item.2PM | twoDecimalPoints }}</td>
+                        <td>{{ item.2PA | twoDecimalPoints }}</td>
+                        <td>{{ item["2PT%"] | percentage}}</td>
+                        <td>{{ item.3PM | twoDecimalPoints }}</td>
+                        <td>{{ item.3PA | twoDecimalPoints }}</td>
+                        <td>{{ item["3PT%"] | percentage }}</td>
+                        <td>{{ item.FGM | twoDecimalPoints }}</td>
+                        <td>{{ item.FGA | twoDecimalPoints }}</td>
+                        <td>{{ item["FG%"] | percentage }}</td>
+                        <td>{{ item.TotalPoints | twoDecimalPoints }}</td>
+                        <td>{{ item.OReb | twoDecimalPoints }}</td>
+                        <td>{{ item.DReb | twoDecimalPoints }}</td>
+                        <td>{{ item.TotalRebounds | twoDecimalPoints }}</td>
+                        <td>{{ item.Assists | twoDecimalPoints }}</td>
+                        <td>{{ item.Steals | twoDecimalPoints }}</td>
+                        <td>{{ item.Blocks | twoDecimalPoints }}</td>
+                        <td>{{ item.TOV | twoDecimalPoints }}</td>
+                        <td>{{ item.FanPoints | twoDecimalPoints }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tfoot>
     </table>
 </div>
 <script>
