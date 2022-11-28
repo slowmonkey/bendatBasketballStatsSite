@@ -270,7 +270,6 @@ function extractWeeklyPlayerTotalStats(weeklyStats, weeklyPlayerTotalStatsQueryR
 function extractWeeklyAllGamesStats(weeklyStats, weeklyAllGamesStatsQueryResult) {
     weeklyAllGamesStatsQueryResult.forEach((result) => {
         let week = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
-        let year = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy");;
 
         weeklyStats[week].games = result.rows;
     });
@@ -392,6 +391,16 @@ async function getWeeklyStats(client, availableWeeks) {
     return weeklyStats;
 }
 
+function calculateWeeklyTotals(availableWeeks, weeklyStats) {
+    const weeklyTotals = [];
+
+    availableWeeks.allWeeks.forEach((week) => {
+        weeklyTotals.push(...weeklyStats[week].playerTotals);
+    })
+
+    return weeklyTotals;
+}
+
 // Example game:
 // {
 //     Date: 2020-02-17T00:00:00.000Z,
@@ -493,7 +502,7 @@ function getBestGameStat(statType, data, topNumberOfStats) {
 }
 
 
-function calculateLeaderBoardStats(availableYears, yearlyStats, allStats) {
+function calculateLeaderBoardStats(availableYears, yearlyStats, allStats, careerStatsAverage, weeklyTotals) {
     let leaderBoardStats = {}
 
     let topX = 10;
@@ -530,11 +539,36 @@ function calculateLeaderBoardStats(availableYears, yearlyStats, allStats) {
         FanPoints: getBestGameStat("FanPoints", allStats, topX),
     }
 
-    // Calculate best averages - all, 10, 30, 50 game minimums
+    topX = 10;
 
-    // Calculate best week totals
+    leaderBoardStats.bestGameAverages = {
+        TotalPoints: getBestGameStat("TotalPoints", careerStatsAverage, topX),
+        "FG%": getBestGameStat("FG%", careerStatsAverage, topX),
+        "2PM": getBestGameStat("2PM", careerStatsAverage, topX),
+        "3PM": getBestGameStat("3PM", careerStatsAverage, topX),
+        TotalRebounds: getBestGameStat("TotalRebounds", careerStatsAverage, topX),
+        OReb: getBestGameStat("OReb", careerStatsAverage, topX),
+        DReb: getBestGameStat("DReb", careerStatsAverage, topX),
+        Assists: getBestGameStat("Assists", careerStatsAverage, topX),
+        Blocks: getBestGameStat("Blocks", careerStatsAverage, topX),
+        Steals: getBestGameStat("Steals", careerStatsAverage, topX),
+        FanPoints: getBestGameStat("FanPoints", careerStatsAverage, topX),
+    }
 
-    // Calculate best games totals
+    leaderBoardStats.bestWeek = {
+        TotalPoints: getBestGameStat("TotalPoints", weeklyTotals, topX),
+        "FG%": getBestGameStat("FG%", weeklyTotals, topX),
+        "2PM": getBestGameStat("2PM", weeklyTotals, topX),
+        "3PM": getBestGameStat("3PM", weeklyTotals, topX),
+        TotalRebounds: getBestGameStat("TotalRebounds", weeklyTotals, topX),
+        OReb: getBestGameStat("OReb", weeklyTotals, topX),
+        DReb: getBestGameStat("DReb", weeklyTotals, topX),
+        Assists: getBestGameStat("Assists", weeklyTotals, topX),
+        Blocks: getBestGameStat("Blocks", weeklyTotals, topX),
+        Steals: getBestGameStat("Steals", weeklyTotals, topX),
+        FanPoints: getBestGameStat("FanPoints", weeklyTotals, topX),
+    }
+
     return leaderBoardStats;
 }
 
@@ -564,8 +598,9 @@ module.exports = async function () {
     let careerStats = await getCareerStats(client);
     let careerStatsAverage = calculateCareerStatsAverage(careerStats);
     let weeklyStats = await getWeeklyStats(client, availableWeeks);
+    let weeklyTotals = calculateWeeklyTotals(availableWeeks, weeklyStats);
     let playersStats = getPlayersStats(availablePlayers, allStats);
-    let leaderBoardStats = calculateLeaderBoardStats(availableYears, yearlyStats, allStats,);
+    let leaderBoardStats = calculateLeaderBoardStats(availableYears, yearlyStats, allStats, careerStatsAverage, weeklyTotals);
 
     return {
         allStats: allStats,
