@@ -359,7 +359,7 @@ function calculateTeamSummary(teamTotals) {
 }
 
 
-async function getWeeklyStats(client, availableYears, availableWeeks) {
+async function getWeeklyStats(client, availableWeeks) {
 
     const weeklyStats = {};
 
@@ -470,7 +470,7 @@ function getPlayersStats(availablePlayers, allStats) {
     return returnPlayerResult;
 }
 
-function getTopStat(statType, yearlyStats, year, topNumberOfStats) {
+function getTopYearlyStat(statType, yearlyStats, year, topNumberOfStats) {
     const filteredSetOfStatsByYear = yearlyStats.filter((item) => item.Year == year);
 
     filteredSetOfStatsByYear.sort(function (a, b) {
@@ -480,26 +480,55 @@ function getTopStat(statType, yearlyStats, year, topNumberOfStats) {
     return filteredSetOfStatsByYear.slice(0, topNumberOfStats);
 }
 
-function calculateLeaderBoardStats(availableYears, yearlyStats) {
+function getBestGameStat(statType, data, topNumberOfStats) {
+    data.sort(function (a, b) {
+        return b[statType] - a[statType];
+    });
+
+    // let bestGames = data.groupBy((item) => item[statType]);
+
+    // console.log({ bestGames: bestGames });
+
+    return data.slice(0, topNumberOfStats);
+}
+
+
+function calculateLeaderBoardStats(availableYears, yearlyStats, allStats) {
     let leaderBoardStats = {}
 
-    const topX = 10;
+    let topX = 10;
 
     availableYears.forEach((year) => {
         leaderBoardStats[year] = {
             totals: {
-                TotalPoints: getTopStat("TotalPoints", yearlyStats, year, topX),
-                "FG%": getTopStat("FG%", yearlyStats, year, topX),
-                TotalRebounds: getTopStat("TotalRebounds", yearlyStats, year, topX),
-                OReb: getTopStat("OReb", yearlyStats, year, topX),
-                DReb: getTopStat("DReb", yearlyStats, year, topX),
-                Assists: getTopStat("Assists", yearlyStats, year, topX),
-                Blocks: getTopStat("Blocks", yearlyStats, year, topX),
-                Steals: getTopStat("Steals", yearlyStats, year, topX),
-                FanPoints: getTopStat("FanPoints", yearlyStats, year, topX),
+                TotalPoints: getTopYearlyStat("TotalPoints", yearlyStats, year, topX),
+                "FG%": getTopYearlyStat("FG%", yearlyStats, year, topX),
+                TotalRebounds: getTopYearlyStat("TotalRebounds", yearlyStats, year, topX),
+                OReb: getTopYearlyStat("OReb", yearlyStats, year, topX),
+                DReb: getTopYearlyStat("DReb", yearlyStats, year, topX),
+                Assists: getTopYearlyStat("Assists", yearlyStats, year, topX),
+                Blocks: getTopYearlyStat("Blocks", yearlyStats, year, topX),
+                Steals: getTopYearlyStat("Steals", yearlyStats, year, topX),
+                FanPoints: getTopYearlyStat("FanPoints", yearlyStats, year, topX),
             }
         }
     });
+
+    topX = 20;
+
+    leaderBoardStats.bestGames = {
+        TotalPoints: getBestGameStat("TotalPoints", allStats, topX),
+        "FG%": getBestGameStat("FG%", allStats, topX),
+        "2PM": getBestGameStat("2PM", allStats, topX),
+        "3PM": getBestGameStat("3PM", allStats, topX),
+        TotalRebounds: getBestGameStat("TotalRebounds", allStats, topX),
+        OReb: getBestGameStat("OReb", allStats, topX),
+        DReb: getBestGameStat("DReb", allStats, topX),
+        Assists: getBestGameStat("Assists", allStats, topX),
+        Blocks: getBestGameStat("Blocks", allStats, topX),
+        Steals: getBestGameStat("Steals", allStats, topX),
+        FanPoints: getBestGameStat("FanPoints", allStats, topX),
+    }
 
     // Calculate best averages - all, 10, 30, 50 game minimums
 
@@ -534,9 +563,9 @@ module.exports = async function () {
     let yearlyStatsAverage = calculateYearlyStatsAverage(yearlyStats);
     let careerStats = await getCareerStats(client);
     let careerStatsAverage = calculateCareerStatsAverage(careerStats);
-    let weeklyStats = await getWeeklyStats(client, availableYears, availableWeeks);
+    let weeklyStats = await getWeeklyStats(client, availableWeeks);
     let playersStats = getPlayersStats(availablePlayers, allStats);
-    let leaderBoardStats = calculateLeaderBoardStats(availableYears, yearlyStats);
+    let leaderBoardStats = calculateLeaderBoardStats(availableYears, yearlyStats, allStats,);
 
     return {
         allStats: allStats,
