@@ -24,6 +24,9 @@ permalink: /
                         <thead>
                             <tr>
                                 <th>Points</th>
+                                <th>FGM</th>
+                                <th>FGA</th>
+                                <th>FG%</th>
                                 <th>Player</th>
                             </tr>
                         </thead>
@@ -31,6 +34,9 @@ permalink: /
                             {% for item in stats.leaderBoardStats.bestGames.TotalPoints %}
                                 <tr>
                                     <td>{{ item.TotalPoints }}</td>
+                                    <td>{{ item.FGM }}</td>
+                                    <td>{{ item.FGA }}</td>
+                                    <td>{{ item["FG%"] | percentage}}</td>
                                     <td>{{ item.Player }}</td>
                                 </tr>
                             {% endfor %}
@@ -43,6 +49,8 @@ permalink: /
                         <thead>
                             <tr>
                                 <th>2PM</th>
+                                <th>2PA</th>
+                                <th>2PT%</th>
                                 <th>Player</th>
                             </tr>
                         </thead>
@@ -52,6 +60,8 @@ permalink: /
                                 .bestGames["2PM"] %}
                                 <tr>
                                     <td>{{ item["2PM"] }}</td>
+                                    <td>{{ item["2PA"] }}</td>
+                                    <td>{{ item["2PT%"] | percentage }}</td>
                                     <td>{{ item.Player }}</td>
                                 </tr>
                             {% endfor %}
@@ -64,6 +74,8 @@ permalink: /
                         <thead>
                             <tr>
                                 <th>3PM</th>
+                                <th>3PA</th>
+                                <th>3PT%</th>
                                 <th>Player</th>
                             </tr>
                         </thead>
@@ -73,6 +85,8 @@ permalink: /
                                 .bestGames["3PM"] %}
                                 <tr>
                                     <td>{{ item["3PM"] }}</td>
+                                    <td>{{ item["3PA"] }}</td>
+                                    <td>{{ item["3PT%"] | percentage }}</td>
                                     <td>{{ item.Player }}</td>
                                 </tr>
                             {% endfor %}
@@ -236,6 +250,9 @@ permalink: /
                         <thead>
                             <tr>
                                 <th>Points</th>
+                                <th>FGM</th>
+                                <th>FGA</th>
+                                <th>FG%</th>
                                 <th>Player</th>
                             </tr>
                         </thead>
@@ -243,6 +260,9 @@ permalink: /
                             {% for item in stats.leaderBoardStats.bestGameAverages.TotalPoints %}
                                 <tr>
                                     <td>{{ item.TotalPoints | twoDecimalPoints }}</td>
+                                    <td>{{ item.FGM | twoDecimalPoints }}</td>
+                                    <td>{{ item.FGA | twoDecimalPoints }}</td>
+                                    <td>{{item["FG%"] | percentage}}</td>
                                     <td>{{ item.Player }}</td>
                                 </tr>
                             {% endfor %}
@@ -255,6 +275,8 @@ permalink: /
                         <thead>
                             <tr>
                                 <th>2PM</th>
+                                <th>2PA</th>
+                                <th>2PT%</th>
                                 <th>Player</th>
                             </tr>
                         </thead>
@@ -264,6 +286,8 @@ permalink: /
                                 .bestGameAverages["2PM"] %}
                                 <tr>
                                     <td>{{ item["2PM"] | twoDecimalPoints }}</td>
+                                    <td>{{ item["2PA"] | twoDecimalPoints }}</td>
+                                    <td>{{ item["2PT%"] | percentage }}</td>
                                     <td>{{ item.Player }}</td>
                                 </tr>
                             {% endfor %}
@@ -276,6 +300,8 @@ permalink: /
                         <thead>
                             <tr>
                                 <th>3PM</th>
+                                <th>3PA</th>
+                                <th>3PT%</th>
                                 <th>Player</th>
                             </tr>
                         </thead>
@@ -285,6 +311,8 @@ permalink: /
                                 .bestGameAverages["3PM"] %}
                                 <tr>
                                     <td>{{ item["3PM"] | twoDecimalPoints }}</td>
+                                    <td>{{ item["3PA"] | twoDecimalPoints }}</td>
+                                    <td>{{ item["3PT%"] | percentage }}</td>
                                     <td>{{ item.Player }}</td>
                                 </tr>
                             {% endfor %}
@@ -448,6 +476,9 @@ permalink: /
                         <thead>
                             <tr>
                                 <th>Points</th>
+                                <th>FGM</th>
+                                <th>FGA</th>
+                                <th>FG%</th>
                                 <th>Player</th>
                             </tr>
                         </thead>
@@ -455,6 +486,9 @@ permalink: /
                             {% for item in stats.leaderBoardStats.bestWeek.TotalPoints %}
                                 <tr>
                                     <td>{{ item.TotalPoints }}</td>
+                                    <td>{{ item.FGM }}</td>
+                                    <td>{{ item.FGA }}</td>
+                                    <td>{{item["FG%"] | percentage}}</td>
                                     <td>{{ item.Player }}</td>
                                 </tr>
                             {% endfor %}
@@ -467,6 +501,8 @@ permalink: /
                         <thead>
                             <tr>
                                 <th>2PM</th>
+                                <th>2PA</th>
+                                <th>2PT%</th>
                                 <th>Player</th>
                             </tr>
                         </thead>
@@ -476,6 +512,8 @@ permalink: /
                                 .bestWeek["2PM"] %}
                                 <tr>
                                     <td>{{ item["2PM"] }}</td>
+                                    <td>{{ item["2PA"] }}</td>
+                                    <td>{{ item["2PT%"] | percentage }}</td>
                                     <td>{{ item.Player }}</td>
                                 </tr>
                             {% endfor %}
@@ -488,6 +526,8 @@ permalink: /
                         <thead>
                             <tr>
                                 <th>3PM</th>
+                                <th>3PA</th>
+                                <th>3PT%</th>
                                 <th>Player</th>
                             </tr>
                         </thead>
@@ -497,6 +537,8 @@ permalink: /
                                 .bestWeek["3PM"] %}
                                 <tr>
                                     <td>{{ item["3PM"] }}</td>
+                                    <td>{{ item["3PA"] }}</td>
+                                    <td>{{ item["3PT%"] | percentage }}</td>
                                     <td>{{ item.Player }}</td>
                                 </tr>
                             {% endfor %}
@@ -661,6 +703,9 @@ permalink: /
                             <thead>
                                 <tr>
                                     <th>Points</th>
+                                    <th>FGM</th>
+                                    <th>FGA</th>
+                                    <th>FG%</th>
                                     <th>Player</th>
                                 </tr>
                             </thead>
@@ -671,6 +716,9 @@ permalink: /
                                     .TotalPoints %}
                                     <tr>
                                         <td>{{ item.TotalPoints }}</td>
+                                        <td>{{ item.FGM }}</td>
+                                        <td>{{ item.FGA }}</td>
+                                        <td>{{ item["FG%"] | percentage}}</td>
                                         <td>{{ item.Player }}</td>
                                     </tr>
                                 {% endfor %}
@@ -781,7 +829,9 @@ permalink: /
                             </thead>
                             <tbody>
                                 {% for item in stats
-                                    .leaderBoardStats[year].totals.Assists %}
+                                    .leaderBoardStats[year]
+                                    .totals
+                                    .Assists %}
                                     <tr>
                                         <td>{{ item.Assists }}</td>
                                         <td>{{ item.Player }}</td>
@@ -822,7 +872,10 @@ permalink: /
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for item in stats.leaderBoardStats[year].totals.Blocks %}
+                                {% for item in stats
+                                    .leaderBoardStats[year]
+                                    .totals
+                                    .Blocks %}
                                     <tr>
                                         <td>{{ item.Blocks }}</td>
                                         <td>{{ item.Player }}</td>
@@ -844,7 +897,10 @@ permalink: /
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for item in stats.leaderBoardStats[year].totals.FanPoints %}
+                                {% for item in stats
+                                    .leaderBoardStats[year]
+                                    .totals
+                                    .FanPoints %}
                                     <tr>
                                         <td>{{ item.FanPoints }}</td>
                                         <td>{{ item.Player }}</td>
