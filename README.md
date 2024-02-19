@@ -12,7 +12,7 @@ Navigate to `http://localhost:8080`
 
 # How to run for production deployment
 
-`docker-compose -f docker-compose.11ty.yml run --rm eleventy bash`
+`docker-compose -f docker-compose.yml run --rm eleventy bash`
 
 Run `npm run build`
 
