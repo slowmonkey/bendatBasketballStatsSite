@@ -1,3 +1,6 @@
+# Main website url
+`https://slowmonkey.github.io/bendatBasketballStatsSite/`
+
 # How to run locally
 
 `docker-compose up`
