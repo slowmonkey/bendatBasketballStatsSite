@@ -66,6 +66,7 @@ permalink: "weekly-stats/{{ week | url }}/"
                         <th>BLK</th>
                         <th>TOV</th>
                         <th>Fan Pts</th>
+                        <th>+/-</th>
                         <th>Wins</th>
                         <th>Losses</th>
                     </tr>
@@ -98,6 +99,7 @@ permalink: "weekly-stats/{{ week | url }}/"
                                 <td>{{ item.Blocks }}</td>
                                 <td>{{ item.TOV }}</td>
                                 <td>{{ item.FanPoints }}</td>
+                                <td>{{ item.PlusMinus }}</td>
                                 <td>{{ item.Wins }}</td>
                                 <td>{{ item.Losses }}</td>
                             </tr>
@@ -134,6 +136,7 @@ permalink: "weekly-stats/{{ week | url }}/"
                         <td>{{ stats.weeklyStats[week].teamSummary["team" + teamNumber].averages.FanPoints | twoDecimalPoints }}</td>
                         <td></td>
                         <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>
@@ -162,6 +165,7 @@ permalink: "weekly-stats/{{ week | url }}/"
                         <td>{{ stats.weeklyStats[week].teamSummary["team" + teamNumber].totals.Blocks }}</td>
                         <td>{{ stats.weeklyStats[week].teamSummary["team" + teamNumber].totals.TOV }}</td>
                         <td>{{ stats.weeklyStats[week].teamSummary["team" + teamNumber].totals.FanPoints }}</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -199,6 +203,7 @@ permalink: "weekly-stats/{{ week | url }}/"
                 <th>BLK</th>
                 <th>TOV</th>
                 <th>Fan Pts</th>
+                <th>+/-</th>
                 <th>Wins</th>
                 <th>Losses</th>
             </tr>
@@ -230,6 +235,7 @@ permalink: "weekly-stats/{{ week | url }}/"
                     <td>{{ item.Blocks }}</td>
                     <td>{{ item.TOV }}</td>
                     <td>{{ item.FanPoints }}</td>
+                    <td>{{ item.PlusMinus }}</td>
                     <td>{{ item.Wins }}</td>
                     <td>{{ item.Losses }}</td>
                 </tr>
@@ -331,6 +337,7 @@ permalink: "weekly-stats/{{ week | url }}/"
                 <th>BLK</th>
                 <th>TOV</th>
                 <th>Fan Pts</th>
+                <th>+/-</th>
                 <th>Win/Loss</th>
             </tr>
         </thead>
@@ -363,6 +370,7 @@ permalink: "weekly-stats/{{ week | url }}/"
                     <td>{{ item.Blocks }}</td>
                     <td>{{ item.TOV }}</td>
                     <td>{{ item.FanPoints }}</td>
+                    <td>{{ item.PlusMinus }}</td>
                     <td>{{ item["Win/Loss"] }}</td>
                 </tr>
             {% endfor %}

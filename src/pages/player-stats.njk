@@ -74,6 +74,7 @@ permalink: "player-stats/{{ player.name | slugify }}/"
                 <th>BLK</th>
                 <th>TOV</th>
                 <th>Fan Pts</th>
+                <th>+/-</th>
                 <th>Win/Loss</th>
             </tr>
         </thead>
@@ -105,6 +106,7 @@ permalink: "player-stats/{{ player.name | slugify }}/"
                     <td>{{ item.Blocks }}</td>
                     <td>{{ item.TOV }}</td>
                     <td>{{ item.FanPoints }}</td>
+                    <td>{{ item.PlusMinus }}</td>
                     <td>{{ item["Win/Loss"] }}</td>
                 </tr>
             {% endfor %}
@@ -141,6 +143,7 @@ permalink: "player-stats/{{ player.name | slugify }}/"
                 <th>Wins</th>
                 <th>Losses</th>
                 <th>Fan Pts</th>
+                <th>+/-</th>
             </tr>
         </thead>
         <tbody>
@@ -172,6 +175,7 @@ permalink: "player-stats/{{ player.name | slugify }}/"
                         <td>{{ item.Wins }}</td>
                         <td>{{ item.Losses }}</td>
                         <td>{{ item.FanPoints }}</td>
+                        <td>{{ item.PlusMinus }}</td>
                     </tr>
                 {% endif %}
             {% endfor %}
@@ -205,6 +209,7 @@ permalink: "player-stats/{{ player.name | slugify }}/"
                         <td>{{ item.Wins }}</td>
                         <td>{{ item.Losses }}</td>
                         <td>{{ item.FanPoints }}</td>
+                        <td>{{ item.PlusMinus }}</td>
                     </tr>
                 {% endif %}
             {% endfor %}
