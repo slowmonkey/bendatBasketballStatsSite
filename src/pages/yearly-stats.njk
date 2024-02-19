@@ -15,7 +15,8 @@ title: "Yearly Stats"
 <div class="year-filter">
     <label for"year-dropdown" class="dropdown-label">Year:</label>
     <select name="year-dropdown" id="year-dropdown" class="dropdown">
-        <option value="2022" selected>2022</option>
+        <option value="2024" selected>2024</option>
+        <option value="2022">2022</option>
         <option value="2021">2021</option>
         <option value="2020">2020</option>
     </select>
@@ -56,6 +57,7 @@ title: "Yearly Stats"
                 <th>Wins</th>
                 <th>Losses</th>
                 <th>Fan Pts</th>
+                <th>+/-</th>
             </tr>
         </thead>
         <tbody>
@@ -94,6 +96,7 @@ title: "Yearly Stats"
                     <td>{{ item.Wins }}</td>
                     <td>{{ item.Losses }}</td>
                     <td>{{ item.FanPoints }}</td>
+                    <td>{{ item.PlusMinus }}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -173,7 +176,7 @@ title: "Yearly Stats"
 <script type="text/javascript">
     var selectedFilters = {
         games: ``,
-        year: `[data-year="2022"]`
+        year: `[data-year="2024"]`
     };
 
     var minGamesMenu = document.getElementById('yearly-min-games-dropdown');
