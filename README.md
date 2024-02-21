@@ -21,7 +21,7 @@ Run `npm run build`
 
 ignore the EACCESS errors.
 
-Wait for the _site contents to be generated.
+Wait for the _site contents to be generated. **NOTE**: This might take a while
 
 ```
 git add src
