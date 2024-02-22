@@ -33,6 +33,7 @@ permalink: "weekly-stats/{{ week | url }}/"
     <button class="tablinks active" onclick="openTab(event, 'TeamSummary')">Team Summary</button>
     <button class="tablinks" onclick="openTab(event, 'PlayerSummary')">Player Summary</button>
     <button class="tablinks" onclick="openTab(event, 'PlayerAverages')">Player Averages Per Game</button>
+    <button class="tablinks" onclick="openTab(event, 'PerGameBreakdown')">Per Game Breakdown</button>
     <button class="tablinks" onclick="openTab(event, 'Games')">Games</button>
 </div>
 
@@ -305,6 +306,155 @@ permalink: "weekly-stats/{{ week | url }}/"
             {% endfor %}
         </tbody>
     </table>
+</div>
+
+<div id="PerGameBreakdown" class="slowmonkeytabcontent">
+    {% for item in stats.weeklyStats[week].gamesList %}
+        <div id="GameBreakdown" class="gamebreakdown">
+            <div id="GameTitle" class"gametitle">Game ID: {{item.Game}}</div>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Opponent</th>
+                        <th>Game</th>
+                        <th>FTM</th>
+                        <th>FTA</th>
+                        <th>FT%</th>
+                        <th>2PM</th>
+                        <th>2PA</th>
+                        <th>2P%</th>
+                        <th>3PM</th>
+                        <th>3PA</th>
+                        <th>3P%</th>
+                        <th>FGM</th>
+                        <th>FGA</th>
+                        <th>FG%</th>
+                        <th>PTS</th>
+                        <th>OREB</th>
+                        <th>DREB</th>
+                        <th>REB</th>
+                        <th>AST</th>
+                        <th>STL</th>
+                        <th>BLK</th>
+                        <th>TOV</th>
+                        <th>Fan Pts</th>
+                        <th>+/-</th>
+                        <th>Win/Loss</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in stats.weeklyStats[week].games %}
+                        {% if (game.Game == item.Game) and (game.Team == item["Team 1"]) %}
+                        <tr>
+                            <td>{{ game.Date | statsdate }}</td>
+                            <td>{{ game.Player }}</td>
+                            <td>{{ game.Team }}</td>
+                            <td>{{ game.Opponent }}</td>
+                            <td>{{ game.Game }}</td>
+                            <td>{{ game.FTM }}</td>
+                            <td>{{ game.FTA }}</td>
+                            <td>{{ game["FT%"] | percentage }}</td>
+                            <td>{{ game.2PM }}</td>
+                            <td>{{ game.2PA }}</td>
+                            <td>{{ game["2PT%"] | percentage }}</td>
+                            <td>{{ game.3PM }}</td>
+                            <td>{{ game.3PA }}</td>
+                            <td>{{ game["3PT%"] | percentage }}</td>
+                            <td>{{ game.FGM }}</td>
+                            <td>{{ game.FGA }}</td>
+                            <td>{{ game["FG%"] | percentage }}</td>
+                            <td>{{ game.TotalPoints }}</td>
+                            <td>{{ game.OReb }}</td>
+                            <td>{{ game.DReb }}</td>
+                            <td>{{ game.TotalRebounds }}</td>
+                            <td>{{ game.Assists }}</td>
+                            <td>{{ game.Steals }}</td>
+                            <td>{{ game.Blocks }}</td>
+                            <td>{{ game.TOV }}</td>
+                            <td>{{ game.FanPoints }}</td>
+                            <td>{{ game.PlusMinus }}</td>
+                            <td>{{ game["Win/Loss"] }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Opponent</th>
+                        <th>Game</th>
+                        <th>FTM</th>
+                        <th>FTA</th>
+                        <th>FT%</th>
+                        <th>2PM</th>
+                        <th>2PA</th>
+                        <th>2P%</th>
+                        <th>3PM</th>
+                        <th>3PA</th>
+                        <th>3P%</th>
+                        <th>FGM</th>
+                        <th>FGA</th>
+                        <th>FG%</th>
+                        <th>PTS</th>
+                        <th>OREB</th>
+                        <th>DREB</th>
+                        <th>REB</th>
+                        <th>AST</th>
+                        <th>STL</th>
+                        <th>BLK</th>
+                        <th>TOV</th>
+                        <th>Fan Pts</th>
+                        <th>+/-</th>
+                        <th>Win/Loss</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in stats.weeklyStats[week].games %}
+                        {% if (game.Game == item.Game) and (game.Team == item["Team 2"]) %}
+                        <tr>
+                            <td>{{ game.Date | statsdate }}</td>
+                            <td>{{ game.Player }}</td>
+                            <td>{{ game.Team }}</td>
+                            <td>{{ game.Opponent }}</td>
+                            <td>{{ game.Game }}</td>
+                            <td>{{ game.FTM }}</td>
+                            <td>{{ game.FTA }}</td>
+                            <td>{{ game["FT%"] | percentage }}</td>
+                            <td>{{ game.2PM }}</td>
+                            <td>{{ game.2PA }}</td>
+                            <td>{{ game["2PT%"] | percentage }}</td>
+                            <td>{{ game.3PM }}</td>
+                            <td>{{ game.3PA }}</td>
+                            <td>{{ game["3PT%"] | percentage }}</td>
+                            <td>{{ game.FGM }}</td>
+                            <td>{{ game.FGA }}</td>
+                            <td>{{ game["FG%"] | percentage }}</td>
+                            <td>{{ game.TotalPoints }}</td>
+                            <td>{{ game.OReb }}</td>
+                            <td>{{ game.DReb }}</td>
+                            <td>{{ game.TotalRebounds }}</td>
+                            <td>{{ game.Assists }}</td>
+                            <td>{{ game.Steals }}</td>
+                            <td>{{ game.Blocks }}</td>
+                            <td>{{ game.TOV }}</td>
+                            <td>{{ game.FanPoints }}</td>
+                            <td>{{ game.PlusMinus }}</td>
+                            <td>{{ game["Win/Loss"] }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
 </div>
 
 <div id="Games" class="slowmonkeytabcontent">

@@ -217,16 +217,24 @@ function calculateCareerStatsAverage(careerStats) {
 
     return careerStatsAverage;
 }
+
+function extractGameListStats(weeklyStats, gameListResults) {
+    gameListResults.forEach((result) => {
+        let week = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
+
+        weeklyStats[week].gamesList = result.rows
+    }) 
+}
+
 function extractWeeklyPlayerTotalStats(weeklyStats, weeklyPlayerTotalStatsQueryResult) {
     weeklyPlayerTotalStatsQueryResult.forEach((result) => {
         let week = DateTime.fromJSDate(result.rows[0].Date).toFormat("yyyy-MM-dd");
 
         const playerAverages = [];
 
-        weeklyStats[week] = {
-            playerTotals: result.rows,
-            playerAverages: playerAverages
-        };
+        weeklyStats[week].playerTotals = result.rows;
+        weeklyStats[week].playerAverages = playerAverages;
+
 
         weeklyStats[week].playerTotals.sort(function (a, b) {
             return b.FanPoints - a.FanPoints;
@@ -365,19 +373,27 @@ async function getWeeklyStats(client, availableWeeks) {
     const weeklyPlayerTotalStatsQuery = [];
     const weeklyAllGamesStatsQuery = [];
     const weeklyTeamTotalStatsQuery = [];
+    const gameListQuery = []
 
     availableWeeks.allWeeks.forEach((week) => {
         weeklyStats[week] = {
             date: week
         };
+
         // For each week get the totals for each player per week
         // Get all the games for each week
         // Get the team total stats for each week.
+
+        gameListQuery.push(client.query(`SELECT * FROM bballstats."gameListByDate" WHERE "Date" = '${week}' ORDER BY "Game", "Team 1"`));
 
         weeklyPlayerTotalStatsQuery.push(client.query(`SELECT * FROM bballstats."playerTotalsPerWeek" WHERE "Date" = '${week}' ORDER BY "Player"`));
         weeklyAllGamesStatsQuery.push(client.query(`SELECT * FROM bballstats."allStats" WHERE "Date" = '${week}' ORDER BY "Game", "Team", "Player"`));
         weeklyTeamTotalStatsQuery.push(client.query(`SELECT * FROM bballstats."teamTotalsPerWeek" WHERE "Date" = '${week}' ORDER BY "Team"`));
     });
+
+    let gameListResults = await Promise.all(gameListQuery);
+    extractGameListStats(weeklyStats, gameListResults);
+
 
     let weeklyPlayerTotalStatsQueryResults = await Promise.all(weeklyPlayerTotalStatsQuery);
     extractWeeklyPlayerTotalStats(weeklyStats, weeklyPlayerTotalStatsQueryResults);
@@ -587,6 +603,8 @@ module.exports = async function () {
         console.error(e);
         throw e;
     }
+
+    // Get the games, teams and opponents for the week
 
 
     let allStats = await getAllStats(client);
