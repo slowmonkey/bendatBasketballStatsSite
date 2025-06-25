@@ -25,4 +25,5 @@ module.exports = (function (eleventyConfig) {
 
     eleventyConfig.addPlugin(charts);
     eleventyConfig.addPlugin(EleventyRenderPlugin);
+    eleventyConfig.addPassthroughCopy("src/libs");
 });
