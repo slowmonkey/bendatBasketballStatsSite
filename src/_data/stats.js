@@ -215,6 +215,8 @@ function calculateCareerStatsAverage(careerStats) {
         })
     });
 
+    careerStatsAverage.sort((a, b) => a.Player.localeCompare(b.Player) )
+
     return careerStatsAverage;
 }
 
