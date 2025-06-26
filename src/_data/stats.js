@@ -69,6 +69,8 @@ async function getAvailableWeeks(client, availableYears) {
         });
     });
 
+    availableWeeks.allWeeks.sort((a, b) => new Date(b) - new Date(a));
+
     return availableWeeks;
 }
 
