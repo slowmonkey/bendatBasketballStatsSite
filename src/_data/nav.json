@@ -15,6 +15,10 @@
         {
             "url": "/yearly-stats/",
             "name": "Yearly Stats"
+        },
+        {
+            "url": "/career-totals/",
+            "name": "Career Totals"
         }
     ]
 }
