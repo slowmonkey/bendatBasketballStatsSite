@@ -40,6 +40,8 @@ async function getAvailableYears(client) {
         availableYears.push(row.Year);
     });
 
+    availableYears.sort((a, b) => a - b)
+
     return availableYears;
 }
 
@@ -96,21 +98,6 @@ async function getAvailablePlayers(client) {
 
     return availablePlayers;
 }
-
-// async function getAvailableYears(client) {
-//     const availableYears = []
-//     const availableYearsQuery = client.query(`SELECT DISTINCT "Year" FROM bballstats."allStats"`);
-
-//     const availableYearsQueryResponse = await availableYearsQuery;
-
-//     availableYearsQueryResponse.forEach((item) => {
-//         availableYears.push(item.Year)
-//     })
-
-//     availableYears.sort((a, b) => a - b);
-
-//     return availableYears;
-// }
 
 async function getYearlyStats(client) {
     const yearlyStats = [];
@@ -636,10 +623,14 @@ module.exports = async function () {
     let weeklyTotals = calculateWeeklyTotals(availableWeeks, weeklyStats);
     let playersStats = getPlayersStats(availablePlayers, allStats);
     let leaderBoardStats = calculateLeaderBoardStats(availableYears, yearlyStats, allStats, careerStatsAverage, weeklyTotals);
+    let reversedAvailableYears = availableYears.sort((a, b) => b - a);
+    let maxYear = Math.max(...reversedAvailableYears);
 
     return {
         allStats: allStats,
         availableYears: availableYears,
+        reversedAvailableYears: reversedAvailableYears,
+        maxYear: maxYear,
         availableWeeks: availableWeeks,
         players: availablePlayers,
         yearlyStats: yearlyStats,
