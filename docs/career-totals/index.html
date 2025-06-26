@@ -218,6 +218,17 @@
         }
     </style>
 
+    
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- jQuery (required by DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
     <script src="/bendatBasketballStatsSite/libs/sorttable.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LLK0QWHF90"></script>
     <script>
@@ -265,7 +276,7 @@
 </div>
 
 <div id="PlayerCareerTotals" class="slowmonkeytabcontent" style="display: block;">
-    <table class="stats-table sortable">
+    <table id="PlayerCareerTotalsTable" class="stats-table">
         <thead>
             <tr>
                 <th>Player</th>
@@ -7213,6 +7224,19 @@
 </div>
 
 <script>
+
+    $(document).ready(function () {
+        $('#PlayerCareerTotalsTable').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            pageLength: 50,
+            responsive: true,
+            autoWidth: true
+        });
+    });
+
     function openTab(evt, tabName) {
         // Declare all variables
         var i,

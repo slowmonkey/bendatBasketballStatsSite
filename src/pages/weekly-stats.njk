@@ -177,7 +177,7 @@ permalink: "weekly-stats/{{ week | url }}/"
 </div>
 
 <div id="PlayerSummary" class="slowmonkeytabcontent">
-    <table class="stats-table sortable withrank">
+    <table id="PlayerSummaryTable" class="stats-table sortable withrank">
         <thead>
             <tr>
                 <th>Player</th>
@@ -529,6 +529,18 @@ permalink: "weekly-stats/{{ week | url }}/"
 </div>
 
 <script>
+    {# $(document).ready(function () {
+        $('#PlayerSummaryTable').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            pageLength: 50,
+            responsive: true,
+            autoWidth: false
+        });
+    }); #}
+
     function openTab(evt, tabName) {
         // Declare all variables
         var i,

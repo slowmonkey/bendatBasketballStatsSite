@@ -8,7 +8,7 @@ title: "Career Totals"
 </div>
 
 <div id="PlayerCareerTotals" class="slowmonkeytabcontent" style="display: block;">
-    <table class="stats-table sortable">
+    <table id="PlayerCareerTotalsTable" class="stats-table">
         <thead>
             <tr>
                 <th>Player</th>
@@ -136,6 +136,19 @@ title: "Career Totals"
 </div>
 
 <script>
+
+    $(document).ready(function () {
+        $('#PlayerCareerTotalsTable').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            pageLength: 50,
+            responsive: true,
+            autoWidth: true
+        });
+    });
+
     function openTab(evt, tabName) {
         // Declare all variables
         var i,
