@@ -97,6 +97,21 @@ async function getAvailablePlayers(client) {
     return availablePlayers;
 }
 
+// async function getAvailableYears(client) {
+//     const availableYears = []
+//     const availableYearsQuery = client.query(`SELECT DISTINCT "Year" FROM bballstats."allStats"`);
+
+//     const availableYearsQueryResponse = await availableYearsQuery;
+
+//     availableYearsQueryResponse.forEach((item) => {
+//         availableYears.push(item.Year)
+//     })
+
+//     availableYears.sort((a, b) => a - b);
+
+//     return availableYears;
+// }
+
 async function getYearlyStats(client) {
     const yearlyStats = [];
 
